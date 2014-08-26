@@ -1,14 +1,17 @@
 ---
 layout: default
 ---
-<div class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-  </header>
-
-  <article class="post-content">
-    {{ content }}
-  </article>
-
+<div class="post-item">
+  <div class="caption wrapper-lg">
+    <h2 class="post-title"><a href="#">{{ page.title }}</a></h2>
+    <div class="post-sum">
+      {{ content }}
+    </div>
+    <div class="line line-lg"></div>
+    <div class="text-muted">
+      {% if page.author %}<i class="fa fa-user icon-muted"></i> by {{ page.author }}{% endif %}
+      <i class="fa fa-clock-o icon-muted"></i> {{ page.date | date: "%b %-d, %Y" }}
+      {% if page.meta %}<a href="#" class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i> {{ page.meta }}{% endif %}
+    </div>
+  </div>
 </div>

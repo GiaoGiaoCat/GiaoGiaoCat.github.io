@@ -1,23 +1,18 @@
 ---
 layout: default
 ---
-
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+{% for post in paginator.posts %}
+<div class="post-item">
+  <div class="caption wrapper-lg">
+    <h2 class="post-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+    <div class="line line-lg"></div>
+    <div class="text-muted">
+      {% if post.author %}<i class="fa fa-user icon-muted"></i> by <a href="#" class="m-r-sm">{{ post.author }}</a>{% endif %}
+      <i class="fa fa-clock-o icon-muted"></i> {{ post.date | date: "%b %-d, %Y" }}
+      {% if post.meta %}<a href="#" class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i> {{ post.meta }}{% endif %}
+    </div>
+  </div>
 </div>
+{% endfor %}
+
+{% include pagination.html %}

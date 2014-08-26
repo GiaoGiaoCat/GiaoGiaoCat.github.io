@@ -8,7 +8,10 @@ github_username: wjp2013
 highlighter: pygments
 permalink: /:title/
 
-markdown: kramdown
+# markdown: kramdown
+markdown: redcarpet
 redcarpet:
   extensions:
     - fenced_code_blocks
+
+paginate: 10

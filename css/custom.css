@@ -1,0 +1,43 @@
+@media (min-width: 1200px) {
+  .container {
+    width: 99%;
+  }
+}
+
+.post-item .post-title a {
+  color: #2F2F2F;
+}
+
+.post-item .post-sum {
+  color: #2F2F2F;
+  font-size: 18px;
+  line-height: 1.6em;
+}
+
+.post-item .post-sum p {
+  margin: 1.6em 0;
+}
+
+.post-item .post-sum a:link {
+  text-decoration: underline;
+}
+.post-item .post-sum a:hover {
+  text-decoration: none;
+}
+
+.pagination > li > a, .pagination > li > span {
+  color: rgb(142, 193, 101);
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  color: rgb(142, 193, 101);
+  background-color: #eee;
+  border-color: #ddd;
+}
+
+.img-circle {
+  border: 1px solid #CCC;
+}
