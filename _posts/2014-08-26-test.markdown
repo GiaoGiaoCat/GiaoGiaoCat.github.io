@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "Test Jekyll!"
-date:   2014-08-21 15:32:03
-categories: jekyll update
+date:   2014-08-26 15:32:03
+categories: update
 author: "Victor"
 ---
 

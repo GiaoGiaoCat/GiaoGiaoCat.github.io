@@ -1,0 +1,16 @@
+<h5 class="font-semibold">Recent Posts</h5>
+<div class="line line-dashed"></div>
+<div>
+  {% for post in site.posts limit:3 %}
+    <article class="media">
+      <a class="pull-left thumb thumb-wrapper m-t-xs">
+        <img src="images/thumb_1.png">
+      </a>
+      <div class="media-body">
+        <a href="{{ BASE_PATH }}{{ post.url }}" class="font-semibold">{{ post.title }}</a>
+        <div class="text-xs block m-t-xs"><a href="https://github.com/{{ site.github_username }}">Victor</a> {{ post.date | date_to_string }}</div>
+      </div>
+    </article>
+    <div class="line"></div>
+  {% endfor %}
+</div>

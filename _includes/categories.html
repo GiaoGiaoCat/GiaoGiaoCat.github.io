@@ -1,0 +1,13 @@
+<h5 class="font-semibold">Categories</h5>
+<div class="line line-dashed"></div>
+<ul class="list-unstyled">
+  {% for category in site.categories %}
+    <li>
+      <a href="/categories/{{ category | first | slugize }}/" class="dk">
+        <span class="badge pull-right">{{ category | last | size }}</span>
+        {{ category | first }}
+      </a>
+    </li>
+    <li class="line"></li>
+  {% endfor %}
+</ul>

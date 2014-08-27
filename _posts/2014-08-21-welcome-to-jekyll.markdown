@@ -3,6 +3,7 @@ layout: post
 title:  "Welcome to Jekyll!"
 date:   2014-08-21 15:32:03
 categories: jekyll update
+tags: test
 author: "Victor"
 ---
 
