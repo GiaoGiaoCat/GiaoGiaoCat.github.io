@@ -10,12 +10,7 @@ permalink: /tags/
     <section class="panel-body">
       {% for post in site.tags[tag_name] %}
         <article class="media">
-          <div class="pull-left">
-            <span class="fa-stack fa-lg">
-              <i class="fa fa-circle fa-stack-2x icon-muted"></i>
-              <i class="fa fa-mobile fa-stack-1x text-white"></i>
-            </span>
-          </div>
+          {% include display_icon.html %}
           <div class="media-body">
             <a href="{{ post.url | prepend: site.baseurl }}" class="h4 text-success">{{ post.title }}</a>
             <small class="block m-t-xs">
