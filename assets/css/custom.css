@@ -14,8 +14,16 @@
   line-height: 1.6em;
 }
 
-.post-item .post-sum p {
+.post-item .post-sum p,
+.post-item .post-sum ol,
+.post-item .post-sum ul { margin: 1.6em 0; }
+.post-sum h2 { font-size: 24px; font-weight: bold; margin: 1.6em 0; }
+.post-sum h3 {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 0.6em;
   margin: 1.6em 0;
+  border-bottom: 1px dashed rgb(232, 232, 232);
 }
 
 .post-item .post-sum a:link {

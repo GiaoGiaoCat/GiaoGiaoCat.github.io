@@ -2,16 +2,4 @@
 title: "update"
 layout: default
 ---
-{% for post in site.categories[page.title] %}
-  <div class="post-item">
-    <div class="caption wrapper-lg">
-      <h2 class="post-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-      <div class="line line-lg"></div>
-      <div class="text-muted">
-        {% if post.author %}<i class="fa fa-user icon-muted"></i> by <a href="https://github.com/{{ site.github_username }}" class="m-r-sm">{{ post.author }}</a>{% endif %}
-        <i class="fa fa-clock-o icon-muted"></i> {{ post.date | date: "%b %-d, %Y" }}
-        {% if post.meta %}<a href="#" class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i> {{ post.meta }}{% endif %}
-      </div>
-    </div>
-  </div>
-{% endfor %}
+{% include category_posts.html %}

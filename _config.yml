@@ -6,7 +6,7 @@ github_username: wjp2013
 
 # Build settings
 highlighter: pygments
-permalink: /:title/
+permalink: /:categories/:title/
 
 # markdown: kramdown
 markdown: redcarpet
