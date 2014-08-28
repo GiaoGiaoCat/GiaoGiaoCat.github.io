@@ -19,7 +19,9 @@ permalink: /tags/
                 {% unless forloop.last %}, {% endunless %}
               {% endfor %}
             </small>
-            <em class="text-xs">Posted on <span class="text-danger">{{ post.date | date: "%b %-d, %Y" }}</span></em>
+            <em class="text-xs">
+              Posted on <span class="text-danger">{{ post.date | date: "%b %-d, %Y" }}</span>
+            </em>
           </div>
         </article>
         {% unless forloop.last %}
