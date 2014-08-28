@@ -26,16 +26,12 @@
   border-bottom: 1px dashed rgb(232, 232, 232);
 }
 
-.post-item .post-sum a:link {
-  text-decoration: underline;
+.post-item .post-sum strong {
+  color: #fb6b5b;
 }
-.post-item .post-sum a:hover {
-  text-decoration: none;
-}
-
-.pagination > li > a, .pagination > li > span {
-  color: rgb(142, 193, 101);
-}
+.post-item .post-sum a:link { text-decoration: underline; }
+.post-item .post-sum a:hover { text-decoration: none; }
+.pagination > li > a, .pagination > li > span { color: rgb(142, 193, 101); }
 
 .pagination > li > a:hover,
 .pagination > li > span:hover,
