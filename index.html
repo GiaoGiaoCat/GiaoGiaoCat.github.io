@@ -8,7 +8,7 @@ layout: default
     <div class="line line-lg"></div>
     <div class="post-sum">
       <!-- <p>{{ post.content | strip_html | truncatewords:80 }}<br> -->
-      <p>{{ post.content | truncatewords:80 }}<br>
+      <p>{{ post.content | truncatewords:20 }}<br>
     </div>
     <div class="text-muted">
       {% if post.author %}<i class="fa fa-user icon-muted"></i> by <a href="https://github.com/{{ site.github_username }}" class="m-r-sm">{{ post.author }}</a>{% endif %}
