@@ -3,15 +3,15 @@
     <i class="fa fa-circle fa-stack-2x"></i>
     {% if post.tags contains 'terminal' %}
       <i class="fa fa-terminal fa-stack-1x text-white"></i>
-    {% else if post.tags contains 'editor' %}
+    {% elsif post.tags contains 'editor' %}
       <i class="fa fa-edit fa-stack-1x text-white"></i>
-    {% else if post.tags contains 'refactoring' %}
+    {% elsif post.tags contains 'refactoring' %}
       <i class="fa fa-leaf fa-stack-1x text-white"></i>
-    {% else if post.tags contains 'testing' %}
+    {% elsif post.tags contains 'testing' %}
       <i class="fa fa-magic fa-stack-1x text-white"></i>
-    {% else if post.tags contains 'git' %}
+    {% elsif post.tags contains 'git' %}
       <i class="fa fa-github fa-stack-1x text-white"></i>
-    {% else if post.tags contains 'mac' %}
+    {% elsif post.tags contains 'mac' %}
       <i class="fa fa-apple fa-stack-1x text-white"></i>
     {% endif %}
   </span>

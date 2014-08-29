@@ -5,7 +5,7 @@
     <li>
       <a href="/categories/{{ category | first | slugize }}/" class="dk">
         <span class="badge pull-right">{{ category | last | size }}</span>
-        {{ category | first }}
+        {{ category | first | capitalize }}
       </a>
     </li>
     <li class="line"></li>
