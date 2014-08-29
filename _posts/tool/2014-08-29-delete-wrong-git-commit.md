@@ -42,6 +42,6 @@ author: "Victor"
 这里的 commit_id 要用分叉之前的，这样所有的代码不会丢，develop 分支上的提交信息也不会丢。那些奇怪的 merge 信息就没了。
 
 
-##commit合并:
+### 延伸阅读:
 
 [git commit 合并](http://www.douban.com/note/318248317/)
