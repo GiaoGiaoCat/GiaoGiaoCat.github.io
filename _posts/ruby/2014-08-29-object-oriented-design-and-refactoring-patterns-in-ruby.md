@@ -218,6 +218,8 @@ end
 * [鸭子类型](http://zh.wikipedia.org/wiki/Duck_typing)
 * [duck-typing-in-ruby](https://speakerdeck.com/zhanghandong/duck-typing-in-ruby)
 
+## 重构可用的几种方法
+
 ### Extract Method 提炼函数
 
 Extract Method （提炼函数）是最常用的重构手法之一。当看见一个过长的函数或者一段需要注释才能让人理解用途的代码，就应该将这段代码放进一个独立函数中。
