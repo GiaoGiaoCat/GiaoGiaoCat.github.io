@@ -43,6 +43,15 @@
   background-color: #eee;
   border-color: #ddd;
 }
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: rgb(142, 193, 101);
+  border-color: rgb(142, 193, 101);
+}
 
 .img-circle {
   border: 1px solid #CCC;

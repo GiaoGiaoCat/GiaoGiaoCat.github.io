@@ -1,17 +1,18 @@
  <div class="pull-left">
   <span class="fa-stack fa-lg">
     <i class="fa fa-circle fa-stack-2x"></i>
-    {% if post.tags contains 'editor' %}
+    {% if post.tags contains 'terminal' %}
+      <i class="fa fa-terminal fa-stack-1x text-white"></i>
+    {% else if post.tags contains 'editor' %}
       <i class="fa fa-edit fa-stack-1x text-white"></i>
-    {% endif %}
-    {% if post.tags contains 'refactoring' %}
+    {% else if post.tags contains 'refactoring' %}
       <i class="fa fa-leaf fa-stack-1x text-white"></i>
-    {% endif %}
-    {% if post.tags contains 'testing' %}
+    {% else if post.tags contains 'testing' %}
       <i class="fa fa-magic fa-stack-1x text-white"></i>
-    {% endif %}
-    {% if post.tags contains 'git' %}
+    {% else if post.tags contains 'git' %}
       <i class="fa fa-github fa-stack-1x text-white"></i>
+    {% else if post.tags contains 'mac' %}
+      <i class="fa fa-apple fa-stack-1x text-white"></i>
     {% endif %}
   </span>
 </div>
