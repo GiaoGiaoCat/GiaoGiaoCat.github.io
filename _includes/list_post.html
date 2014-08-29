@@ -1,0 +1,18 @@
+<article class="media">
+  {% include display_icon.html %}
+  <div class="media-body">
+    <a href="{{ post.url | prepend: site.baseurl }}" class="h4 text-success">{{ post.title }}</a>
+    <small class="block m-t-xs">
+      {% for post_tag in post.tags %}
+        {{ post_tag }}
+        {% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+    </small>
+    <em class="text-xs">
+      Posted on <span class="text-danger">{{ post.date | date: "%b %-d, %Y" }}</span>
+    </em>
+  </div>
+</article>
+{% unless forloop.last %}
+  <div class="line pull-in"></div>
+{% endunless %}
