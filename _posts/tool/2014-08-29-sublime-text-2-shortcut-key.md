@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Sublime Text2 常用快捷键和资源"
+title:  "Sublime Text 2 常用快捷键和资源"
 date:   2014-08-29 12:11:00
 categories: tool
 tags: editor
