@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Object-Oriented Design and Refactoring Patterns in Ruby"
-date:   2014-08-28 14:30:00
+date:   2014-08-29 14:31:00
 categories: ruby
 tags: refactoring
 author: "Victor"
