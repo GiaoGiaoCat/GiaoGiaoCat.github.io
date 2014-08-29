@@ -31,6 +31,8 @@
 }
 .post-item .post-sum a:link { text-decoration: underline; }
 .post-item .post-sum a:hover { text-decoration: none; }
+.post-sum p img { max-width: 100%; }
+
 .pagination > li > a, .pagination > li > span { color: rgb(142, 193, 101); }
 
 .pagination > li > a:hover,
