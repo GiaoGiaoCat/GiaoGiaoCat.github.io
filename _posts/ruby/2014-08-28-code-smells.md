@@ -219,3 +219,5 @@ Product.new "Shirt", "Pink", 10
 * [http://rubylearning.com/blog/2011/03/01/how-do-i-smell-ruby-code/](http://rubylearning.com/blog/2011/03/01/how-do-i-smell-ruby-code/)
 * [7 Patterns to Refactor Fat ActiveRecord Models](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
 * [代码的坏味道](http://www.cnblogs.com/mywolrd/archive/2012/04/24/2467395.html)
+* [21种代码的坏味道](http://www.knowsky.com/362766.html)
+* [Bad Smell(代码的坏味道)](http://blog.csdn.net/sulliy/article/details/6635596)
