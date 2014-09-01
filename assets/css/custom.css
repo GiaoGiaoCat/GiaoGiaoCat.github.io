@@ -25,6 +25,10 @@
   margin: 1.6em 0;
   border-bottom: 1px dashed rgb(232, 232, 232);
 }
+.post-sum h4 {
+  margin: 1.2em 0;
+  font-weight: bold;
+}
 
 .post-item .post-sum strong {
   color: #fb6b5b;
