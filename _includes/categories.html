@@ -2,12 +2,16 @@
 <div class="line line-dashed"></div>
 <ul class="list-unstyled">
   {% for category in site.categories %}
-    <li>
-      <a href="/categories/{{ category | first | slugize }}/" class="dk">
-        <span class="badge pull-right">{{ category | last | size }}</span>
-        {{ category | first | capitalize }}
-      </a>
-    </li>
-    <li class="line"></li>
+    {% assign category_folder = category | first | slugize %}
+    {% assign category_name = category | first | capitalize %}
+    {% if category_folder != category_name %}
+      <li>
+        <a href="/categories/{{ category_folder }}/" class="dk">
+          <span class="badge pull-right">{{ category | last | size }}</span>
+          {{ category_name }}
+        </a>
+      </li>
+      <li class="line"></li>
+    {% endif %}
   {% endfor %}
 </ul>
