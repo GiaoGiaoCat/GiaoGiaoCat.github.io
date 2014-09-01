@@ -3,7 +3,7 @@ layout: post
 title:  "Building a robust JSON API client with Ruby"
 date:   2014-09-01 12:10:00
 categories: rails
-tags: apis
+tags: api
 author: "Victor"
 ---
 
