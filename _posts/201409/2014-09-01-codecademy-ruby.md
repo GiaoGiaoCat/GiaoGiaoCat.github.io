@@ -425,6 +425,7 @@ end
 
 ### 链接
 
+* [CodeCademy Ruby Glossary](http://www.codecademy.com/glossary/ruby)
 * [methods-in-ruby-objects-or-not](http://stackoverflow.com/questions/2602340/methods-in-ruby-objects-or-not)
 * [了解 Ruby 中的闭包 : blocks , procs 和 lambdas](http://www.oschina.net/translate/know-your-closures-blocks-procs-and-lambdas?cmp&p=1)
 * [理解Ruby的4种闭包：blocks, Procs, lambdas 和 Methods](http://rubyer.me/blog/917/)
