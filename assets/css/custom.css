@@ -17,7 +17,13 @@
 .post-item .post-sum p,
 .post-item .post-sum ol,
 .post-item .post-sum ul { margin: 1.6em 0; }
-.post-sum h2 { font-size: 24px; font-weight: bold; margin: 1.6em 0; }
+.post-sum h2 {
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 0.6em;
+  margin: 1.6em 0;
+  border-bottom: 1px solid #D9D9D9;
+}
 .post-sum h3 {
   font-size: 20px;
   font-weight: bold;
@@ -59,4 +65,7 @@
 
 .img-circle {
   border: 1px solid #CCC;
+}
+.progress-xxs {
+  height: 1px;
 }
