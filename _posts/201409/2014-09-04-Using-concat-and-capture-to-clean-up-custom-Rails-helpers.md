@@ -3,7 +3,7 @@ layout: post
 title:  "Using concat and capture to clean up custom Rails helpers"
 date:   2014-09-04 11:40:00
 categories: rails
-tags: helpers
+tags: helper
 author: "Victor"
 ---
 

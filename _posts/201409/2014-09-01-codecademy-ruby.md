@@ -3,7 +3,7 @@ layout: post
 title:  "CodeCademy Ruby 学习笔记"
 date:   2014-09-01 21:00:00
 categories: ruby
-tags: codecademy learningnotes
+tags: codecademy learningnote
 author: "Victor"
 ---
 
