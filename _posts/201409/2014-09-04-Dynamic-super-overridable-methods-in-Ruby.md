@@ -7,7 +7,7 @@ tags: metaprogramming
 author: "Victor"
 ---
 
-当你在 library 中覆盖一个方法 ```super``` 比 ```alias_method``` 更方便:
+当你在 library 中重载一个方法 ```super``` 比 ```alias_method``` 更方便:
 
 ```ruby
 class Post < SomeORM
@@ -125,7 +125,7 @@ end
 
 这段代码做了一些有趣的事情，它命名了一个常量 ```Post::DynamicAttributes```，所以现在继承链看起来是 ```Post, Post::DynamicAttributes, SomeORM, Object]```。
 
-我们的代码会检查 ```Post::DynamicAttributes``` 是否存在，如果已经存在那么就重用它。现在，即便 ```Post``` 定义了十个属性，我们也只会在继承链中定义一个匿名模块。
+我们的代码会检查 ```Post::DynamicAttributes``` 是否存在，如果已经存在那么就重用它。现在，即便 ```Post``` 定义了十个属性，我们也只会在继承链中定义一个模块。
 
 另外 ```const_defined?(MODULE_NAME, _search_ancestors = false)``` 也是很重要的，让我们来看看子类继承 ```Post``` 的情况:
 
