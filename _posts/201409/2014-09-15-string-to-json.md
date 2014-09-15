@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How to parse String to Hash in Ruby"
-date:   2014-09-12 17:10:00
+date:   2014-09-15 11:00:00
 categories: ruby
 tags: tip
 author: "Victor"
