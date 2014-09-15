@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A tip of ruby initialize method"
+title:  "A Tip of Ruby Initialize Method"
 date:   2014-09-12 17:10:00
 categories: ruby
 tags: tip

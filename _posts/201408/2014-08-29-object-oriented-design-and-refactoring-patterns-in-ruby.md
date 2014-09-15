@@ -10,7 +10,7 @@ author: "Victor"
 This course will teach you on the basics of OOD (面向对象设计) in the Ruby language and will also refer lots of different patterns (模式) of refactoring (重构) that you can apply instantly into your code.
 
 
-## 簡介，繼承，封裝，多態
+## 簡介：繼承，封裝，多態，鸭子类型
 
 ### Introduction
 
