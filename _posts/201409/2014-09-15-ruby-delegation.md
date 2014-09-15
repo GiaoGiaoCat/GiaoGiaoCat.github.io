@@ -3,7 +3,7 @@ layout: post
 title:  "Ruby 中的委托"
 date:   2014-09-15 11:30:00
 categories: ruby
-tags: tip
+tags: metaprogramming
 author: "Victor"
 ---
 
