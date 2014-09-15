@@ -29,6 +29,18 @@ author: "Victor"
 
 当不需要动态修改委派接受对象的时候使用 ```DelegateClass```。
 
+### 基本用法
+
+```ruby
+class MyClass < DelegateClass(ClassToDelegateTo) # Step 1
+  def initialize
+    super(obj_of_ClassToDelegateTo) # Step 2
+  end
+end
+```
+
+### 例子
+
 ```ruby
 require 'delegate'
 
@@ -60,7 +72,6 @@ mgr.read_email #(Bill Gate) It is mostly spam.
 mgr.attend_meeting # please hold my call
 ```
 
-
 ## SimpleDelegator
 
 ### 方法介绍
@@ -77,10 +88,10 @@ SimpleDelegator.new(obj) # 生成一个对象, 它委托obj来执行自身所拥
 
 ```ruby
 __getobj__ # 返回接受委托的对象。
-__setobj__ # 将接受委托的对象变为obj。
+__setobj__ # 将接受委托的对象变为 obj。
 ```
 
-请注意，因为只有在生成时才会进行委托方法的定义，所以即使接受委托的对象和obj之间存在实例方法上的差异，也无法再次设定委托实例方法。因此，这里的建议是新的委托对象最好和原始的委托对象保持类型一致。
+请注意，因为只有在生成时才会进行委托方法的定义，所以即使接受委托的对象和 obj 之间存在实例方法上的差异，也无法再次设定委托实例方法。因此，这里的建议是新的委托对象最好和原始的委托对象保持类型一致。
 
 ### 例子
 
