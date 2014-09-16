@@ -63,7 +63,7 @@ You might expect this to produce no output, but you’ll see the output once:
 
 You might expect this to produce the output once, but it will appear twice:
 
-```<% widget %>```
+```<%= widget %>```
 
 
 Why? Inside block helpers, **concat** appends only to that element’s content; outside block helpers, it appends straight to the page itself, and is then appended to the page again as ```<%= widget %>``` writes out the helper’s return value.
