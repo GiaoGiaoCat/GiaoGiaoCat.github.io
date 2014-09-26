@@ -3,7 +3,7 @@ layout: post
 title:  "Build Awesome Command-Line Applications in Ruby: 01 Have a Clear and Concise Purpose"
 date:   2014-09-25 18:20:00
 categories: ruby
-tags: terminal
+tags: terminal learningnote
 author: "Victor"
 ---
 
