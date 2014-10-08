@@ -314,6 +314,27 @@ end
 puts by_channel_and_app.call
 ```
 
+### Blocks and Methods:
+
+如果方法的最后一个参数之前有 **&**, 那么你可以传递一个 block 给这个方法，需要注意的是这个 block 需要是最后一个传递进来的参数。另外，如果既有 * 也有 & 开头的参数。 那么 & 应该在后面。
+
+```ruby
+def test(&block)
+   block.call
+end
+test { puts "Hello World!"}
+```
+
+```ruby
+class Hash
+  def modify(&block)
+    map { |k, v| v.is_a?(Hash) ? v.modify(&block) : yield(k, v) }
+  end
+end
+
+data = {name: 'haha', info: {address: 'xx'}, admin: {password: 'xxxx'}}
+puts data.modify {|k, v| k == :password ? 'filtered' : v }
+```
 
 ## OBJECT-ORIENTED PROGRAMMING, PART I
 
