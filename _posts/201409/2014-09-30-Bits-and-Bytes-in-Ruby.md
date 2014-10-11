@@ -3,7 +3,7 @@ layout: post
 title:  "Working with Bits and Bytes in Ruby"
 date:   2014-09-30 11:50:00
 categories: ruby
-tags: tips
+tags: tip
 author: "Victor"
 ---
 
