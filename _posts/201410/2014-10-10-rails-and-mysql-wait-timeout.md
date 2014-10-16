@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Using rails and lost connection to MySQL server during queryk"
+title:  "Using rails and lost connection to MySQL server during query"
 date:   2014-10-15 17:20:00
 categories: rails
 tags: tip
