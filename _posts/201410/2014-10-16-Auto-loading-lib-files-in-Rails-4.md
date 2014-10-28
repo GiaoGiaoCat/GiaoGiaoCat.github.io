@@ -15,7 +15,7 @@ author: "Victor"
 
 比如 ```app/models/concerns/```, ```app/models/products/```
 
-这取决于你的文件是否在正确的命名空间下。比如 ```app/models/products/``` 内的文件，是否在 ```app/models/products/``` 内。
+这取决于你的文件是否在正确的命名空间下。比如 ```app/models/products/``` 内的文件，是否在 ```module Products``` 内。
 
 * yes。啥也不用干。
 * no。需要在 ```application.rb``` 中手动引入该文件，方法如下：
