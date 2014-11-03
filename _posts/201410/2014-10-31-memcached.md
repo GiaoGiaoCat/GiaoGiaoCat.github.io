@@ -3,7 +3,7 @@ layout: post
 title:  "Memcached"
 date:   2014-10-31 11:40:00
 categories: tool
-tags: mac
+tags: mac caching
 author: "Victor"
 ---
 
