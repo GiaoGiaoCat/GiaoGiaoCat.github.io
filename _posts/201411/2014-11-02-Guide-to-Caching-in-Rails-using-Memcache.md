@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Guide to Caching in Rails using Memcache"
-date:   2014-12-02 09:50:00
+date:   2014-11-02 09:50:00
 categories: rails
 tags: caching
 author: "Victor"
