@@ -69,3 +69,31 @@
 .progress-xxs {
   height: 1px;
 }
+
+
+.post-sum table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-color: gray;
+}
+.post-sum table td,
+.post-sum table th {
+  padding: 6px 15px;
+  border-top: 1px solid #f1f1f1;
+}
+.post-sum table thead > tr > th {
+  border-bottom: 1px solid #ebebeb;
+  background: #f5f5f5;
+  border-right: 1px solid #f1f1f1;
+}
+.post-sum table > tbody > tr:nth-child(odd) > td,
+.post-sum table > tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+.post-sum table > thead th {
+  background: #f5f5f5;
+  border-right: 1px solid #f1f1f1;
+}
+.post-sum table > thead th:last-child {
+  border-right: none;
+}
