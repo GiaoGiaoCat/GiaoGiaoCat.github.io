@@ -75,7 +75,7 @@ end
 
 ## 相关链接
 
-* <<Rake Task Management Essentials>>
+* BOOK: Rake Task Management Essentials
 * [Using the Rake Build Language](http://www.martinfowler.com/articles/rake.html)
 * [Rake Tutorial](http://jasonseifer.com/2010/04/06/rake-tutoria)
 * [How to Write Rock Solid Rake Tasks](http://bugroll.com/rock-solid-rake-tasks.html)
