@@ -9,22 +9,20 @@ author: "Victor"
 
 ### 常用快捷键列表
 
+以下均可用 vim mode 替换
+
 ```
-Ctrl+L 选择整行（按住-继续选择下行）
-Ctrl+KK 从光标处删除至行尾
+CMD+L 选择整行（按住-继续选择下行）
+CMD+KK 从光标处删除至行尾
 Ctrl+Shift+K 删除整行
 Ctrl+Shift+D 复制光标所在整行，插入在该行之前
-Ctrl+J 合并行（已选择需要合并的多行时）
-Ctrl+KU 改为大写
-Ctrl+KL 改为小写
-Ctrl+D 选词 （按住-继续选择下个相同的字符串）
-Ctrl+M 光标移动至括号内开始或结束的位置
-Ctrl+Shift+M 选择括号内的内容（按住-继续选择父括号）
+CMD+J 合并行（已选择需要合并的多行时）
+CMD+KU 改为大写
+CMD+KL 改为小写
 Ctrl+/ 注释整行（如已选择内容，同“Ctrl+Shift+/”效果）
 Ctrl+Shift+/ 注释已选择内容
-Ctrl+Z 撤销
+CMD+Z 撤销
 Ctrl+Y 恢复撤销
-Ctrl+M 光标跳至对应的括号
 Alt+. 闭合当前标签
 Ctrl+Shift+A 选择光标位置父标签对儿
 Ctrl+Shift+[ 折叠代码
@@ -45,7 +43,13 @@ F2 下一个书签
 Shift+F2 上一个书签
 ```
 
-需要把 *Ctrl* 鍵，換成 Mac 的 *Command* 鍵
+```
+CMD+D 选词 （按住-继续选择下个相同的字符串）
+Ctrl+M 光标移动至括号内开始或结束的位置
+Ctrl+Shift+M 选择括号内的内容（按住-继续选择父括号）
+```
+
+部分需要把 *Ctrl* 鍵，換成 Mac 的 *Command* 鍵
 
 ### 收集资源
 

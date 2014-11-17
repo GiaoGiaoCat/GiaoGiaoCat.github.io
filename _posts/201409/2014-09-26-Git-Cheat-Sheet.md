@@ -7,7 +7,7 @@ tags: git
 author: "Victor"
 ---
 
-##创建
+## 创建
 
 复制一个已创建的仓库:
 ```
@@ -19,7 +19,7 @@ $ git clone ssh://user@domain.com/repo.git
 $ git init
 ```
 
-##本地修改
+## 本地修改
 
 显示工作路径下已修改的文件：
 ```
@@ -62,11 +62,26 @@ $ git commit -m 'message here'
 $ git commit --amend
 ```
 
-##提交历史
+## 提交历史
 
 从最新提交开始，显示所有的提交记录（显示hash， 作者信息，提交的标题和时间）：
 ```
 $ git log
+```
+
+查看最后一次提交及其改动：
+```
+$ git log 1 -p
+```
+
+一行显示一个提交：
+```
+$ git log --pretty=oneline
+```
+
+以树状图显示提交历史：
+```
+$ git log --graph --oneline --decorate --all
 ```
 
 显示所有提交（仅显示提交的hash和message）：
@@ -89,7 +104,7 @@ $ git log -p <file>
 $ git blame <file>
 ```
 
-##分支与标签
+## 分支与标签
 
 列出所有的分支：
 ```
@@ -155,7 +170,7 @@ $ git pull origin master
 
 将本地版本发布到远程端：
 ```
-$ git push remote <remote> <branch>
+$ git push origin <remote> <branch>
 ```
 
 删除远程端分支：
@@ -170,7 +185,7 @@ git push <remote> --delete <branch> (since Git v1.7.0)
 $ git push --tags
 ```
 
-##合并与重置
+## 合并与重置
 
 将分支合并到当前HEAD中：
 ```
@@ -206,7 +221,7 @@ $ git add <resolved-file>
 $ git rm <resolved-file>
 ```
 
-##撤销
+## 撤销
 
 放弃工作目录下的所有修改：
 ```
@@ -243,7 +258,19 @@ $ git reset <commit>
 $ git reset --keep <commit>
 ```
 
+将本地仓库重置成与远端一样：
+```
+$ git fetch origin git reset --hard origin/master
+```
+
+## 暂存
+
+```
+$ git stash
+$ git stash list
+$ git stash pop
+```
+
 ## 原文链接
 
 * [Git Cheat Sheet](https://github.com/flyhigher139/Git-Cheat-Sheet)
-
