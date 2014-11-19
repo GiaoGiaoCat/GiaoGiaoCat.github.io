@@ -2,7 +2,7 @@
 layout: post
 title:  "MySQL 索引类型一览"
 date:   2014-11-19 13:40:00
-categories: other
+categories: tool
 tags: database
 author: "Victor"
 ---
