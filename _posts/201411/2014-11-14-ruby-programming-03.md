@@ -184,3 +184,52 @@ end
 ```ruby
 zip, <<(等同push), concat(等同+), compact, delete, delete_at, delete_if, reject, uniq, fill, flatten, reverse, sort, sort_by
 ```
+
+### 字符串类
+
+* 当创建包含 "" 或者 '' 的字符串时，比起使用 \", \' 进行转义，使用 %Q 或者 %q 更简单。
+* 使用 %Q 相当于 "", 使用 %q 相当于 ''。
+
+```ruby
+desc = %Q{Ruby 的字符串可以使用 '' 和 ""。}
+desc = %q|Ruby 的字符串可以使用 '' 和 ""。|
+```
+
+#### Here Document
+
+* 我们一般将 EOF 或者 EOB 作为结束标示符使用。EOF 是 End of File 的简写，EOB 是 End of Block 的简写。
+* 使用 <<- 代替 << 程序会忽略结束标示符前的空格和制表符，结束标示符也就没有必要一定要写在行首了。
+
+```ruby
+<<"结束标示符"
+字符串内容
+结束标示符
+
+10.times do |i|
+  10.times do |j|
+    print(<<-"EOB")
+i: #{i}
+j: #{j}
+i*j = #{i*j}
+    EOB
+  end
+end
+
+str = <<-EOB
+Hello!
+Hello!
+Hello!
+EOB
+```
+
+#### 其它
+
+* ```+``` 字符串的连接
+* ```<<``` 扩展原有字符串
+* 字符串的比较不由长短决定，而由字符串的编码顺序决定。中文字符同样。
+* 使用 `command` 的形式，可以得到命令的标准输入并将其转换为字符串对象。
+
+```bash
+`ls -l /etc/hosts`
+puts `cat /etc/hosts`
+```
