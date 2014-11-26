@@ -80,6 +80,26 @@ function () {
 }
 ```
 
+### Macros and Registers
+
+#### 录制宏
+
+* 每个寄存器都是按a到z来定义的
+* 在命令行模式下，输入q来触发宏录制，输入q来退出宏录制
+* ```q<letter><commands>q```
+* 如需执行多次，可以按如下格式输入 ```<number>@<letter>```
+
+完整的宏看起来应该是这样的:
+
+1. ```qd```	开始录制宏，记为寄存器 ```d```
+2. ```..```	你可以在 vim 里进行各种操作
+3. ```q```	按下q ，停止录制
+4. ```@d```	执行你录制的宏 d
+5. ```@@```	再次执行你刚刚录制的宏
+
+* [Vim Macros 中文教程](http://my.oschina.net/linuxjd/blog/312847)
+* [Vim Macros](http://vim.wikia.com/wiki/Macros)
+
 ## Vim as an Extension of Vi
 
 ## Customization
