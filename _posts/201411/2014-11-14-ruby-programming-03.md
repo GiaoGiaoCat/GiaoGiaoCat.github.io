@@ -233,3 +233,52 @@ EOB
 `ls -l /etc/hosts`
 puts `cat /etc/hosts`
 ```
+
+### 散列类
+
+* 建议使用 字符串，数值，符号，日期 作为散列的键
+* 可以使用 ```store, fetch``` 来获取和设置散列的值
+* ```fetch``` 取不存在的键，程序发生异常。但如果对这个方法指定第2个参数，则当键不存在时，返回这个默认值
+* 查看散列的大小 ```size, length```
+* 不同类的对象不能判断为相同的键，因此 ```h[1]``` 和 ```h[1.0]``` 不同，具体如下
+
+```ruby
+h = {}
+n1 = 1
+n2 = 1.0
+p n1 == n2 #=> true
+h[n1] = "exists."
+p h[n2] #=> nil
+```
+
+#### 散列的默认值
+
+1. 创建散列时指定默认值
+2. 通过块指定默认值
+3. 用 ```fetch``` 方法指定默认值
+
+```ruby
+h = Hash.new(1)
+
+h = Hash.new do |hash, key|
+  hash[key] = key.upcase
+end
+h["a"] = "b"
+p h["a"] #=> "b"
+p h["x"] #=> "X"
+
+h = Hash.new do |hash, key|
+  hash[key] = key.upcase
+end
+p h.fetch("x", "(undef)") #=> "(undef)"
+```
+
+#### 删除键值
+
+* ```delete``` 删除方法返回被删除键的值。如果指定一个代码块，则返回块的执行结果。
+* ```delete_if, reject!``` 的区别，当不符合删除条件时，前者返回原散列，后者返回 **nil**
+
+```ruby
+h = { "R" => "Ruby" }
+p h.delete("p") { |key| "no #{key}." } #=> "no P."
+```
