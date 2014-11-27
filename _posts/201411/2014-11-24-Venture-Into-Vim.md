@@ -100,6 +100,32 @@ function () {
 * [Vim Macros 中文教程](http://my.oschina.net/linuxjd/blog/312847)
 * [Vim Macros](http://vim.wikia.com/wiki/Macros)
 
+### Advanced Movement
+
+* H(ome), M(iddle), L(ast line)
+* zt, zb, zz 把光标所在行移动到屏幕的顶部, 尾部, 或中间。
+* m<letter> 可以标记当前位置，再次输入 '<letter> 则会跳转到这个记号位置，回到刚刚的位置用 ''
+
+```
+Ctrl + u, Ctrl + d, Ctrl + f, Ctrl + b, M, <number>H, <number>L, zt, zb, m<letter>, '<letter>, ''
+```
+
+### Buffers
+
+```
+:ls, :bnext, :bn, :bp, :b#, :bd<number>
+```
+
+### Using the Command Line Directly From Vim
+
+* ft 是 file type 的意思
+* 选中代码块之后也可执行命令, 比如 ```!coffee -c -s -p```
+
+```
+:! ls, :read !date, :set ft=javascript
+:r !curl --silent https://github.com/jashkenas/coffeescript/blob/master/repl.js
+```
+
 ## Vim as an Extension of Vi
 
 ## Customization
