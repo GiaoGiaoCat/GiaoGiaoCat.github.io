@@ -128,6 +128,20 @@ Ctrl + u, Ctrl + d, Ctrl + f, Ctrl + b, M, <number>H, <number>L, zt, zb, m<lette
 
 ## Vim as an Extension of Vi
 
+### Windows and Tabs
+
+```
+:e <path and file>, :sp(lit) <path and file>, :vsp(lit) <path and file>, ctrl + w - w(h|j|k|l), ctrl + w - h, ctrl + w - l, ctrl + w + H(J|K|L), ctrl + w - <number> - (- | + | =), :sb<number of buffer>, :verb sb<number of buffer>, :tabedit <path and file>,  gt, gT,
+:e app/apis/api.rb
+```
+
+* http://robots.thoughtbot.com/vim-splits-move-faster-and-more-naturally
+* http://www.linux.com/learn/tutorials/442415-vim-tips-using-viewports
+
+### Graphical Vim: GVim
+
+### Indents and Folds
+
 ## Customization
 
 
