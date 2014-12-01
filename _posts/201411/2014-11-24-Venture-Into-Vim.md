@@ -142,7 +142,63 @@ Ctrl + u, Ctrl + d, Ctrl + f, Ctrl + b, M, <number>H, <number>L, zt, zb, m<lette
 
 ### Indents and Folds
 
+```
+:set list, :set nolist, :set expandtab, :set shiftwidth=2, <number>>>, <number><<, :set smartindent, :set softtabstop=2
+zf<number><hjkl>, zf%, zo, zc,
+insert mode 下 Ctrl + t, Ctrl + d
+```
+
 ## Customization
+
+### The .vimrc File
+
+```
+set nocompatible
+
+filetype on
+filetype indent on
+filetype plugin on
+
+let mapleader = ","
+syntax enable
+"set foldmethod=syntax
+set ignorecase
+set hlsearch
+set fileencoding=utf-8
+set encoding=utf-8
+set backspace=indent, eol, start
+set ts=2 sts=2 expandtab
+
+inoremap ...
+
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+
+set winwidth=84
+set winheight=5
+set winminheight=5
+set winheight=999
+
+set nolist
+#set listchars=tab:>\, eol:
+set guifont=PragmataPro
+set guioptions=aAc
+set guioptions-=Be
+set number
+set noswapfile
+set visualbell
+set cursorline
+```
+
+### Plugins and the Pathogen Tool
+
+### Themes
+
+### Mappings
+
+### Final Tips
 
 
 ## 相关链接
