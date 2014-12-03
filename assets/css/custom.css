@@ -37,7 +37,8 @@
 }
 
 .post-item .post-sum strong {
-  color: #fb6b5b;
+  /*color: #fb6b5b;*/
+  color: #109D84;
 }
 .post-item .post-sum a:link { text-decoration: underline; }
 .post-item .post-sum a:hover { text-decoration: none; }
