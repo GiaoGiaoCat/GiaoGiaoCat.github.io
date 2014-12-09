@@ -194,6 +194,40 @@ set cursorline
 
 ### Plugins and the Pathogen Tool
 
+Manage Vim Plugins with Vundle
+
+1. ```git clone https://github.com/gmarik/Vundle.vim.git bundle/Vundle.vim```
+1. ```vim ~/.vimrc```
+2. add the vundle configs:
+
+```
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" Please note that that's how you add plugins
+" My Bundles here:
+"
+" original repos on github
+Bundle 'scrooloose/nerdtree'
+" vim-scripts repos
+Bundle 'FuzzyFinder'
+" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+
+filetype plugin indent on " required!
+```
+
+3. open vim
+4. ```:BundleInstall```
+5. ```:NERDTree```
+
 ### Themes
 
 ### Mappings
