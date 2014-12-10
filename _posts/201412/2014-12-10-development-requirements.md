@@ -20,4 +20,4 @@ author: "Victor"
   * 搜索框中输入 ```String.new``` 意思要搜索 ```String``` 类或模块内的 ```new``` 方法。
   * 搜索框中输入 ```String new``` 意思要搜索 ```String``` 类或模块内的 ```new``` 关键词。
 
-* [Dash 帮助手册](http://kapeli.com/guide/guide.html()
+* [Dash 帮助手册](http://kapeli.com/guide/guide.html)
