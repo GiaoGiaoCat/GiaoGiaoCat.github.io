@@ -230,12 +230,19 @@ filetype plugin indent on " required!
 
 ### Themes
 
-### Mappings
+```
+:colorscheme, :colo blue,
+```
 
-### Final Tips
+### Mappings
 
 
 ## 相关链接
 
 * [Vimer的程序世界](http://www.vimer.cn/category/vim)
 * [Vim应用大收集](http://be-evil.org/post-157.html)
+* [Tutorials 上关于 VIM 的资源](https://tutsplus.com/tutorials/search?utf8=%E2%9C%93&search%5Btopic%5D=&search%5Bterms%5D=vim+tutorials&button=)
+* [vimcasts](http://vimcasts.org/)
+* [Derek Wyatt: some videos on the Vim](http://vimeo.com/user1690209)
+* [vi-vim-cheat-sheet](http://www.viemu.com/vi-vim-cheat-sheet.gif)
+* [Reddit 关于 Vim 的部分](http://www.reddit.com/r/vim)
