@@ -21,3 +21,7 @@ author: "Victor"
   * 搜索框中输入 ```String new``` 意思要搜索 ```String``` 类或模块内的 ```new``` 关键词。
 
 * [Dash 帮助手册](http://kapeli.com/guide/guide.html)
+
+## RVM 配合 SublimeText
+
+假设默认的 ruby 版本和 gemset 是 ```ruby-2.1.2@rails4```，则运行 ```rvm wrapper ruby-2.1.2@rails4 sublime```
