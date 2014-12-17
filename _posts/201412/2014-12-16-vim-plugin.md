@@ -98,3 +98,6 @@ Bundle 'Shougo/neocomplete'
 Bundle 'Shougo/neosnippet'
 Bundle 'Shougo/neosnippet-snippets'
 ```
+
+* 用 ctrl + n | p 来选择
+* 用 tab 键来确认所选
