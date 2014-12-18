@@ -21,6 +21,26 @@ foo.txt
 *.[oa]
 ```
 
+### 设置全局代理
+
+```bash
+git config --global http.proxy 'socks5://127.0.0.1:7070'
+```
+
+也可手动修改 ~/.gitconfig 文件中的配置
+
+```bash
+[http]
+proxy = socks5://127.0.0.1:12441
+```
+
+### clone 项目的时候只拉取最后一次的提交结果
+
+--depth=1 是指只拉取最后一次的提交结果。
+
+```
+git clone git@github.com:laravel/laravel.git --depth=1
+```
 
 ### 如何取消全部的本地修改
 
@@ -83,3 +103,7 @@ git fsck --no-reflog | awk '/dangling commit/ {print $3}'
 ```
 
 拿到SHA1的值只要再apply就可以了
+
+### 参考
+
+* [git 小技巧](https://github.com/xiaobeicn/programming-skills-summary/tree/master/git)
