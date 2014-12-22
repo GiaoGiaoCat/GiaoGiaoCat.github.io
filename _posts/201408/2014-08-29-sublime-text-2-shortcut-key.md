@@ -7,6 +7,18 @@ tags: editor
 author: "Victor"
 ---
 
+### Multiple Selection with the Keyboard
+
+1. Adding a Line ```Ctrl+Shift+Up and Ctrl+Shift+Down```
+2. Splitting the Selection into Lines ```Command+Shift+L```
+3. Quick Add Next ```Command+D```, step backwards ```Command+U```
+4. Find All ```Ctrl+Command+G```
+
+### Column Selection
+
+1. Left Mouse Button + Option
+2.
+
 ### 常用快捷键列表
 
 以下均可用 vim mode 替换

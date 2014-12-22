@@ -101,3 +101,10 @@ Bundle 'Shougo/neosnippet-snippets'
 
 * 用 ctrl + n | p 来选择
 * 用 tab 键来确认所选
+
+### ag
+
+```
+brew install the_silver_searcher
+echo "Bundle 'rking/ag.vim'" >> ~/.vimrc && vim +BundleInstall
+```
