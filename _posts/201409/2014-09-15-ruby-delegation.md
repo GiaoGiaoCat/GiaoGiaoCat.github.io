@@ -29,6 +29,8 @@ author: "Victor"
 
 当不需要动态修改委派接受对象的时候使用 ```DelegateClass```。
 
+```DelegateClass``` 接受一个类作为参数。
+
 ### 基本用法
 
 ```ruby
@@ -38,8 +40,31 @@ class MyClass < DelegateClass(ClassToDelegateTo) # Step 1
   end
 end
 ```
-
 ### 例子
+
+```ruby
+require 'delegate'  
+
+class MyQueue < DelegateClass(Array)  
+
+  def initialize(arg=[])  
+    super(arg)  
+  end  
+
+  alias_method :enqueue, :push  
+  alias_method :dequeue, :shift  
+end  
+```
+
+```ruby
+mq = MyQueue.new  
+mq.enqueue(123)  
+mq.enqueue(234)  
+p mq.dequeue #=> 123
+p mq.dequeue #=> 234  
+```
+
+另外一个例子。
 
 ```ruby
 require 'delegate'
@@ -180,6 +205,45 @@ to.sellTicket #=> "Sorry-come back tomorrow"
 to.allowSales(true) #=> true
 to.sellTicket #=> "Here is a ticket"
 ```
+
+### Forwarding 和 SingleForwardable
+
+如果你想要更多的控制，你可能想做到方法的委托，而不是类的委托，这时你可以使用 ```forwardable``` 库。
+
+### 例子
+
+```ruby
+require 'forwardable'  
+
+class MyQueue  
+  extend Forwardable  
+
+  def initialize(obj=[])  
+    @queue = obj # delegate to this object  
+  end  
+
+  def_delegator :@queue, :push,  :enqueue  
+  def_delegator :@queue, :shift, :dequeue  
+
+  def_delegators :@queue, :clear, :empty?, :length, :size, :<<  
+
+  # Any additional stuff...  
+end  
+```
+
+在这里要注意，```def_delegator``` 方法也就是把 ```push``` 方法委托到 ```@queue``` 对象，并且重命名为 ```enqueue``` 方法。
+而 ```def_delegators``` 则是直接把他后面的参数都委托给 ```@queue``` 对象，并且方法名不变。
+
+```ruby
+q1 = MyQueue.new                    # use an array  
+q2 = MyQueue.new(my_array)          # use one specific array  
+q3 = MyQueue.new(Queue.new)         # use a Queue (thread.rb)  
+q4 = MyQueue.new(SizedQueue.new)    # use a SizedQueue (thread.rb)  
+```
+
+q3 和 q4 都是线程安全的，因为他们委托给了一个线程安全的对象。
+
+```SingleForwardable``` 操作实例。当你需要把一个指定的对象委托给另一个对象时，就用得到了。
 
 ### 相关链接
 

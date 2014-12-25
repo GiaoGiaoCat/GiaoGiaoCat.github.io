@@ -17,7 +17,15 @@ author: "Victor"
 ### Column Selection
 
 1. Left Mouse Button + Option
-2.
+
+### Search
+
+1. Line search ```Ctrl+G```
+2. Method search ```Command+R```
+3. ```Command + T```
+  * filename
+  * filename:line_number
+  * filename@method_name
 
 ### 常用快捷键列表
 
