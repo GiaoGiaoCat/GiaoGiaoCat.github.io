@@ -21,9 +21,23 @@ Port 22 # change to other number.
 
 ```bash
 vi /etc/sysconfig/iptables
+
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 ```
 
-执行 ```/etc/init.d/iptables restart```。
+执行 ```/etc/init.d/iptables restart``` 或 ```service iptables restart```。
+
+重启防火墙
+
+**重启后生效**
+
+* 开启: ```chkconfig iptables on```
+* 关闭: ``` chkconfig iptables off```
+
+**即时生效，重启后失效**
+
+* 开启: ```service iptables start```
+* 关闭: ```service iptables stop```
 
 ## 限制 SSH 登陆的 IP
 
@@ -32,3 +46,30 @@ vim /etc/hosts.allow
 
 sshd:192.168.0.241 # 限制只有 192.168.0.241 的 IP 可以访问
 ```
+
+## 防火墙脚本
+
+```bash
+#允许所有IP对本机80端口的访问
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+iptables -I INPUT -p udp --dport 80 -j ACCEPT
+#提高本地数据包的优先权：放在第1位
+iptables -t mangle -A OUTPUT -p tcp -m tcp --dport 22 -j MARK –set-mark 1
+iptables -t mangle -A OUTPUT -p tcp -m tcp --dport 22 -j RETURN
+iptables -t mangle -A OUTPUT -p icmp -j MARK –set-mark 1
+iptables -t mangle -A OUTPUT -p icmp -j RETURN
+#提高tcp初始连接(也就是带有SYN的数据包)的优先权是非常明智的：
+iptables -t mangle -A PREROUTING -p tcp -m tcp –tcp-flags SYN,RST,ACK SYN -j MARK –set-mark 1
+iptables -t mangle -A PREROUTING -p tcp -m tcp –tcp-flags SYN,RST,ACK SYN -j RETURN
+#提高ssh数据包的优先权：放在第1类，要知道ssh是交互式的和重要的，不容待慢哦
+iptables -t mangle -A PREROUTING -p tcp -m tcp --dport 22 -j MARK –set-mark 1
+iptables -t mangle -A PREROUTING -p tcp -m tcp --dport 22 -j RETURN
+#封锁55.55.55.55对本机所有端口的访问，暂不使用，我的注释掉了。
+iptables -I INPUT -s 55.55.55.55 -j DROP
+#禁止55.55.55.55对80端口的访问
+iptables -I INPUT -s 55.55.55.55 -p TCP --dport 80 -j DROP
+```
+
+## 参考
+
+* [Linux的iptables常用配置范例](http://www.ha97.com/3928.html)
