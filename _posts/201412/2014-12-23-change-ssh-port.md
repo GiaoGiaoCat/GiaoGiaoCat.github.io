@@ -73,3 +73,6 @@ iptables -I INPUT -s 55.55.55.55 -p TCP --dport 80 -j DROP
 ## 参考
 
 * [Linux的iptables常用配置范例](http://www.ha97.com/3928.html)
+* [Ubuntu Documentation - Firewall](https://help.ubuntu.com/10.04/serverguide/firewall.html)
+* [How to Manually Edit ufw Rules on Ubuntu Linux](https://scottlinux.com/2012/08/25/how-to-manually-edit-ufw-rules-on-ubuntu-linux/)
+* [Using ufw / iptables in Ubuntu 8.04 LTS](https://pario.no/2008/05/21/using-ufw-iptables-in-ubuntu-804-lts/)
