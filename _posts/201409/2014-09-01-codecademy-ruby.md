@@ -9,13 +9,13 @@ author: "Victor"
 
 ## 复习到的新知识
 
-1. hash = Hash.new(0) 然后 hash 里面添加任何一个新的 key 默认的 value 都是 0。
-2. 多行注释的时候 =begin 和 =end 是ruby少数几个，不能用空格隔开的地方。通常情况下我们认为 ruby 是忽略空格的。
-3. <=> 不是比较内存地址，只是比较两个对象的值，根据相等，大于，小于 依次返回 0，1，-1。所以数组反向排序的排序可以使用 arr.sort! { |a,b| b <=> a }。
-4. hash 的 select 方法，可以过滤条件 hash.select { |k, v| v > 50 }
-5. false 和 nil 是 Ruby 中唯一不是 true 的值，但是它俩并不一样。 unless nil 和 unless false 都会执行。
+1. ```hash = Hash.new(0)``` 然后 hash 里面添加任何一个新的 key 默认的 value 都是 0。
+2. 多行注释的时候 =begin 和 =end 是 ruby 少数几个，不能用空格隔开的地方。通常情况下我们认为 ruby 是忽略空格的。
+3. <=> 不是比较内存地址，只是比较两个对象的值，根据相等，大于，小于 依次返回 0，1，-1。所以数组反向排序的排序可以使用 ```arr.sort! { |a,b| b <=> a }```。
+4. hash 的 select 方法，可以过滤条件 ```hash.select { |k, v| v > 50 }```
+5. **false** 和 **nil** 是 Ruby 中唯一不是 **true** 的值，但是它俩并不一样。 ```unless nil``` 和 ```unless false``` 都会执行。
 6. Hash 创建的方法。
-7. class.ancestors 可以查看一个类的所有父类。class.included_modules 可以查看类包含的所有模块。
+7. ```class.ancestors``` 可以查看一个类的所有父类。```class.included_modules``` 可以查看类包含的所有模块。
 
 ```ruby
 Hash["a", 100, "b", 200]             #=> {"a"=>100, "b"=>200}
@@ -232,8 +232,8 @@ yield_name("Eric") { |n| puts "My name is #{n}." }
 ### Procs: Savable Blocks!
 
 在 **一切皆对象** 的 Ruby 中。代码块是一个例外，它不是对象。所以你不能给它复制给一个变量。所以也没有对象那些能力，比如 .methods 方法。
-*&* 把 proc 转换成 block。
-*.call* 调用 proc
+```&``` 把 proc 转换成 block。
+```.call``` 调用 proc
 
 there's always more than one way to do something in Ruby.
 
@@ -255,7 +255,7 @@ hi = Proc.new { puts "Hello!" }
 hi.call
 ```
 
-利用 *&* 可以把符号转换成代码块。
+利用 ```&``` 可以把符号转换成代码块。
 
 ```ruby
 strings = ["1", "2", "3"]
@@ -329,6 +329,8 @@ test { puts "Hello World!"}
 class Hash
   def modify(&block)
     map { |k, v| v.is_a?(Hash) ? v.modify(&block) : yield(k, v) }
+    # same as:
+    # map { |k, v| v.is_a?(Hash) ? v.modify(&block) : block.call(k, v) }
   end
 end
 
