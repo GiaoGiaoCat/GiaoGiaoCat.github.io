@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "W3CSchool AngularJS 教程阅读笔记"
-date:   2014-12-27 16:30:00
+date:   2014-12-29 15:00:00
 categories: development
 tags: learningnote javascript
 author: "Victor"
@@ -323,3 +323,9 @@ app.controller("myTodoCtrl", function($scope) {
     $scope.save  = function() {$scope.message="";};
 });
 ```
+
+### AngularJS 参考手册
+
+## 阅读教程
+
+* [AngularJS 教程](http://www.w3cschool.cc/angularjs/angularjs-tutorial.html)
