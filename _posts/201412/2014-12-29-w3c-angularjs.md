@@ -324,8 +324,6 @@ app.controller("myTodoCtrl", function($scope) {
 });
 ```
 
-### AngularJS 参考手册
-
 ## 阅读教程
 
 * [AngularJS 教程](http://www.w3cschool.cc/angularjs/angularjs-tutorial.html)
