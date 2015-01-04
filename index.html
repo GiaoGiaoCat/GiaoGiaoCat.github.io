@@ -2,7 +2,8 @@
 layout: default
 ---
 {% for post in paginator.posts %}
-<div class="post-item">
+<!-- old home -->
+<div class="post-item" style="display:none;">
   <div class="caption wrapper-lg">
     <h2 class="post-title"><a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
     <div class="line line-lg"></div>
@@ -19,4 +20,12 @@ layout: default
 </div>
 {% endfor %}
 
+<section class="panel panel-default portlet-item">
+  <header class="panel-heading"><strong>Article List</strong></header>
+  <section class="panel-body">
+    {% for post in paginator.posts %}
+      {% include list_post.html %}
+    {% endfor %}
+  </section>
+</section>
 {% include pagination.html %}
