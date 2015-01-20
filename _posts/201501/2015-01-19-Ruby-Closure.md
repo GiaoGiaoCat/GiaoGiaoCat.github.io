@@ -7,13 +7,15 @@ tags: functional_programming
 author: "Victor"
 ---
 
-## 概念
+## 基础
+
+### 概念
 
 * 你可以像传递对象那样传递闭包, 也可以以后调用。
 * 当闭包创建的时候, 它记住了该环境下所有的变量的值。被调用时, 它可以访问这些变量, 甚至这些变量已处于环境的外部或其值已经改变。
-* Ruby 通过 ``proc`` 和 ``lambda`` 来实现闭包。
+* Ruby 通过 ``proc`` 和 ``lambda`` 以及代码块来实现闭包。
 
-## 例子
+### 例子
 
 ```ruby
 class SomeClass
@@ -78,7 +80,43 @@ value: 5
 
 结论：Ruby 使用的是延长变量的生命周期的办法。每一次迭代2个闭包操作的都是同一个变量, 因为值在增长。
 
-## 作用
+### 作用
 
 1. 使用闭包来持久化一些状态。
 2. 写出更加简明的代码而且还利用了命令式的风格。
+
+
+## break 和 return
+
+### return
+
+* ``lambda`` 是匿名方法，因此 ``return`` 就会返回该 ``lambda`` 的执行结果，并继续执行整个方法。
+* ``proc`` 和代码块会返回该该代码块的执行结果，并结束整个方法。
+
+```ruby
+def test_proc
+  puts 'test proc method'
+  proc = Proc.new { return puts 'run proc' }
+  proc.call
+  puts 'end proc'
+end
+test_proc
+# >> test proc method
+# >> run proc
+
+def test_lambda
+  puts 'test lambda method'
+  lambda = -> { return puts 'run proc' }
+  lambda.call
+  puts 'end lambda'
+end
+test_lambda
+# >> test lambda method
+# >> run proc
+# >> end lambda
+```
+
+### break
+
+* 在代码块中的 ``braek`` 和 ``return`` 中一样。
+* 在方法中，不能直接添加 ``braek``，它只能处于 ``while/until/for`` 的内部。
