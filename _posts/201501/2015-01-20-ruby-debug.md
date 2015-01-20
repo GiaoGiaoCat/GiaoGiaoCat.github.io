@@ -3,7 +3,7 @@ layout: post
 title:  "Debugging Ruby"
 date:   2015-01-20 18:00:00
 categories: ruby
-tags: functional_programming
+tags: tip
 author: "Victor"
 ---
 
