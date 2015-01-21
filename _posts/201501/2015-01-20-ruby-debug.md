@@ -3,7 +3,7 @@ layout: post
 title:  "Debugging Ruby"
 date:   2015-01-20 18:00:00
 categories: ruby
-tags: tip
+tags: debug
 author: "Victor"
 ---
 
@@ -66,6 +66,12 @@ author: "Victor"
 * ``cd``
 * ``exit``
 * ``ls -h``
+* ``ls -G map`` 列出所有包含 map 的方法
+* ``ls -M Repo --grep ^b`` 列出 Repo 模块中以 b 开头的方法
+* ``ls -g`` List global variables
+* ``ls -c`` List constants
+* ``find-method currency Spree`` 列出命名空间 Spree 下所有包含 currency 的方法
+* ``show-source Spree::Product#bought_since`` any method in your application or its gems
 * ``show-doc Array#in_group_of``
 * ``show-method all.in_group_of``
 * ``edit-method all.in_group_of``
