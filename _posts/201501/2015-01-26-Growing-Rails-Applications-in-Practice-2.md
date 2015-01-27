@@ -3,7 +3,7 @@ layout: post
 title:  "Growing Rails Applications in Practice - 2"
 date:   2015-01-26 20:30:00
 categories: rails
-tags: learningnote
+tags: learningnote refactoring
 author: "Victor"
 ---
 
@@ -15,7 +15,7 @@ author: "Victor"
 
 * 你害怕保存数据会引起意外回调，比如给客户发送个电子邮件啥的。
 * 过多的回调和验证让你很难创建一个简单的数据来进行单元测试。
-* 不同的 UI 界面需要你的 model 提供不同的支持。比如：用户自己注册的时候，发送给他一个欢迎邮件。而管理员从后台注册用户就不处罚这个动作。
+* 不同的 UI 界面需要你的 model 提供不同的支持。比如：用户自己注册的时候，发送给他一个欢迎邮件。而管理员从后台注册用户就不触发这个动作。
 
 All of these problems of so-called **fat models** can be mitigated. But before we look at solutions,
 let’s understand why models grow fat in the first place.
@@ -133,7 +133,7 @@ model 体积变大的主要原因是因为它们要承担越来越多的任务�
 * ProfileForm
 * FacebookConnect
 
-我们曾说过 **large applications are large**。当你需要实现恢复密码的工恩呢刚，但是不新建一个地方来放置这些代码，那么 **Code never goes away**。它必然会横跨几个类，并让这些类都变得难读难用。
+我们曾说过 **large applications are large**。当你需要实现恢复密码的功能，但是又不新建一个地方来放置这些代码，那么 **Code never goes away**。它必然会横跨几个类，并让这些类都变得难读难用。
 
 **Code never goes away** 意思是你需要把代码组织到一个正确的地方，否则它会感染现有类。
 
@@ -152,9 +152,9 @@ model 体积变大的主要原因是因为它们要承担越来越多的任务�
 下面的章节我们将展示：
 
 * 如何在你的代码中发现未被抽象的概念
-* 如何将相互作用的代码和逻辑放在自己的类中，而让核心类苗条
+* 如何将相互作用的代码和逻辑放在单独的类中，而让核心类苗条
 * 如何识别出一段代码不该插入现有的 ActiveRecord 模型而是应该将其抽取到一个 service 类
-* 如何借用 ActiveRecord 的功能方便的做到着一些
+* 如何借用 ActiveRecord 的功能方便的做到这一切
 
 ### A home for interaction-specific code
 
@@ -162,11 +162,11 @@ model 体积变大的主要原因是因为它们要承担越来越多的任务�
 
 将一个巨大的 model 砍小的第一步是将互相之间有关系的代码抽取成一个单独的 model，并让核心 model 保持简洁。
 
-你的核心 model 应该只包含如何内容：
+你的核心 model 应该只包含如下内容：
 
 * 最低程度的验证确保数据的完整
 * 声明联合关系(belongs_to，has_many)
-* 通用且重要的方法用来查找或操作数据
+* 用来查找或操作数据相关的方法，并且这些方法是通用且重要的
 
 核心 model 不该包含特殊的与表单或用户界面相关的逻辑，例如：
 
@@ -174,19 +174,155 @@ model 体积变大的主要原因是因为它们要承担越来越多的任务�
 * 虚拟属性，以支持那些并非和数据库表对应的表单，例如：tags are entered into a single text field separated by comma, the model splits that string into individual tags before validation
 * 仅在特定界面或用例才执行的回调，例如：只有用户注册页面了才发送邮件
 * 关于授权验证的代码 [access control](http://bizarre-authorization.talks.makandra.com/)
-* 用来渲染复杂试图的辅助方法
+* 用来渲染复杂视图的辅助方法
 
 所有这些只与一个 UI(或一组相关的 UI) 有关系的逻辑和代码，最好被放在一个单独的 model。
 
-如果你一直保持，将特定的业务逻辑抽取成 model 的做法，那么你的核心 model 也会保持简洁，并且大多没有啥回调。
+如果你一直保持这种将特定的业务逻辑抽取成 model 的做法，那么你的核心 model 也会保持简洁，并且不会被回调干扰。
 
 #### A modest approach to form models
 
+关于模型的重构不是什么新鲜事。你会从 Github 上发现一大堆和 **presenters**，**exhibits**，**form models** 相关的 gems。不幸的是，其中很大部分看起来都不像从实践中出发。下面是一些我们在实践中遇到的问题：
+
+* 无法和 Rails 的表单方法工作，比如 ``form_for``
+* 无法使用 ActiveRecord 宏风格的代码，比如 ``validates_presence_of``
+* 无法使用嵌套资源型表单
+* 只针对单个对象工作，面对一组对象就无效了，比如 index 动作
+* 创建新记录和编辑已经存在的记录需要不同的主持类, 虽然用户界面是相同的
+* 你需要从核心类中复制粘贴验证和逻辑代码
+* 频繁使用委托(过多的委托，会引起自身的混乱)
+* 增加许多文件，加大理解难度
+
+这些 gems 让我们一次又一次失望，我们想知道：是否有可能既享受 ActiveRecord 的便利，又能把不同的逻辑放在各自的类中。
+
+我们发现这是可行的，甚至不需要引入什么特殊的 gem 就能做到这一点。我们需要的就是利用普通的继承把和页面交互相关的代码从 model 中抽取到另外一个地方。
+
+让我们来看一个例子。思考下面这个已经有点巨大的 User model 如何才能变得好起来：
+
+```ruby
+class User < ActiveRecord::Base
+
+  validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, confirmation: true
+  validates :terms, acceptance: true
+
+  after_create :send_welcome_email
+
+  private
+
+  def send_welcome_email
+    Mailer.welcome(user).deliver
+  end
+
+end
+```
+
+很明显这些代码涉及注册表单，应该从 User 核心类移除。当某些情况下想要跳过验证（管理员在后台操作）或者某种情况下创建用户不发送欢迎邮件的时候（控制台创建用户），当前这个 model 让你开始遇到麻烦。
+
+下面我们减小 model 的体积，仅保留基本的逻辑：
+
+```ruby
+class User < ActiveRecord::Base
+  validates :email, presence: true, uniqueness: true
+end
+```
+
+所有跟注册有关的代码都移动到 ``User::AsSignUp`` 类中，该类继承 ``User`` 类：
+
+```ruby
+class User::AsSignUp < User
+
+  validates :password, presence: true, confirmation: true
+  validates :terms, acceptance: true
+
+  after_create :send_welcome_email
+
+  private
+
+  def send_welcome_email
+    Mailer.welcome(user).deliver
+  end
+end
+```
+
+需要注意的是我们不必在新类中重复验证 email 属性。由于这个新 model 继承自核心 model，它自动继承了核心 model 的全部行为，并在此基础上进行自己的定义。
+
+当我们使用 ``User::AsSignUp`` 来代替原来的 ``User`` 类之后，用来处理注册表单的 controller 也非常简单：
+
+```ruby
+class UsersController < ActionController
+
+  def new
+    build_user
+  end
+
+  def create
+    build_user
+    if @user.save
+      redirect_to dashboard_path
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+  def build_user
+    @user ||= User::AsSignUp.new(user_params)
+  end
+
+  def user_params
+    user_params = params[:user]
+    user_params.permit(
+      :email,
+      :password,
+      :password_confirmation,
+      :terms
+    )
+  end
+end
+```
+
+需要注意的是，我们使用 ``User::AsSignUp`` 作为类名仅仅是因为大家都喜欢用这样的命名约定而已，并没有强迫你使用 **As** 作为前缀或命名空间。但是，我们推荐使用这种目录结构来帮助你更好的组织模型。
+
+File | Class definition
+---|---
+user.rb | class User < ActiveRecord::Base
+user/as_sign_up.rb | class User::AsSignUp < User
+user/as_profile.rb | class User::AsProfile < User
+user/as_admin_form.rb | class User::AsAdminForm < User
+user/as_facebook_login.rb | class User::AsFacebookLogin < User
+
+后面的章节我们会介绍如何用命名空间来组织代码。
+
 #### More convenience for form models
 
-### Extracting service objects
+在不断地实践中，我们发现可以通过适当增加一些小的调整，能让我们更方便的和 models 交互。最后，我们把这些小的功能打包成了前面的章节提到过的 ``ActiveType`` 这个 gem。即使你并不需要使用 ``ActiveType`` 从 model 带来的便利，这里有几个例子说明为什么 ``ActiveType`` 能让你的开发工作更轻松：
 
-#### Example
+* 像 ``url_for``，``form_for``，``link_to`` 这样的辅助方法会根据类名判断出路由地址。如果使用 ``User::AsSignUp`` 这样的名字，这些方法就无法正确工作。而 ``ActiveType`` 内部已经帮忙处理这个问题，它会把 ``link_to(@user)`` 方法路由到 ``user_path(@user)``，即便 ``@user`` 是一个 ``User::AsSignUp`` 的实例。
+* 当使用[单表继承](http://api.rubyonrails.org/classes/ActiveRecord/Base.html#class-ActiveRecord::Base-label-Single+table+inheritance)时，你很可能不想在 ``type`` 字段存一个叫做 ``User::AsSignUp`` 的值，``ActiveType`` 也解决了这个问题，在这种情况下，我们不存 ``User::AsSignUp``，仍然存 ``User``。
+* 对于表单模型，你需要控制一些虚拟属性(某些属性自动转换为整数或日期类型)。尤其当你的模型不适合数据库映射的时候。``ActiveType`` 附带了一些简单的语法糖方便我们在类中定义这些属性。
 
-#### Did we just move code around?
+切换到 ``ActiveType`` 很简单，你只需要从
 
+```ruby
+class User::AsSignUp < User
+```
+
+改成
+
+```ruby
+class User::AsSignUp < ActiveType::Record[User]
+```
+
+一切都和原来一样，但是你得到了上述我们介绍的优点。
+
+需要注意的时，``ActiveType`` 除了能让表单更方便还有其它优势，你仍然可以像原 Ruby 类一样使用前面章节我们讨论过的 ``ActiveModel`` API。
+
+下一章我们将讨论如何进一步减少核心 model 的体积。
+
+### Can’t I just split my model into modules?
+
+有很多技术可以把 **fat models** 分割成多个 modules，比如 DDH 推荐的 [Put chubby models on a diet with concerns](https://signalvnoise.com/posts/3372-put-chubby-models-on-a-diet-with-concerns)。
+
+虽然这种技术可以有效地在多个模型中共享行为，但你必须了解这并非是文件组织的唯一形式。由于所有这些 modules 都会在运行时加载进入你的 model，实际上它并没有降低 model 的代码量。你的回调和方法不会因为被划分在多个模块中而消失。仅仅只是换了个地方而已。

@@ -3,7 +3,7 @@ layout: post
 title:  "Growing Rails Applications in Practice - 1"
 date:   2015-01-24 17:30:00
 categories: rails
-tags: learningnote
+tags: learningnote refactoring
 author: "Victor"
 ---
 
