@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "Growing Rails Applications in Practice - 5"
-date:   2015-01-29 18:30:00
+date:   2015-01-29 10:30:00
 categories: rails
 tags: learningnote refactoring
 author: "Victor"
 ---
 
-## Building applications to last
+## Building applications to last - 上
 
 ### On following fashions
 

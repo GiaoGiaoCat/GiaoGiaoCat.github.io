@@ -120,6 +120,74 @@ body.homepage .article img {
 
 #### An API for your stylesheets
 
+如果让我们形象的描述出如何才是一个好的 CSS 结构。那么我们的清单看起来会这样：
+
+* 限制样式之间互相影响
+* 鼓励重用
+* 限制重复的代码
+* 简单的查看有哪些样式可用
+* 对去哪查看已经存在的样式有明确的规则
+* 对如何添加新样式有明确的规则
+* 可以重构样式而不用担心删除或破坏已有的效果
+
+BEM(short for Block, Element, Modifier) 是一个有效的解决上面的问题系统方法。BEM 不是下载一个类库。它是一组关于样式表结构的规则。
+
+BEM 可以为你那拥有 10000 行 PHP 代码的项目提供干净利落的领域模型。它划分责任，并为样式提供清晰的 API。最重要的是它有清晰地界限以描述可能发生的副作用。
+
+首先，BEM 看起来很有效。你必须问自己为什么你不能随便乱写而需要约束自己的样式表。但是就像 spaghetti 对比 OOP 一样，一旦使用 BEM 那么它带来的好处很快变得清晰。在使用 BEM 一周后，如果按照过去的方式写 CSS 你会觉得自己很傻且不专业。
+
+#### Blocks
+
+在 BEM 中你的每个样式都是统一的。BEM 样式由一个简单，扁平的 **block** 列表组成，而不是疯狂的到处添加样式。
+
+Here are some examples for blocks:
+
+* A navigation bar
+* A blog article
+* A row of buttons
+* Columns that divide the available horizontal space
+
+你可以把 blocks 想象成样式表中的 ``classes`` 。Blocks 通过简单的 CSS 选择器来是实现：
+
+```css
+.navigation { ... }
+.article { ... }
+.buttons { ... }
+```
+
+#### Elements
+
+组件通常比单一的样式规则更复杂。这就是为啥 BEM 提出了 **elements** 的概念：
+
+Here are some examples for elements:
+
+* The block ``navigation bar`` comprises multiple ``section`` elements
+* The block ``blog article`` comprises an element ``title`` and an element ``text``
+* The block ``columns`` contains multiple ``column`` elements
+
+把 elements 想象成你样式表中 classes (blocks) 的方法。Elements 可以使简单的 CSS 选择器或者有前缀的 block 名：
+
+```html
+<div class="article">
+  <div class="article__title">
+    Awesome article
+  </div>
+  <div class="article__text">
+    Lorem ipsum dolor ...
+  </div>
+</div>
+```
+
+下面是这些元素的样式表：
+
+```css
+.article { ... }
+.article__title { ... }
+.article__text { ... }
+```
+
+#### Modifiers
+
 #### The BEM prime directive
 
 #### Full BEM layout example
