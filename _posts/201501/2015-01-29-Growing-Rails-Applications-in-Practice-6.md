@@ -71,16 +71,3 @@ Article::Search.find('query goes here')
 
 这样，当你的数据已经超过了 MySQL 的容量，你需要一个更复杂的替代品，你可以很简单的修改 ``Article::Search.find`` 方法而不用碰其它代码。
 
-### The value of tests
-
-#### Choosing test types effectively
-
-#### How many tests are too many?
-
-#### When to repeat yourself in tests - and when not to
-
-#### Better design guided by tests
-
-#### Getting started with tests in legacy applications
-
-#### Overcoming resistance to testing in your team
