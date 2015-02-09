@@ -11,12 +11,12 @@ author: "Victor"
 
 ### Beautiful controllers
 
-刚接触 MVC 的开发者，最头疼的问题打开时搞不懂 controller 的作用：
+刚接触 MVC 的开发者，最头疼的问题大概是搞不懂 controller 的作用：
 
 * 很难决定把一个新功能是写在 controller 还是写在 model 中。是由 model 来完成发送邮件通知的功能还是 controller 的责任呢？支撑 model 和用户界面差异的代码放在哪里呢？
 *  model 和显示界面之间的自定义映射需要太多的 controller 代码。比如， controller 操作多个 model ；表单中含有 model 中不存在的附加字段；
 *  controller 中的代码难以测试和试验，因为运行 controller 需要一个复杂的环境(request, params, sessions等等)。
-* 由于没有一个缺乏明确的指导方针教大家如何设计的 controller ，以致于没有两个 controller 是完全一样的。这使得在现有的 UI 上工作一件苦差事，因为你必须要了解数据是如何在每个 controller 之间传递的。
+* 由于没有一个明确的指导方案教大家如何设计 controller，以致于没有两个 controller 是完全一样的。这使得在现有的 UI 上工作一件苦差事，因为你必须要了解数据是如何在每个 controller 之间传递的。
 
 我们不能干掉 controller 。但是遵循一些简单的原则，可以减少 controller 在整个项目中的重要性，并把 controller 的代码放到一个更好的地方。 **在 controller 中存在的商业逻辑越少越好。**
 
@@ -206,7 +206,7 @@ end
 一旦你接受只使用回调来表达 model 限制的做法，你可以收获许多好处：
 
 * 借助 ActiveRecord 的错误追踪，你的视图会大大简化。不需要在 controller 中读写变量来显示错误状态。无效的表单字段会由 Rails 表单辅助方法自动高亮。
-* 开发人员不需要再了解每一个 model 的API。可以很容易的理解每个 model 是如何验证各个字段并产生什么行为的。
+* 开发人员不需要再了解每一个 model 的 API。可以很容易的理解每个 model 是如何验证各个字段并产生什么行为的。
 * 不会再因意外误用一个 model ，然后产生一条处于意外状态的记录。
 * 你的 controller 也因此变瘦小。
 * 你会发现有许多有用的类库可以和标准的 ActiveRecord API 协同工作。比如：[state_machine](https://github.com/pluginaweek/state_machine) 提供状态机功能。 [paper_trail](https://github.com/airblade/paper_trail) 在 ActiveRecord 的生命周期中增加了钩子用来监控数据改变。
@@ -236,7 +236,7 @@ pass.
 
 ### Writing a better sign in form
 
-每个人都写过用户登录的表单，它看起来和注册用户差不多。当输入错误数据的时候，显示错误信息。两者的区别是：表单提交的时候当数据验证通过，登录操作并没有和数据库交互，而是修改了 session。
+每个人都写过用户登录的表单，它看起来和注册用户差不多。当输入错误数据的时候，显示错误信息。两者的区别是：表单提交后，当数据验证通过，登录操作并没有和数据库交互，而是修改了 session。
 
 如果我们要实现这个功能，通常是创建一个新的 model，用来包含这些逻辑。下面创建了一个 ``SignIn`` 类包含 ``email`` 和 ``password`` 字段。并且我们要验证 ``email`` 必须是一个存在的账号地址，并且 ``password`` 正确。
 

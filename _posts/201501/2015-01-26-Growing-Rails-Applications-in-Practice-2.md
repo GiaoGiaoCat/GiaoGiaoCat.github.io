@@ -22,7 +22,7 @@ let’s understand why models grow fat in the first place.
 
 #### Why models grow fat
 
-model 体积变大的主要原因是因为它们要承担越来越多的任务。例如一个用户模型要支持如下的如多用例：
+model 体积变大的主要原因是因为它们要承担越来越多的任务。例如一个用户模型要支持如下的用例：
 
 * A new user signs up through the registration form
 * An existing user signs in with her email and password
@@ -145,7 +145,7 @@ model 体积变大的主要原因是因为它们要承担越来越多的任务�
 
 #### Getting into a habit of organizing
 
-做个收件箱不难，难的是要认清你身边有无数算乱的信件的能力。
+做个收件箱不难，难的是要认清你身边有无数混乱的信件的能力。
 
 类似的，当你要找个地方新添加代码的时候，不要马上去找已有的 ActiveRecord 类，试着去寻找一个新类来包含这些逻辑。
 
@@ -165,7 +165,7 @@ model 体积变大的主要原因是因为它们要承担越来越多的任务�
 你的核心 model 应该只包含如下内容：
 
 * 最低程度的验证确保数据的完整
-* 声明联合关系(belongs_to，has_many)
+* 声明联合关系(``belongs_to``，``has_many``)
 * 用来查找或操作数据相关的方法，并且这些方法是通用且重要的
 
 核心 model 不该包含特殊的与表单或用户界面相关的逻辑，例如：
@@ -288,10 +288,10 @@ end
 File | Class definition
 ---|---
 user.rb | class User < ActiveRecord::Base
-user/as_sign_up.rb | class User::AsSignUp < User
-user/as_profile.rb | class User::AsProfile < User
-user/as_admin_form.rb | class User::AsAdminForm < User
-user/as_facebook_login.rb | class User::AsFacebookLogin < User
+``user/as_sign_up.rb`` | class User::AsSignUp < User
+``user/as_profile.rb`` | class User::AsProfile < User
+``user/as_admin_form.rb`` | class User::AsAdminForm < User
+``user/as_facebook_login.rb`` | class User::AsFacebookLogin < User
 
 后面的章节我们会介绍如何用命名空间来组织代码。
 
