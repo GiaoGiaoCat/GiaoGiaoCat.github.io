@@ -275,8 +275,8 @@ app/
     projects/
       index.html.erb
       show.html.erb
-    reports/
-      show.html.erb
+      reports/
+        show.html.erb
 ```
 
 如果把 controller 放在单数的命名空间 ``Project``，Rails 会把视图模板的结构组织成如下：
