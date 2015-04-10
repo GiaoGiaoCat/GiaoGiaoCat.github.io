@@ -3,7 +3,7 @@ layout: post
 title:  "Enumerable & Enumerator in Ruby"
 date:   2014-11-19 10:00:00
 categories: ruby
-tags: tip
+tags: enumerable
 author: "Victor"
 ---
 
@@ -50,11 +50,11 @@ Enumerable.instance_methods.sort #=>
 
 Enumerable 模块定义了很多方便的方法，但是作为模块中其他方法的基础，将遍历元素的方法限定为 each 方法，这一点有些不太灵活。
 
-String 对象有 each_byte, each_line, each_char 等用于循环的方法，如果这些方法都能使用 each_with_index, collect 等 Enumerable 模块的方法就方便多了。而 Enumerator 类就是解决这个问题的。
+String 对象有 `each_byte`, `each_line`, `each_char` 等用于循环的方法，如果这些方法都能使用 `each_with_index`, `collect` 等 Enumerable 模块的方法就方便多了。而 Enumerator 类就是解决这个问题的。
 
-Enumerator 类能以 each 方法以外的方法为基础，执行 Enumerable 模块定义的方法。使用 Enumerator 类后，我们就可以用 String#each_line 方法替代 each 方法，从而执行 Enumerable 模块的方法。
+Enumerator 类能以 `each` 方法以外的方法为基础，执行 Enumerable 模块定义的方法。使用 Enumerator 类后，我们就可以用 `String#each_line` 方法替代 `each` 方法，从而执行 Enumerable 模块的方法。
 
-另外，在不带块的情况下，大部分 Ruby 原生的迭代器在调用时都会返回 Enumerator 对象，因此可以在 each_line, each_byte 等方法的返回结果继续使用 map 等方法。
+另外，在不带块的情况下，大部分 Ruby 原生的迭代器在调用时都会返回 Enumerator 对象，因此可以在 `each_line`, `each_byte` 等方法的返回结果继续使用 `map` 等方法。
 
 ```ruby
 str = "AA\nBB\nCC\n"
