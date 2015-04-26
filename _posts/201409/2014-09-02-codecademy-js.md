@@ -11,8 +11,8 @@ author: "Victor"
 
 ### Getting Started with Programming
 
-1. ```confirm("Hello")``` 弹出消息
-2. ```var myAge = prompt("What is ur name?")``` 接受输入，并保存到变量中
+1. ```confirm("Hello")``` 弹出确认框，会返回布尔值，通过这个值可以判断点击时确认还是取消。true 表示点击了确认，false 表示点击了取消。
+2. ```var myAge = prompt("What is ur name?")``` 接受输入，并保存到变量中。点击取消返回 null。
 3. Data Types: Numbers, Strings, Booleans
 4. ```console.log("hello")```
 5. Math: ```+, -, *, /, %```
@@ -22,9 +22,9 @@ author: "Victor"
 
 ### JavaScript 对象类型的确定
 
-typeof 可以确定对象的基本类型: number, string, object, function, undefined。 === 比较值和对象类型是否相等。 == 仅比较值是否相等。
+`typeof` 可以确定对象的基本类型: number, string, boolean, object, function, undefined。 `===` 比较值和对象类型是否相等。 `==` 仅比较值是否相等。
 
-=== 比较的是基本类型，如果是对象的子类型，同样满足。所以 1 === 1.0 是 true 而 1 === "1" 是false。
+`===` 比较的是基本类型，如果是对象的子类型，同样满足。所以 `1 === 1.0` 是 true 而 `1 === "1"` 是 false。
 
 ### if 语句
 
