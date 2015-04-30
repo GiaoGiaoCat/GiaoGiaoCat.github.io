@@ -43,3 +43,11 @@ vim /etc/ssh/sshd_config
 PasswordAuthentication no # 去掉注释, yes 改成 no
 ChallengeResponseAuthentication no #  去掉注释, yes 改成 no
 ```
+
+第六步： Storing Passphrases in the Keychain
+
+本机的这一步可以略过，主要用在需要转发 ssh key 的安全主机上
+
+```bash
+ssh-add -K
+```
