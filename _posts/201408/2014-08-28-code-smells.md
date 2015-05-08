@@ -282,7 +282,7 @@ Product.new "Shirt", "Pink", 10
 * Preserve Whole Object __保持对象完整__: 将对象中的一些字段是函数的参数，直接将对象作为函数的参数，由传递多个参数改为传递封装好的对象。
 * Introduce Parameter Object __引入参数对象__: 将函数参数封装在一个对象中。
 
-# 10. Shotgun Surgery 霰弹式修改
+## 10. Shotgun Surgery 霰弹式修改
 
 如果每遇到某种变化，你都必须在许多不同的类内做出许多小修改以响应之。如果需要修改的代码散布四处，你不但难以找到它们，也很容易忘记某个重要的修改。
 
