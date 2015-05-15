@@ -196,3 +196,4 @@ $('#<%= dom_id @message %>').highlight();
 * [The security risks of RJS/SJR](https://github.com/jcoglan/unsafe_sjr/blob/master/README.md)
 * [A Tour of Rails’ jQuery UJS](https://robots.thoughtbot.com/a-tour-of-rails-jquery-ujs)
 * [Server-generated JavaScript Responses](https://signalvnoise.com/posts/3697-server-generated-javascript-responses)
+* [服务器端生成的 JavaScript 响应](http://www.oschina.net/translate/server-generated-javascript-responses?cmp)
