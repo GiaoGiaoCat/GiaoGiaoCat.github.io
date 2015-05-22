@@ -216,3 +216,4 @@ uri | URI is a module providing classes to handle Uniform Resource Identifiers
 * [Ruby 2.1.5 Standard Library Documentation](http://www.ruby-doc.org/stdlib-2.1.5/)
 * [Ruby Standard Library](https://github.com/rubysl)
 * [Ruby标准库一览](http://my.oschina.net/u/130017/blog/15520)
+* [Better Standards - A guide to Ruby's standard library and available alternatives](http://idiosyncratic-ruby.com/20-better-standards.html)
