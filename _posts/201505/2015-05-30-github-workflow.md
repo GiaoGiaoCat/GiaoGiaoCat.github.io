@@ -67,3 +67,4 @@ GitHub Flow 是一个轻量级，基于分支的工作流程。它让团队和�
 * [Understanding the GitHub Flow](https://guides.github.com/introduction/flow/)
 * [GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html)
 * [GitHub Cheat Sheet](https://github.com/tiimgreen/github-cheat-sheet)
+* [Git Flow vs Github Flow](http://lucamezzalira.com/2014/03/10/git-flow-vs-github-flow/)
