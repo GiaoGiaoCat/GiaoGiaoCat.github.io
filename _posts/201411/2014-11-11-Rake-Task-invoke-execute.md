@@ -44,7 +44,7 @@ $ rake demo:say_five_hello
 => Hello, World!
 ```
 
-结果就是，** Hello, World! ** 只打印了一次，也就是说，我们的 ```Rake::Task['demo:say_hello']``` 只被运行了一次。
+结果就是， __Hello, World!__ 只打印了一次，也就是说，我们的 ```Rake::Task['demo:say_hello']``` 只被运行了一次。
 
 我们有两种修改方案。第一种就是将上述代码进行修改：
 
