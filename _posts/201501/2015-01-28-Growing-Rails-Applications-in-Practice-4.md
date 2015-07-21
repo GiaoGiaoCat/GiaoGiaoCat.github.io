@@ -32,7 +32,7 @@ author: "Victor"
 我们可以用下面的 HTML 标记来描述这个布局：
 
 ```html
-<divclass="article">
+<div class="article">
   <img src="avatar.png" />
   <h1>Article title</h1>
   <p>Lorem ipsum...</p>
@@ -55,7 +55,7 @@ author: "Victor"
 没问题，我们简单的增加一个 ``<div class='social'>`` 内容区用来包含这些链接就行。
 
 ```html
-<divclass="article">
+<div class="article">
   <img src="avatar.png" />
   <h1>Article title</h1>
   <p>Lorem ipsum...</p>
