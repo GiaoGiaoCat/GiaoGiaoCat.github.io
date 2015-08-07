@@ -52,7 +52,7 @@ bug.status      # => nil
 
 ## 使用该特性时还有如下一些注意事项：
 
-### 所以一旦定义完 `enum` 的 `symbol` 后，你就不应该再去改动其顺序了。
+### 一旦定义完 `enum` 的 `symbol` 后，你就不应该再去改动其顺序了。
 
 不要被其名字所迷惑，在一些数据库中并不使用 `ENUM` 类型来实现该特性。状态和其对应的整数值的匹配是通过 model 文件来维护的。所以一旦定义完 `enum` 的 `symbol` 后，你就不应该再去改动其顺序了。可以明确地指定 mapping 来删除不再使用的状态：
 
@@ -68,7 +68,7 @@ class Bug < ActiveRecord::Base
 end
 ```
 
-### 避免在一个类的不同 enum 中使用相同的名字！这样会使 Active Record 很迷茫！
+### 避免在一个类的不同 enum 中使用相同的名字
 
 ```ruby
 class Bug < ActiveRecord::Base
@@ -89,8 +89,8 @@ Conversation.where.not(status: :active)
 
 ```ruby
 # model
-class User < ActiveRecord::Base
-  enum role: [:admin, :member]
+class User::Profile < ActiveRecord::Base
+  enum gender: [ :female, :male ]
 end
 ```
 
