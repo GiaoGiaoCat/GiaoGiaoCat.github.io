@@ -9,12 +9,17 @@ author: "Victor"
 
 ## 提取值对象 - Extracting Value Objects
 
-值对象是是依赖于它们的值而不是身份的简单对象。它们通常是不可变的。例如：Ruby 标准库中的 Date, URI, Pathname 等，Rails 应用程序中定义的特定域的值对象也是如此。从 ActiveRecords 中提取它们是很容易实现的重构方法。
+值对象是依赖于它们的值而不是身份的一种简单对象。它们通常是不可变的。例如：Ruby 标准库中的 Date, URI, Pathname 等，Rails 应用程序中定义的特定域的值对象也是如此（下面的代码中的`ATTRS`）。从 ActiveRecords 中提取它们是常见的重构方法。
 
-在 Rails 中，当你有一个属性或具有与其关联的逻辑的一小组属性，使用 Value Objects 特别方便。任何超过基本的文本字段和计数器都可以可被抽取成 Value Object。
+```ruby
+class Favorite < ActiveRecord::Base
+  ATTRS = [:name, :age]
+end
+```
 
-例如：一个短消息系统，我需要处理电话号码的对象。在线商城系统需要一个 Money 类。Code Climate 有一个叫做 `Rating` 的 Value Object 用来表示 A - F 等级供给每个类和模块接收。 我最初使用 Ruby 的 String 实例，但是 Rating 允许我把行为和数据结合起来，参考例1。
+在 Rails 中，当你有一个属性或逻辑上互相关联的一小组属性，使用 Value Objects 特别方便。通常来说复杂的文本和数值都可被抽取成 Value Object。
 
+例如：一个短消息系统，我需要处理电话号码的对象。在线商城系统需要一个 Money 类。Code Climate 有一个叫做 `Rating` 的 Value Object 用来表示 A - F 等级供给每个类和模块使用。最初我们使用 Ruby 的 String 实例来完成该功能，但是创建一个 Rating 的 Value Object 允许我把行为和数据结合起来，参考例1。
 
 ## 好处
 
