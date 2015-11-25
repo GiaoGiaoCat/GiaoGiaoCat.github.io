@@ -1,1 +1,4 @@
 _site
+.tags
+.ruby-gemset
+.ruby-version

@@ -14,9 +14,11 @@ brew remove mysql
 brew cleanup
 launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 rm ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-sudo rm -rf /usr/local/var/mysql
+sudo rm -rf /usr/local/var/mysql #删除全部数据库
 brew install mysql
+# Inject launch agent
 unset TMPDIR
+# Set up databases to run as your user account
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 ```
 
@@ -29,9 +31,12 @@ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --
 用下面的命令自动在系统启动的时候加载 mysql
 
 ```bash
-#start
+# To have launchd start mysql at login:
+ln -sfv /usr/local/opt/mysql/*plist ~/Library/LaunchAgents
+
+# start
 launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
-#stop
+# stop
 launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
 ```
 
