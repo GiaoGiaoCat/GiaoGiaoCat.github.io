@@ -3,7 +3,7 @@ layout: post
 title:  "Installing a specific version of a homebrew package"
 date:   2015-11-25 22:00:00
 categories: tool
-tags: database
+tags: terminal
 author: "Victor"
 ---
 

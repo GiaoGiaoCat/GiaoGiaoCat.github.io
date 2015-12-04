@@ -3,7 +3,7 @@ layout: post
 title:  "brew install mysql on mac os 10.10"
 date:   2014-10-27 11:40:00
 categories: tool
-tags: mac
+tags: mac database
 author: "Victor"
 ---
 
