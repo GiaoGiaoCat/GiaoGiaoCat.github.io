@@ -5,6 +5,8 @@ url: "http://wjp2013.github.io" # the base hostname & protocol for your site
 github_username: wjp2013
 
 timezone: Beijing
+gems: ['jekyll-paginate', 'pygments.rb']
+
 # Build settings
 highlighter: pygments
 permalink: /:categories/:title/
@@ -17,3 +19,4 @@ redcarpet:
     - tables
 
 paginate: 20
+
