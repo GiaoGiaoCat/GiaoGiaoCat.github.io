@@ -97,7 +97,7 @@ class Transaction
 end
 ```
 
-我们不必在新增一个字段或者使用 `attr_accessor` 定义 `confirmed_at` 属性，仅用 `:date_time` 约束就完美的实现了这一功能：
+我们不必在数据库中新增一个字段或者使用 `attr_accessor` 定义 `confirmed_at` 属性，仅用 `:date_time` 约束就完美的实现了这一功能：
 
 ```ruby
 transaction = Transaction.new
@@ -113,7 +113,7 @@ transaction.confirmed_at
 
 ### Out of the Box Typing
 
-除了刚刚提到的那些字段类型之外，其实 `Attributes` 还支持任何对象类型。
+除了刚刚提到的那些字段类型之外，其实 `Attributes` 还支持绑定对象类型。
 
 为了帮助说明这个特点，我们可以假定数据库中的所有价格已更改为只处理美分，这有助于消除一些由浮点运算的复杂性。
 
@@ -141,7 +141,7 @@ Transaction.where(price: '$10.00')
 # => SELECT * FROM transactions WHERE price = 1000
 ```
 
-我们观察它的行为非常有趣，在程序内部把字符串转换成了整数类型。
+可见它的行为非常有趣，在程序内部把字符串转换成了整数类型。
 
 虽然 `Attributes` 并不是解决这类问题的唯一方法，但是仍然是一种值得我们收入工具箱的技巧。
 
