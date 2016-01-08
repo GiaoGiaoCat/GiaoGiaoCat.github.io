@@ -18,5 +18,5 @@ redcarpet:
     - fenced_code_blocks
     - tables
 
-paginate: 20
+paginate: 22
 
