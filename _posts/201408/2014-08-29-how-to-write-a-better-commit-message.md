@@ -10,10 +10,18 @@ author: "Victor"
 ## 为什幺要关注提交信息
 
 * 加快 Reviewing Code 的过程
-* 帮助我们写好 release note
+* 帮助我们写好 Release note，也可以直接从 commit 生成 Change log
 * 5年后帮你快速想起来某个分支，tag 或者 commit 增加了什么功能，改变了哪些代码
 * 让其他的开发者在运行 ```git blame``` 的时候想跪谢
 * 总之一个好的提交信息，会帮助你提高项目的整体质量
+
+```bash
+#提供更多的历史信息，方便快速浏览
+git log <last tag> HEAD --pretty=format:%s
+
+#可以过滤某些commit（比如文档改动），便于快速查找信息。
+git log <last release> HEAD --grep feature
+```
 
 ## 基本要求
 
@@ -103,7 +111,96 @@ being redirected to the login form.
 * Redirect to the stored location after successfully logging in the user
 ```
 
-### 延伸阅读
+## Angular 规范的 Commit message 格式
+
+每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。
+
+```bash
+<type>(<scope>): <subject>
+// 空一行
+<body>
+// 空一行
+<footer>
+```
+
+其中，Header 是必需的，Body 和 Footer 可以省略。
+
+### Header
+
+Header 部分只有一行，包括三个字段：**type**（必需）、**scope**（可选）和 **subject**（必需）。
+
+**type** 用于说明 commit 的类别，只允许使用下面7个标识。
+
+* **feat** 新功能（feature）
+* **fix** 修补bug
+* **docs** 文档（documentation）
+* **style** 格式（不影响代码运行的变动）
+* **refactor** 重构（即不是新增功能，也不是修改bug的代码变动）
+* **test** 增加测试
+* **chore** 构建过程或辅助工具的变动
+
+如果 **type** 为 **feat** 和 **fix**，则该 commit 将肯定出现在 Change log 之中。
+
+**scope** 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
+
+**subject** 是 commit 目的的简短描述，不超过50个字符。
+
+* 以动词开头，使用第一人称现在时，比如 change，而不是 changed 或 changes
+* 第一个字母小写
+* 结尾不加句号
+
+### Body
+
+Body 部分是对本次 commit 的详细描述，可以分成多行。下面是一个范例。
+
+```
+More detailed explanatory text, if necessary.  Wrap it to
+about 72 characters or so.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+- Use a hanging indent
+```
+
+应该说明代码变动的动机，以及与以前行为的对比，参考前文提到的 **注释要回答如下信息**。
+
+### Footer
+
+Footer 部分只用于不兼容变动和关闭 Issue。
+
+```
+BREAKING CHANGE: isolate scope bindings definition has changed.
+
+    To migrate the code follow the example below:
+
+    Before:
+
+    scope: {
+      myAttr: 'attribute',
+    }
+
+    After:
+
+    scope: {
+      myAttr: '@',
+    }
+
+    The removed `inject` wasn't generaly useful for directives so there should be no code using it.
+```
+
+```
+Closes #123, #245, #992
+```
+
+## 相关工具
+
+* [Commitizen](https://github.com/commitizen/cz-cli) 是一个撰写合格 Commit message 的工具
+* [validate-commit-msg](https://github.com/kentcdodds/validate-commit-msg) 用于检查 Node 项目的 Commit message 是否符合格式
+* [conventional-changelog](https://github.com/ajoslin/conventional-changelog) 是生成 Change log 的工具
+
+
+## 延伸阅读
 
 * [A Note About Git Commit Messages](http://web-design-weekly.com/blog/2013/09/01/a-better-git-commit/)
 * [Writing good commit messages](http://ablogaboutcode.com/2011/03/23/proper-git-commit-messages-and-an-elegant-git-history/)
@@ -111,3 +208,5 @@ being redirected to the login form.
 * [A Better Git Commit](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
 * [5 Useful Tips For A Better Commit Message ](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message)
 * [好玩的提交信息](http://whatthecommit.com/)
+* [写法规范](https://github.com/ajoslin/conventional-changelog/tree/master/conventions)
+* [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
