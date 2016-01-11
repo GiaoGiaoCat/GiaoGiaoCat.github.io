@@ -9,6 +9,8 @@ author: "Victor"
 
 `module_function` 可以把一个模块的实例方法同时定义成模块级方法。
 
+模块级方法的意思是，这些方法的接受者可以是该模块本身。
+
 你可以给 `module_function` 传递一个方法名作为参数：
 
 ```ruby
@@ -37,9 +39,11 @@ $ X.foo
 => 'huhu'
 ```
 
-所有通过 `module_function` 定义的方法默认都是 `private` 的。
+当一个类混入了该模块后，所有通过 `module_function` 定义的方法默认都是 `private` 的实例方法。
 
 更妙的是，这些模块级方法都是实例方法的副本，所以给其中的一个方法打猴子补丁不会影响其它部分。
+
+最后所有 `module_function` 接受的字符串参数会被内部转换成符号类型。
 
 ### Why should I be using this?
 
