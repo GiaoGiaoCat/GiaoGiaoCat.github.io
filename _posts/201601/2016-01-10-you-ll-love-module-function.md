@@ -41,6 +41,42 @@ $ X.foo
 
 当一个类混入了该模块后，所有通过 `module_function` 定义的方法默认都是 `private` 的实例方法。
 
+请看下面的不同：
+
+```ruby
+module A
+  def hello
+    p "Yeah"
+  end
+end
+
+class B
+  include A
+end
+
+B.new.hello
+
+# >> "Yeah"
+```
+
+```ruby
+module A
+  def hello
+    p "Yeah"
+  end
+  module_function :hello
+end
+
+class B
+  include A
+end
+
+B.new.hello
+
+# ~> NoMethodError
+# ~> private method `hello' called for #<B:0x007fb262031d78>
+```
+
 更妙的是，这些模块级方法都是实例方法的副本，所以给其中的一个方法打猴子补丁不会影响其它部分。
 
 最后所有 `module_function` 接受的字符串参数会被内部转换成符号类型。
