@@ -7,7 +7,7 @@ tags: tip
 author: "Victor"
 ---
 
-`module_function` 可以把一个方法定义成实例方法同时也是 module level methods。
+`module_function` 可以把一个模块的实例方法同时定义成模块级方法。
 
 你可以给 `module_function` 传递一个方法名作为参数：
 
@@ -23,7 +23,7 @@ $ X.foo
 => 'bar'
 ```
 
-如果 `module_function` 没有跟随参数，则它后面的所有方法都会被定位为 module level methods：
+如果 `module_function` 没有跟随参数，则它后面的所有方法都会被定义为模块级方法：
 
 ```ruby
 module X
@@ -39,7 +39,7 @@ $ X.foo
 
 所有通过 `module_function` 定义的方法默认都是 `private` 的。
 
-更妙的是，这些 module level methods 是实例方法的副本，所以给其中的一个方法打猴子补丁不会影响另外的。
+更妙的是，这些模块级方法都是实例方法的副本，所以给其中的一个方法打猴子补丁不会影响其它部分。
 
 ### Why should I be using this?
 
