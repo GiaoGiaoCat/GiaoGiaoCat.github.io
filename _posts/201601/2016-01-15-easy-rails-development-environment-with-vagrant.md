@@ -248,6 +248,8 @@ $ vagrant destroy  # 销毁当前虚拟机
 * [Atom Vagrant](https://atom.io/packages/vagrant) Vagrant commands for Atom editor.
 * [atom-vagrant-manager](https://atom.io/packages/atom-vagrant-manager) A manager for start and stopping vagrant boxes.
 
+最后说一句：**我已经意识到在虚拟机上安装 RVM 是一件很傻的事情，所以请忽略 RVM 安装那部分吧**
+
 ## 参考
 
 * [VAGRANT 中文文档](http://tangbaoping.github.io/vagrant_doc_zh/v2/) 建议阅读一遍文档
