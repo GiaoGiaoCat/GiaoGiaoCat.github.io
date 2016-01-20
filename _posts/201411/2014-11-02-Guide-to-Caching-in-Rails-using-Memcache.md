@@ -7,35 +7,111 @@ tags: caching
 author: "Victor"
 ---
 
-## Implementing and Using in Rails
+## 在 Rails 中使用 Memcache 的方法
 
 ### 安装 Dalli (Memcache Client)
 
 * [Installing Memcache Dalli Client](https://github.com/mperham/dalli)
 * [Dalli Client Api Doc](http://www.rubydoc.info/github/mperham/dalli/Dalli/Client)
 
+Gemfile 中添加 ```gem 'dalli'``` 并执行 ```bundle install```
 
-Include ```gem 'dalli'``` in Gemfile & Run ```bundle install```
+```ruby
+# Connecting
+require 'dalli'
+cache = Dalli::Client.new('localhost')
+```
+
+```ruby
+# Basic storage
+cache.set 'greet', 'hello'
+cache.get 'greet' #=> "hello"
+
+cache.set 'greet', 'hello', 5
+cache.get 'greet' #=> "hello"
+sleep 5
+cache.get 'greet' #=> nil
+
+cache.set 'greet1', 'hello'
+cache.set 'greet2', 'good morning'
+cache.get_multi 'greet1', 'greet2' #=> {"greet1"=>"hello", "greet2"=>"good morning"}
+
+# deleting
+cache.delete 'greet1'
+cache.delete 'greet2'
+cache.get_multi 'greet1', 'greet2' #=> {}
+
+# delete all keys
+cache.flush #=> [true]
+```
+
+```ruby
+# Adding data
+cache.set 'greet', 'hello'
+cache.get 'greet' #=> "hello"
+cache.set 'greet', 'good morning'
+cache.get 'greet' #=> "good morning"
+
+# create the value if the key doesn’t exist:
+cache.add 'greet', 'good evening'
+cache.get 'greet' #=> "good morning"
+cache.add 'greet2', 'good evening' #=> "good evening"
+```
+
+```ruby
+# Replacing data
+cache.replace 'greet', 'hi there!'
+cache.get 'greet' #=> "hi there!"
+# it will do nothing if the key doesn’t exist:
+cache.replace 'non existing greet', 'hi there!' #=> nil
+```
+
+```ruby
+# Appending and prepending data
+cache.set 'greet', 'hello', 0, raw: true
+cache.append 'greet', '!'
+cache.get 'greet' #=> "hello!"
+cache.prepend 'greet', 'hey! '
+cache.get 'greet' #=> "hey! hello!"
+```
+
+```ruby
+# Increment and decrement data
+cache.set 'counter', 1, 0, raw: true
+cache.incr 'counter' #=> 2
+cache.incr 'counter', 2 #=> 4
+cache.decr 'counter' #=> 3
+cache.decr 'counter', 3 #=> 0
+```
+
+当一个值可能被多个客户端更新的时候，可以使用 `cas` 判断该值是否被其他客户端更新过，如果没有被更新，则像 `set` 一样更新该值：
+
+```ruby
+# Check and set
+cache.set 'config', 'foo'
+cache.cas('config') { 'bar' }
+cache.get 'config' #=> "bar"
+```
 
 ### 在 Rails 中配置 Memcache 作为缓存介质
 
-* Set **perform_caching** and specify **cache_store** in the environment file (e.g. RAILS_ROOT/config/environments/production.rb)
+* 设置 **perform_caching** 参数，在环境变量文件中指定 **cache_store** 方式。(例如：**RAILS_ROOT/config/environments/production.rb**)
 
 ```
 config.action_controller.perform_caching = true
 config.cache_store = :dalli_store, { :namespace => “my_project”, :expires_in => 1.day, :socket_timeout => 3, :compress => true }
 ```
 
-Detailed explanation of Dalli Client options can be found [here](https://github.com/mperham/dalli)
+Dalli 客户端可接受参数的详细解释可以[查看这里](https://github.com/mperham/dalli)
 
-Memcache does not provide any command to list all keys present but at times seeing the keys and their expiry time can be a life saviour. Here is a [Ruby Script to list all memcache keys](https://gist.github.com/bkimble/1365005).
+Memcache 内建的命令行无法一次查看全部目前可用的 keys 和它的过期时间。但是这里有一个脚本可以帮忙 [Ruby Script to list all memcache keys](https://gist.github.com/bkimble/1365005)。
 
 ### 使用 Memcache 来缓存开销较大的运算并且避免重复执行
 
 * 我们把较大的运算结果存入 memcache 并在下次读取。如果下次计算返回相同的结果则我们直接利用缓存内容，否则将新的计算结果放入缓存中。
 * Rails 提供几个辅助方法 ```Rails.cache.read``` 读取缓存，```Rails.cache.write``` 写入缓存，```Rails.cache.fetch``` 返回缓存结果，如果缓存中没有对应的值，则将新的运算结果写入缓存。
 
-Code Snippet to pass a block to evaluate if key not present in cache, else return the value of key
+下面的代码演示了如何传递一个代码块给缓存，如果缓存中未找到该 key 则运行代码块并将返回结果缓存，否则直接返回该 key 的缓存结果。
 
 ```ruby
 # File: application_controller.rb
@@ -61,7 +137,7 @@ def caching_disabled?
 end
 ```
 
-Using ```data_cache``` helper created in last step in application_controller.rb
+ ```data_cache``` helper created in last step in application_controller.rb
 
 ```ruby
 # File: posts_controller.rb
@@ -146,6 +222,7 @@ dcache.set("test", 'helloworld', 0, :raw => true)
 
 ## 相关阅读
 
+* [What is Memcached?](http://davidmles.com/blog/what-is-memcached)
 * [Rails Cache Store Guide](http://api.rubyonrails.org/classes/ActiveSupport/Cache/Store.html)
 * [Faking Regex Based Cache keys in Rails](http://quickleft.com/blog/faking-regex-based-cache-keys-in-rails)
 * [Ruby Script to list all memcache keys](https://gist.github.com/bkimble/1365005)

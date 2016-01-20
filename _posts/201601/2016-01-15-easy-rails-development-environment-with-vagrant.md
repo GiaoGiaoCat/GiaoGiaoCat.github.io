@@ -248,7 +248,7 @@ $ vagrant destroy  # 销毁当前虚拟机
 * [Atom Vagrant](https://atom.io/packages/vagrant) Vagrant commands for Atom editor.
 * [atom-vagrant-manager](https://atom.io/packages/atom-vagrant-manager) A manager for start and stopping vagrant boxes.
 
-最后说一句：**我已经意识到在虚拟机上安装 RVM 是一件很傻的事情，所以请忽略 RVM 安装那部分吧**
+最后说一句：**我已经意识到在虚拟机上安装 RVM 是一件很傻的事情，所以请忽略 RVM 安装那部分吧**，还是直接安装 Ruby 2.3 好了，[Ruby 2.3 Ubuntu packages](https://www.brightbox.com/blog/2016/01/06/ruby-2-3-ubuntu-packages/)
 
 ## 参考
 
