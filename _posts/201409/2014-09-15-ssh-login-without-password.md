@@ -26,6 +26,8 @@ useDNS no # 不改的话 ssh 客户端连接的时候会很慢，这一步可以
 ```bash
 # 复制自己的公钥到粘贴板
 cat ~/.ssh/id_rsa.pub| pbcopy
+# 复制自己的公钥到粘贴板直接粘贴到服务器上
+cat ~/.ssh/id_rsa.pub | ssh root@xxx.xx.xxx.xx "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 ```
 
 第四步：重启 sshd 服务
