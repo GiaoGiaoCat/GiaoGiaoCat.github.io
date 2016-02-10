@@ -40,6 +40,25 @@ brew cask install vagrant
 brew cask install vagrant-manager
 ```
 
+### 安装系统
+
+一个打包好的系统环境在 Vagrant 叫 Box，你可以在 http://www.vagrantbox.es/ 上挑选需要的。
+
+```bash
+# vagrant box add {title} {url}
+vagrant box add {Ubuntu-12-10} {http://cloud-images.ubuntu.com/quantal/current/quantal-server-cloudimg-vagrant-amd64-disk1.box}
+```
+
+之后可以用 `vagrant box list` 来查看已安装的 Box。通常我都用 Vagrantfile 直接指定 Box 名称，它会自动帮忙下载好 Box。也参考下面安装 Rails 时的系统镜像部分。
+
+如果本地的 Box 太多，也可以删除一些。
+
+```bash
+vagrant box remove ubuntu/trusty64 --box-version=20160206.0.0
+```
+
+更多命令看这里 https://www.vagrantup.com/docs/cli/box.html
+
 ## Setting Up Your Rails Stack
 
 ### The Vagrantfile
@@ -58,13 +77,19 @@ atom Vagrantfile # 编辑配置文件
 config.vm.box = "bento/ubuntu-14.04"
 ```
 
+设定 hostname 非常重要，因为很多服务都依赖 hostname 作为辨识。比如 Chef 和 NewRelic。
+
+```ruby
+config.vm.host_name = "gogojimmy-app"
+```
+
 Vagrant 默认是使用端口映射方式将虚拟机的端口映射本地从而实现类似 http://localhost:80 这种访问方式，因为我们是开发 Rails 所以直接把 3000 端口转发过去就好。
 
 ```ruby
 config.vm.network "forwarded_port", guest: 3000, host: 3000
 ```
 
-不过这个端口转发方式其实很麻烦，host-only 模式显得方便多了。将下面这行的注释去掉（移除 #）并保存：
+Vagrant 有两种桥接方式：host-only 和 Bridge。host-only 的意思是局域网内的其他人看不到你的 VM，而 Bridge 则让同网段的其他人也可以访问。将下面这行的注释去掉（移除 #）并保存：
 
 ```ruby
 config.vm.network :private_network, ip: "192.168.33.10"
@@ -231,6 +256,20 @@ sudo service rails stop
 ps aux | grep rails
 ```
 
+## 打包 Box
+
+做完了这一切，我可不想让我的同事再来一次。所以我们把目前装配好的环境打包成 Box 发给同事吧。
+
+```bash
+vagrant package
+```
+
+这个指令会在文件夹内建立一个 **vagrant.box** 的文件，我们需要先把它加入到我们的 Box 中，这样将来就可以在 Vagrantfile 中使用这个 Box 了。
+
+```bash
+vagrant box add gogojimmy-ubuntu-12-10 package.box
+```
+
 ## 常用命令
 
 ```ruby
@@ -261,3 +300,4 @@ $ vagrant destroy  # 销毁当前虚拟机
 * [安装 Rails 5](/rails/learn-rails-5/)
 * [Ubuntu 14.04 LTS 服务器配置](/tool/rails101/)
 * [Using RVM and Ruby-based services that start via init.d or upstart](https://rvm.io/deployment/init-d)
+* [使用Vagrant練習環境佈署](http://gogojimmy.net/2013/05/26/vagrant-tutorial/)
