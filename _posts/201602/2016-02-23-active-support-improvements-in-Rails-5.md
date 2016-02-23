@@ -162,3 +162,7 @@ array_inquirer2.any?(:mark, :david) #=> true
 array_inquirer2.any?(:john, :louis) #=> false
 ```
 
+
+## 原文
+
+* [Active Support Improvements in Rails 5](http://blog.bigbinary.com/2016/02/17/active-support-improvements-in-Rails-5.html)
