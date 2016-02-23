@@ -3,7 +3,7 @@ layout: post
 title:  "Active Support Improvements in Rails 5"
 date:   2016-02-22 12:00:00
 categories: rails
-tags: rails5 time array
+tags: rails5 time enumerable
 author: "Victor"
 ---
 
