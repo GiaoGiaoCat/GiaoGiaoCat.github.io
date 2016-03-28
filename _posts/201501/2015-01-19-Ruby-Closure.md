@@ -118,5 +118,5 @@ test_lambda
 
 ### break
 
-* 在代码块中的 ``braek`` 和 ``return`` 中一样。
-* 在方法中，不能直接添加 ``braek``，它只能处于 ``while/until/for`` 的内部。
+* 在代码块中的 ``break`` 和 ``return`` 中一样。
+* 在方法中，不能直接添加 ``break``，它只能处于 ``while/until/for`` 的内部。
