@@ -7,10 +7,9 @@ tags: refactoring
 author: "Victor"
 ---
 
-This course will teach you on the basics of OOD (面向对象设计) in the Ruby language and will also refer lots of different patterns (模式) of refactoring (重构) that you can apply instantly into your code.
+本文講述基於 Ruby 語言的面向對象設計，並介紹了一些可以用來重構代碼的設計模式。
 
-
-## 簡介：繼承，封裝，多態，鸭子类型
+## 简介：繼承，封裝，多態，鸭子类型
 
 ### Introduction
 
@@ -18,8 +17,8 @@ Improve the way you code. Increase readability and maintainability. 提高你的
 
 **Object Oriented principles 面向對象設計原則**
 
-* Inheritance 继承
 * Encapsulation 封装
+* Inheritance 继承
 * Polymorphism 多态性
 * Duck typing (particular in Ruby) 鴨子類型
 
@@ -41,45 +40,12 @@ Improve the way you code. Increase readability and maintainability. 提高你的
 
 Just run ```rake test```
 
-### Inheritance 继承
-
-```ruby
-class Person
-  attr_reader :first_name, :last_name
-
-  def initialize first_name, last_name, gender
-    @first_name = first_name
-    @last_name = last_name
-    @gender = gender
-  end
-
-  def full_name
-    first_name + ' ' + last_name
-  end
-end
-
-class Screencaster < Person
-  def initialize first_name, last_name, gender, tools
-    super first_name, last_name, gender
-    @tools = tools
-  end
-end
-
-class Student < Person
-  def initialize first_name, last_name, gender, perferred_language
-    super first_name, last_name, gender
-    @perferred_language = perferred_language
-  end
-end
-```
-
-```bash
-pry
-require './inheritance'
-Student.new('Bill', 'Gates', 'M', 'Visual Baisc')
-```
-
 ### Encapsulation 封裝
+
+封裝是實現面向對象程序設計的第一步。封裝就是把屬於同一類事物的共性（屬性和行爲）歸到一個類中。被封裝的對象通常被稱爲抽象數據類型。
+只公開代碼的對外接口而隱藏具體實現。
+
+下面的例子中，我們把 `Screencaster` 和 `Student` 的共同特徵封裝成了 `Person`。
 
 ```ruby
 class Person
@@ -117,6 +83,47 @@ class Student < Person
     @perferred_language = perferred_language
   end
 end
+```
+
+### Inheritance 继承
+
+在封裝的基礎上，继承主要實現重用代碼，節省開發時間。
+下面的例子中，`Screencaster` 和 `Student` 繼承自 `Person` 各自有擴展。
+
+```ruby
+class Person
+  attr_reader :first_name, :last_name
+
+  def initialize first_name, last_name, gender
+    @first_name = first_name
+    @last_name = last_name
+    @gender = gender
+  end
+
+  def full_name
+    first_name + ' ' + last_name
+  end
+end
+
+class Screencaster < Person
+  def initialize first_name, last_name, gender, tools
+    super first_name, last_name, gender
+    @tools = tools
+  end
+end
+
+class Student < Person
+  def initialize first_name, last_name, gender, perferred_language
+    super first_name, last_name, gender
+    @perferred_language = perferred_language
+  end
+end
+```
+
+```bash
+pry
+require './inheritance'
+Student.new('Bill', 'Gates', 'M', 'Visual Baisc')
 ```
 
 ### Polymorphism 多態性
