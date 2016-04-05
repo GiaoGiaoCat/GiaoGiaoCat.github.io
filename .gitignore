@@ -2,3 +2,4 @@ _site
 .tags
 .ruby-gemset
 .ruby-version
+.DS_Store
