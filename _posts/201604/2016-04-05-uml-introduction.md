@@ -116,8 +116,10 @@ UML 的七种视图各有各自的特点，各自有各自的作用。只有正�
 
 ## 相关阅读
 
+* [用例图、顺序图、状态图、类图、包图、协作图](http://blog.csdn.net/zfrong/article/details/4086424)
 * [UML用例图总结](http://blog.csdn.net/tianhai110/article/details/6369762)
 * [UML序列图总结](http://blog.csdn.net/tianhai110/article/details/6361338)
-* [用例图、顺序图、状态图、类图、包图、协作图](http://blog.csdn.net/zfrong/article/details/4086424)
 * [10个uml学习网站](http://www.nnbaike.com/Course/497.html)
-* [10个uml教程 ](http://www.nnbaike.com/Course/498.html)
+* [10个uml教程](http://www.nnbaike.com/Course/498.html)
+* [UML 教程](http://www.sparxsystems.cn/resources/tutorial/uml-tutorial.html)
+* [UML概览](http://www.uml.org.cn/oobject/OObject.asp)
