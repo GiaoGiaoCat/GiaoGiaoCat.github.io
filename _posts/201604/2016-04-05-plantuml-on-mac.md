@@ -3,7 +3,7 @@ layout: post
 title:  "在 Mac 上使用 PlantUML 画 UML"
 date:   2016-04-04 20:00:00
 categories: tool
-tags: unl
+tags: uml
 author: "Victor"
 ---
 
@@ -33,4 +33,4 @@ Alice -> Bob : Fine, thank you, and you?
 ## 相关链接
 
 * [使用 Sublime + PlantUML 高效地画图](http://www.jianshu.com/p/e92a52770832)
-* [官方中文文档](http://translate.plantuml.com/zh)  
+* [官方中文文档](http://translate.plantuml.com/zh)
