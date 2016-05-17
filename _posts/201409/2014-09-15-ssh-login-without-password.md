@@ -30,6 +30,11 @@ cat ~/.ssh/id_rsa.pub| pbcopy
 cat ~/.ssh/id_rsa.pub | ssh root@xxx.xx.xxx.xx "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 ```
 
+```bash
+brew install ssh-copy-id
+ssh-copy-id root@xxx.xx.xxx.xx
+```
+
 第四步：重启 sshd 服务
 
 ```bash
