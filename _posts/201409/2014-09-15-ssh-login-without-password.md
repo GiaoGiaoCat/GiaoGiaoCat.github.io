@@ -19,6 +19,7 @@ apt-get install ssh
 vim /etc/ssh/sshd_config
 PubkeyAuthentication yes # 去掉注释
 AuthorizedKeysFile ~/.ssh/authorized_keys # 去掉注释
+AuthorizedKeysFile .ssh/authorized_keys # 去掉注释, CentOS 请用这个
 useDNS no # 不改的话 ssh 客户端连接的时候会很慢，这一步可以忽略
 ```
 第三步：把公钥加入到 authorized_keys 中，以让服务端认识你的公钥

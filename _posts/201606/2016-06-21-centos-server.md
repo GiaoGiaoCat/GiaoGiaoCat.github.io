@@ -40,6 +40,23 @@ yum install -y npm
 npm install bower -g
 ```
 
+### 安装 Nginx
+
+```bash
+yum install epel-release
+yum install nginx
+systemctl start nginx
+systemctl enable nginx
+```
+
+If you are running a firewall, run the following commands to allow HTTP and HTTPS traffic:
+
+```bash
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+```
+
 ### 添加 deployer 用户
 
 ```bash
@@ -62,6 +79,7 @@ Staging 机器，可以把 数据库 放在 ECS 而不用单开一个 RDS
 yum install mariadb-server mariadb
 systemctl start mariadb.service
 systemctl enable mariadb.service
+yum install mysql-devel
 ```
 
 ### 安装 memcached
@@ -70,6 +88,8 @@ Staging 机器，可以把 Memcached 放在 ECS
 
 ```bash
 yum install memcached
+systemctl status memcached
+systemctl enable memcached # Be sure that Memcached starts at boot:
 ```
 
 ## deployer 执行
@@ -78,6 +98,7 @@ yum install memcached
 
 ```bash
 git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone git://github.com/jamis/rbenv-gemset.git  ~/.rbenv/plugins/rbenv-gemset
 git clone git://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
 git clone git://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
@@ -109,7 +130,6 @@ gem install bundler
 ### MySQL
 
 ```
-sudo yum install mysql-devel
 gem install mysql2 -v '0.4.4'
 ```
 
@@ -128,3 +148,5 @@ service sshd restart
 * [How To Deploy With Mina: Getting Started](https://www.digitalocean.com/community/tutorials/how-to-deploy-with-mina-getting-started)
 * [rbenv 使用指南](https://ruby-china.org/wiki/rbenv-guide)
 * [Install MySQL Server on CentOS](https://support.rackspace.com/how-to/installing-mysql-server-on-centos/)
+* [How to Install Memcached on CentOS 7](https://www.liquidweb.com/kb/how-to-install-memcached-on-centos-7/)
+* [How To Install Nginx on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-centos-7)
