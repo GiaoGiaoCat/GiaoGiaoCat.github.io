@@ -142,6 +142,11 @@ cat ~/.ssh/id_rsa.pub # 复制到 github 的部署机器人身上
 service sshd restart
 ```
 
+### Nginx 无法访问 assets 文件夹下面的文件
+
+1. 把 assets 在 mina 中配置成 shared 文件
+2. `chmod o+x /home/deployer` [参考此文](https://stackoverflow.com/questions/6795350/nginx-403-forbidden-for-all-files)
+
 ## 相关阅读
 
 * [Initial Server Setup with CentOS 7](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-7)
