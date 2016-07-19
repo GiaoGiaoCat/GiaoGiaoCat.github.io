@@ -67,9 +67,25 @@ port = 3306
 socket = /tmp/mysql.sock
 ```
 
+### How to Disable Strict SQL Mode in MySQL 5.7
+
+先用 `mysql --help` 查看，发现 MySQL 从如下位置读取配置文件 `/etc/my.cnf /etc/mysql/my.cnf /usr/local/etc/my.cnf ~/.my.cnf`
+
+`sudo cp $(brew --prefix mysql)/support-files/my-default.cnf ~/.my.cnf`
+
+编辑该文件添加如下
+
+```
+[mysqld]
+sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+```
+
+重启 MySQL
+
 ### 相关链接
 
 * [brew install mysql on mac os](http://stackoverflow.com/questions/4359131/brew-install-mysql-on-mac-os)
 * [mac os 安装 mysql总是出现cannot find mysql.sock](https://ruby-china.org/topics/794)
 * [在 Mac 下用 Homebrew 安装 MySQL](http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/)
 * [Disable Services in OSX (services.msc)](http://apple.stackexchange.com/questions/105892/disable-services-in-osx-services-msc)
+* [How to Disable Strict SQL Mode in MySQL 5.7](https://serverpilot.io/community/articles/how-to-disable-strict-mode-in-mysql-5-7.html)
