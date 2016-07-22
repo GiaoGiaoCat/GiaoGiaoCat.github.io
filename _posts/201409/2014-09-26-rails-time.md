@@ -148,6 +148,19 @@ Less common formats
 %V     week number of the year, starting on first Monday where week has 4 or more days.
 ```
 
+## Rails 4 之后推荐的另外一种做法
+
+Rails 4 推荐在 I18N 文件中指定时间格式，比如 `config/locales/en.yml`
+
+```
+en:
+  time:
+    formats:
+      submitted: "%b %d %Y"
+```
+
+然后在 view 中使用 Rails 的 `#l` 辅助方法，`<%= l review.created_at, format: :submitted %>`。
+详情可以参阅文档，http://guides.rubyonrails.org/i18n.html#adding-date-time-formats
 
 ### 相关链接
 
