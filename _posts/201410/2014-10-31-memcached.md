@@ -27,6 +27,10 @@ ln -sfv /usr/local/opt/memcached/*.plist ~/Library/LaunchAgents
 launchctl load ~/Library/LaunchAgents/homebrew.mxcl.memcached.plist
 ```
 
+### CentOS
+
+`yum install cyrus-sasl-devel.x86_64`
+
 ## Memcache Telnet Interface
 
 ### How To Connect

@@ -40,7 +40,9 @@ ssh-copy-id root@xxx.xx.xxx.xx
 
 ```bash
 service ssh restart
+service sshd restart #centos
 ```
+更多情况请参考 http://www.cyberciti.biz/faq/centos-stop-start-restart-sshd-command/
 
 第五步：增强安全性
 
