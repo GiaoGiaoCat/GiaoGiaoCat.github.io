@@ -14,7 +14,7 @@ Turbolinks 让 Web 应用页面之间的导航变得更快。你不需要引入�
 ### 功能
 
 * 自动提高页面导航的性能。不需要指定哪个链接或哪部分页面需要被替换。
-* 不需要服务端提供额外的支持。服务端开发仍然渲染整个 HTML 页面，而不是局部模板或 JSON。
+* 不需要服务端提供额外的支持。服务端仍然渲染整个 HTML 页面，而不是返回局部模板或 JSON。
 * 尊重 Web 的体验。后退和刷新按钮仍然会如你期望的一样工作，Turbolinks 对搜索引擎友好。
 * 支持移动端。借助 [iOS](https://github.com/turbolinks/turbolinks-ios) 和 [Android](https://github.com/turbolinks/turbolinks-android) 可以让你的应用获得近似于原生应用的体验。
 
