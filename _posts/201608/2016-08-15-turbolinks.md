@@ -96,3 +96,33 @@ Restoration visits 无法被取消，它也不会触发 `turbolinks:before-visit
 <a href="/" data-turbolinks="true">Enabled</a>
 ```
 
+## 创建你的 Turbolinks 应用
+
+采用 Turbolinks 技术的应用访问速度很快，因为当你点击链接的时候并没有重新加载页面。应用看起来像一个持久化运行的应用。这让我们不得不重新思考项目中的 JavaScript 架构。
+
+尤其要注意的是，每次进入一个新页面不会再重置环境变量。JavaScript 的 `window` 和 `document` 对象会在页面间携带它们的状态。你在内存中留下的任何对象都会一直待在内存里。
+
+不用担心，只要注意一些细节。你的应用就能很优雅的处理掉这些问题，而不需要跟 Turbolinks 耦合在一起。
+
+### Running JavaScript When a Page Loads
+过去我们使用 `window.onload`，`DOMContentLoaded` 或 jQuery 的 `ready` 事件来添加一个行为。而 Turbolinks 应用，只会在第一次初始化页面的时候执行这些函数，也就是你点击链接进入其它页面的时候，所有这些事件下面注册的行为都不会再次执行。
+
+我们应该改用 `turbolinks:load`
+
+```
+document.addEventListener("turbolinks:load", function() {
+  // ...
+})
+```
+
+另外，不要在页面的 `body` 中使用 `turbolinks:load` 来注册监听事件，而是在 `document` 和 `window` 上利用 [event delegation](https://learn.jquery.com/events/event-delegation/) 注册监听。
+
+### Working with Script Elements
+在首次初始化页面的时候，浏览器会自动加载和计算 `<script>` 元素。在进入新页面的时候，Turbolinks 会去新页面的 `<head>` 区域寻找与当前页面不同的 `<script>` 元素，加载并运行完毕。所以，你可以在这里追加你所需要的 JavaScript 文件。
+
+Turbolinks 当进入一个新页面的时候会运行该页面 `<body>` 中的 `<script>`。你可以在这里放一些只在当前页面有效的代码，比如设置当前页面的 JavaScript 状态或 bootstrap 客户端模型。
+
+在 `<script>` 上增加 `data-turbolinks-eval="false"` 会阻止 Turbolinks 运行该脚本。但是，这个方法无法阻止浏览器在第一次加载页面的时候运行这个脚本。
+
+### 理解缓存
+
