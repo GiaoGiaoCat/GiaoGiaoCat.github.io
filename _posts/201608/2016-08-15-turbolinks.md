@@ -109,7 +109,7 @@ Restoration visits 无法被取消，它也不会触发 `turbolinks:before-visit
 
 我们应该改用 `turbolinks:load`
 
-```
+```javascript
 document.addEventListener("turbolinks:load", function() {
   // ...
 })
@@ -126,3 +126,45 @@ Turbolinks 当进入一个新页面的时候会运行该页面 `<body>` 中的 `
 
 ### 理解缓存
 
+Turbolinks 会为最近访问的页面维护一份缓存。缓存有两个目的：在 restoration visits 时，不需要网络请求就可以显示页面；在 application visits 时，通过显示一个临时页面来改善性能。
+
+When navigating by history (via Restoration Visits), Turbolinks will restore the page from cache without loading a fresh copy from the network, if possible.
+
+Otherwise, during standard navigation (via Application Visits), Turbolinks will immediately restore the page from cache and display it as a preview while simultaneously loading a fresh copy from the network. This gives the illusion of instantaneous page loads for frequently accessed locations.
+
+Turbolinks 在渲染新页面前，会把当前页面的副本保存进入缓存。需要注意的是，Turbolinks 复制页面用的是 [cloneNode(true)](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)，这意味着所有这个页面注册的监听事件和关联数据都会被丢弃。
+
+#### Preparing the Page to be Cached
+
+如果需要在 Turbolinks 缓存文档前进行干点什么事，那么你可以监听 `turbolinks:before-cache` 事件。在这里你可以重置表单、折叠一些展开的 UI 对象、拆除一些注册的第三方小部件，这样再进入这个页面的时候，她们就能显示正常了。
+
+```javascript
+document.addEventListener("turbolinks:before-cache", function() {
+  // ...
+})
+```
+
+#### Detecting When a Preview is Visible
+
+当从页面显示的是缓存中的内容时，Turbolinks 会在 `<html>` 元素上增加一个 `data-turbolinks-preview` 属性。你可以根据是否存在这个属性来检查你的内容是不是缓存的。
+
+```javascript
+if (document.documentElement.hasAttribute("data-turbolinks-preview")) {
+  // Turbolinks is displaying a preview
+}
+```
+
+#### Opting Out of Caching
+
+你可以通过在 `<head>` 元素上添加 `<meta name="turbolinks-cache-control">` 来控制一个页面的缓存行为。
+
+在 application visit 模式下使用 `no-preview`，则不会从缓存中取数据渲染预览页面。标记为 `no-preview` 的页面会使用 restoration visits 模式。
+
+如果一个页面永远不想被缓存，可以使用 `no-cache`。标记为 `no-cache` 参数的页面永远从网络取数据，即便是 restoration visits 模式。
+
+
+### Making Transformations Idempotent
+
+### Responding to Page Updates
+
+### Persisting Elements Across Page Loads
