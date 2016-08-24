@@ -162,8 +162,23 @@ if (document.documentElement.hasAttribute("data-turbolinks-preview")) {
 
 如果一个页面永远不想被缓存，可以使用 `no-cache`。标记为 `no-cache` 参数的页面永远从网络取数据，即便是 restoration visits 模式。
 
+```html
+<head>
+  ...
+  <meta name="turbolinks-cache-control" content="no-cache">
+</head>
+```
 
-### Making Transformations Idempotent
+如果想整站都禁用缓存，目前只能是确保所有的页面上都添加这个 `no-cache` 命令。
+
+### Making Transformations Idempotent(幂等)
+
+有时，从服务端获取 HTML 后我们想在客户端做一些处理。比如，浏览器知道用户的时区，客户端可以根据日期把数据分组显示。
+
+假设有一组元素，它们的 `data-timestamp` 属性用 UTC 方式标注了该对象在数据库中的创建时间。现在你想用 JavaScript 函数来查询这些元素，把时间戳改成本地时间，并在每个元素前增加一个元素显示日期。
+
+试想，如果这件事你想在 `turbolinks:load` 里面做的话会怎样。当你进入页面，你的函数插入了日期元素。你点击链接进入其它页面，Turbolinks 把刚才的页面存入缓存。现在点击浏览器的后退按钮，`turbolinks:load` 会再次执行，所有元素前面又增加了第二组日期元素。
+
 
 ### Responding to Page Updates
 
