@@ -29,7 +29,8 @@ rubocop app/models/entrance_guard/key.rb -a
 ```
 
 在 Atom 下配置：
-```
+
+```shell
 gem install rubocop
 apm install linter
 apm install linter-rubocop
@@ -78,7 +79,7 @@ Code Climate 还提供了一个 [Chrome Extension](https://codeclimate.com/brows
 
 Code Climate 提供的命令行工具 Code Climate CLI 和 Atom Package，作用和 rubocop 几乎一样。所以可以根据喜好酌情安装。需要注意的是 Code Climate CLI 需要你安装 Docker。
 
-Code Climate 和 Github 可以很好的结合到一起吃，参考[这篇文档](https://docs.codeclimate.com/docs/github)。
+Code Climate 和 Github 可以很好的结合到一起，参考[这篇文档](https://docs.codeclimate.com/docs/github)。
 
 ## 重构
 
