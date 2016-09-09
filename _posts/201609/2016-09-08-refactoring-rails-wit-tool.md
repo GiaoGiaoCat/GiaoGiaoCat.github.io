@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "使用工具提高 Raiils 代码质量"
+title:  "使用工具提高 Rails 代码质量"
 date:   2016-09-08 10:30:00
 categories: rails
 tags: refactoring
@@ -42,17 +42,17 @@ rubocop-auto-correct
 
 ## 代码安全检测
 
-[brakeman](https://github.com/presidentbeef/brakem) 是一个 Ruby 静态代码安全检测工具。
+[brakeman](https://github.com/presidentbeef/brakeman) 是一个 Ruby 静态代码安全检测工具。
 
 在 Gemfile 中增加
 
 ```ruby
 group :development do
-  gem 'brakem', require: false
+  gem 'brakeman', require: false
 end
 ```
 
-brakem 的用法还是比较简单的，平时我们在项目的目录下直接执行 `brakem` 就行。
+brakeman 的用法还是比较简单的，平时我们在项目的目录下直接执行 `brakeman` 就行。
 
 
 ## 依赖安全检测
@@ -101,7 +101,7 @@ Code Climate 和 Github 可以很好的结合到一起，参考[这篇文档](ht
 
 把 rubocop 集成到 workflow 中，可以在 CI 中配置 `bundle exec rubocop`。
 
-把 brakem 集成到 workflow 中，可以在 CI 中配置 `bundle exec brakeman -z`。
+把 brakeman 集成到 workflow 中，可以在 CI 中配置 `bundle exec brakeman -z`。
 
 最后把 bundler-audit 集成到 workflow 中，可以在 CI 中配置
 
