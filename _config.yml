@@ -8,7 +8,7 @@ timezone: Beijing
 gems: ['jekyll-paginate', 'pygments.rb']
 
 # Build settings
-highlighter: pygments
+highlighter: rouge
 permalink: /:categories/:title/
 
 # markdown: kramdown
