@@ -5,14 +5,14 @@ url: "http://wjp2013.github.io" # the base hostname & protocol for your site
 github_username: wjp2013
 
 timezone: Beijing
-gems: ['jekyll-paginate', 'pygments.rb']
+gems: ['jekyll-paginate']
 
 # Build settings
 highlighter: rouge
 permalink: /:categories/:title/
 
-# markdown: kramdown
-markdown: redcarpet
+markdown: kramdown
+# markdown: redcarpet
 redcarpet:
   extensions: ['fenced_code_blocks', 'tables']
 

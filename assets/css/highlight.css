@@ -83,4 +83,16 @@
   border: solid 1px #9f9f9f;
 }
 
-
+/* CSS for kramdown */
+.highlighter-rouge pre {
+  background: #141414;
+  color: #E6E1DC;
+  padding: 10px 20px;
+  counter-reset: line-numbering;
+  font-size: 16px;
+  line-height: 1.4em;
+  white-space: pre;
+  font-family: monospace, 'Lucida Console', 'Courier New', Terminal, monospace;
+  border-radius: 0;
+  border: solid 1px #9f9f9f;
+}
