@@ -7,7 +7,7 @@ tags: tip
 author: "Victor"
 ---
 
-工作中经常会遇到一些资源自己有共享的路由，就像 controller 和 model 的 concern 文件夹一样，Rails 4 开始对 routes 也提供了 concern 功能，而且用起来很简单。
+工作中经常会遇到一些资源之间要共享路由，就像 controller 和 model 的 concern 文件夹一样，Rails 4 开始对 routes 也提供了 concern 功能，而且用起来很简单。
 
 ```ruby
 concern :printable do
