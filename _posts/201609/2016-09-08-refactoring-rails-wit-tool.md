@@ -95,7 +95,7 @@ Code Climate 和 Github 可以很好的结合到一起，参考[这篇文档](ht
 
 对这些检查，仅靠工具可能就不够了。重构这些代码，需要我们先写测试，然后提 PR，找个人来帮我们 Review 这部分代码，那可以再去搞一下 [houndci](https://houndci.com/)
 
-## Step 4: CI 自动集成
+## CI 自动集成
 
 [travis-ci](https://travis-ci.org/) 没啥说的，贼好。
 
