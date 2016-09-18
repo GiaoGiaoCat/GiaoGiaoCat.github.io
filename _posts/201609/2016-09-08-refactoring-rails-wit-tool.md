@@ -112,6 +112,10 @@ bundle exec bundle-audit -v
 
 如果你已经使用了 Code Climate，就不需要在 CI 中集成它们。
 
+## 遗留代码的重构
+
+如果接盘了别人的代码，可以试试 [suture](https://github.com/testdouble/suture)。
+
 ## 阅读
 
 * [A Recipe for Rails Continuous Integration](https://mattbrictson.com/rails-continuous-integration)
