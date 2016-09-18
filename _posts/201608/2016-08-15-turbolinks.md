@@ -54,7 +54,7 @@ Turbolinks 模式下的页面跳转就像通过一个 action 来访问（visit�
 
 visit 的动作决定了 Application visits 如何修改浏览器的访问历史记录。
 
-默认的 visit 动作是 `advance`，这种情况下 Turbolinks 使用 [history.pushState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) 推送一条新记录到浏览器的访问历史中。
+默认的 visit 动作是 `advance`，这种情况下 Turbolinks 使用 [history.pushState](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries) 推送一条新记录到浏览器的访问历史中。
 
 iOS 应用会推送一个新的 view controller 到导航栈中，Android 会推送一个新的 activity 到回退栈。
 
@@ -179,7 +179,20 @@ if (document.documentElement.hasAttribute("data-turbolinks-preview")) {
 
 试想，如果这件事你想在 `turbolinks:load` 里面做的话会怎样。当你进入页面，你的函数插入了日期元素。你点击链接进入其它页面，Turbolinks 把刚才的页面存入缓存。现在点击浏览器的后退按钮，`turbolinks:load` 会再次执行，所有元素前面又增加了第二组日期元素。
 
+为了避免这个问题的，我们需要让所有页面载入的函数操作均幂等。幂等的函数可以安全的多次执行，其不会破坏程序初始化结果。
+
+一个让过场函数幂等的技巧是给每一个需要处理的元素上面添加一个 `data` 属性，然后观察这个值，以便判断是否已经在该元素上执行过函数操作。因为当 Turbolinks 从缓存中 restores 页面的时候, 这些属性值仍然存在，所以我们可以通过在函数中检测这些属性来确定哪些元素已经被处理过。
+
+另一个更好的办法是检测函数自身。也就是上面日期分组那个例子，当我们要插入一个新的日期之前，先检测它是否已经存在。这一技巧通常用来处理在页面中插入新元素的情况。
 
 ### Responding to Page Updates
+
+Turbolinks 可能并不是你应用中唯一修改页面内容的代码。Ajax 请求、WebSocket 连接或其它客户端渲染操作都会插入新的 HTML，这些内容也需要像新页面载入的时候被初始化。
+
+你可以处理上面提到的这些更新过程，包括通过 Turbolinks 加载页面而引起的更新。in a single place with the precise lifecycle callbacks provided by [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) and [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements)。
+
+利用这些 APIs 可以在页面中加入元素或删除元素时增加回调。使用回调，当我们发现页面出现元素的时候来实现渲染、注册或拆除行为，而不用管这些元素是通过什么手段添加到页面中的。
+
+通过 MutationObserver, Custom Elements, 和 idempotent transformations 带来的优势，只需要处理很小的改动就可以让应用程序兼容 Turbolinks 事件。
 
 ### Persisting Elements Across Page Loads
