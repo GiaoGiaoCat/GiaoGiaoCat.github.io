@@ -69,7 +69,7 @@ CONFIG.symbolize_keys!
 
 盲目的使用了一年之后，我发现这玩意和 Rails 4 引入的 secrets.yml 文件相比没差多少。你可以看一下 Figaro 在 Github 上的 README，它有一份很详细的对比。
 
-那干吗还有装一个 gem，在 config/application.rb 文件的最下面增加一行 `CONFIG = Rails.application.secrets`，以后用到配置的地方直接写 `CONFIG.hello` 或者 `CONFIG.name["first"]` 好了。
+那干吗还要在项目里面加一个 gem，在 config/application.rb 文件的最下面增加一行 `CONFIG = Rails.application.secrets`，以后用到配置的地方直接写 `CONFIG.hello` 或者 `CONFIG.name["first"]` 好了。
 
 只要注意什么时候用访问方法，什么时候用 hash 取值。另外 secrets.yml 文件也不要纳入版本控制才对。
 
