@@ -21,6 +21,12 @@ GitHub Flow 是一个轻量级，基于分支的工作流程。它让团队和�
 
 当开发一个新功能或者修复一个 bug 的时候，我们的新分支是基于 master 创建的。分支名称应该是描述性质的，例如：`refactor-authentication, user-content-cache-key, make-retina-avatars`，这样其他同事就知道你目前正在做什么。
 
+```bash
+git checkout master
+git pull origin master
+git checkout -b <my branch name>
+```
+
 ## Add commits
 
 分支创建后，我们开始在其上进行开发。每当你添加，修改或删除文件，都需要进行 `commit` ，并推送到分支。这些 `commits` 可以让我们追踪该分支上的工作过程。
@@ -30,6 +36,8 @@ GitHub Flow 是一个轻量级，基于分支的工作流程。它让团队和�
 ### ProTip
 
 `Commit messages` 是非常重要的，当你把 `commit` 推送到服务器上后，Git 会跟踪你的修改并把这些信息显示出来。清晰的 `Commit messages`，可以让你和同事更容易的理解开发进度并进行反馈。
+
+经常在工作分支上执行 `git rebase -i master`，将 master 上的最新的代码合并到当前分支上，这里的 `-i` 的作用是将我们当前分支之前的 commit 压缩成为一个。这样做的好处在于当我们之后创建 PR 并进行相应的 Code Review 的时候，代码的改动会集中在一个 commit，使得 Code Review 更直观方便
 
 ## Open a Pull Request
 
