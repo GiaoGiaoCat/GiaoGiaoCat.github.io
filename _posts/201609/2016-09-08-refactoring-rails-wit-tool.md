@@ -7,6 +7,18 @@ tags: refactoring
 author: "Victor"
 ---
 
+每个人都可能用正确的风格写出质量低下的代码，这其中可能包括：
+
+* 重复的代码，它们可能存在于同一个类或不同类中
+* 不一致或没有标识性的对象、变量或方法命名
+* 过长的代码段
+* 让人费解的布尔表达式
+* 过于复杂的逻辑判断
+* 对象错误地暴露其内部状态
+* 遭废弃但没有删除的类或方法
+
+对这些检查，仅靠工具可能就不够了。重构这些代码，需要我们先写测试，然后提 PR，找个人来帮我们 Review 这部分代码。
+
 重构一个系统时，应该从引入工具开始。
 
 ## 代码风格检测
@@ -81,20 +93,6 @@ Code Climate 提供的命令行工具 Code Climate CLI 和 Atom Package，作用
 
 Code Climate 和 Github 可以很好的结合到一起，参考[这篇文档](https://docs.codeclimate.com/docs/github)。
 
-## 重构
-
-每个人都可能用正确的风格写出质量低下的代码，这其中可能包括：
-
-* 重复的代码，它们可能存在于同一个类或不同类中
-* 不一致或没有标识性的对象、变量或方法命名
-* 过长的代码段
-* 让人费解的布尔表达式
-* 过于复杂的逻辑判断
-* 对象错误地暴露其内部状态
-* 遭废弃但没有删除的类或方法
-
-对这些检查，仅靠工具可能就不够了。重构这些代码，需要我们先写测试，然后提 PR，找个人来帮我们 Review 这部分代码，那可以再去搞一下 [houndci](https://houndci.com/)
-
 ## CI 自动集成
 
 [travis-ci](https://travis-ci.org/) 没啥说的，贼好。
@@ -116,7 +114,8 @@ bundle exec bundle-audit -v
 
 如果接盘了别人的代码，可以试试 [suture](https://github.com/testdouble/suture)。
 
-## 阅读
+## 相关链接
 
 * [A Recipe for Rails Continuous Integration](https://mattbrictson.com/rails-continuous-integration)
 * [rubycritic 中文介绍](https://ruby-china.org/topics/28746)
+* [houndci](https://houndci.com/)
