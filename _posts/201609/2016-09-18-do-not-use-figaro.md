@@ -86,3 +86,7 @@ test:
 production:
   secret_key_base: 024e1460...
 ```
+
+## 相关链接
+
+* [YAML Configuration File](http://railscasts.com/episodes/85-yaml-configuration-file)
