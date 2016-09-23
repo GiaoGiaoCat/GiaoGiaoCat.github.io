@@ -35,10 +35,10 @@ eval "str + ' Fred'" #=> "hello Fred"
 但是，有些时候，结果却并非想象的那样，考虑下面的例子：
 
 ```ruby
-exp = gets().chomp()   
+exp = gets().chomp()
 puts(eval(exp)) #=> 8
 puts("#{exp}") #=> 2*4
-puts("#{eval(exp)}") #=> 8  
+puts("#{eval(exp)}") #=> 8
 ```
 
 键入 2*4，发现两个方法给出的结果并不相同。这是因为，通过 `gets()` 方法接收到的是一个字符串，`#{}` 将它当成字符串处理，而不是一个表达式，但是 `eval(exp)` 将它作为一个表达式处理。
@@ -47,7 +47,7 @@ puts("#{eval(exp)}") #=> 8
 
 ### Proc 和 Binding
 
-Proc 类我[这里](/ruby/ruby-proc/)有讲过。
+关于 Proc 类，[这篇文章](/ruby/ruby-proc/)有介绍过。
 
 Binding 类的实例对象，可以封装代码在某一环境运行时的上下文，可以供以后使用。变量、方法、self 的值以及任何迭代器代码块都会被保留在该实例对象中。我们可以通过 `Kernel#binding` 方法来创建一个 Binding 类的实例对象。
 
@@ -88,7 +88,7 @@ eval("@secret")       #=> nil
 
 ### 实际使用
 
-有时候我们需要在日志中，输出全部一些变量信息：
+有时候我们需要在日志中，输出全部的变量信息：
 
 ```ruby
 # config/initializers/logger_additions.rb
