@@ -18,12 +18,28 @@
                 <div class="post-sum">
                   {{ content }}
                 </div>
-                <div class="line line-lg"></div>
-                <div class="text-muted">
-                  {% if page.author %}<i class="fa fa-user icon-muted"></i> by <a href="https://github.com/{{ site.github_username }}" class="m-r-sm">{{ page.author }}</a>{% endif %}
-                  <i class="fa fa-clock-o icon-muted"></i> {{ page.date | date: "%b %-d, %Y" }}
-                  {% if page.meta %}<a href="#" class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i> {{ page.meta }}{% endif %}
-                </div>
+
+                <section class="panel panel-default">
+                  <div class="panel-body">
+                    <a href="https://github.com/{{ site.github_username }}" class="thumb pull-right m-l">
+                      <img src="/assets/images/avatar.jpg" class="img-circle">
+                    </a>
+                    <div class="clear">
+                      <p>
+                        <small class="block text-muted">
+                          如果觉得我的文章对您有用，请 N 次打赏。
+
+                          {% if page.author %}<a href="https://github.com/{{ site.github_username }}" class="text-info">@{{ page.author }} <i class="icon-twitter"></i></a>{% endif %}
+
+                          <i class="fa fa-clock-o icon-muted"></i> {{ page.date | date: "%b %-d, %Y" }}
+
+                          {% if page.meta %}<a href="#" class="m-l-sm"><i class="fa fa-comment-o icon-muted"></i> {{ page.meta }}{% endif %}
+                        </small>
+                      </p>
+                      <a href="/reward/" class="btn btn-s-md btn-success btn-rounded">打赏支持</a>
+                    </div>
+                  </div>
+                </section>
               </div>
             </div>
           <!-- End Post -->
