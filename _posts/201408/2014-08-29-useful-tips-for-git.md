@@ -64,7 +64,7 @@ git stash apply
 git stash pop
 ```
 
-###git stash recover 恢复
+### git stash recover 恢复
 
 最简单的用法就是
 
