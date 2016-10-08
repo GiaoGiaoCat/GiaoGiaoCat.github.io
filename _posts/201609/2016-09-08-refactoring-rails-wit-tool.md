@@ -21,6 +21,11 @@ author: "Victor"
 
 重构一个系统时，应该从引入工具开始。
 
+## CSS 无用代码检测
+[Dead Weight](https://github.com/aanand/deadweight) 可以检测你的项目中有哪些 CSS 选择器几乎从不使用，这样你可以安全的删除这些无用的样式。尴尬的是，这个 gem 已经不维护了。
+
+现在推荐替代品 [PurifyCSS](https://github.com/purifycss/purifycss) 和 [UnCSS](https://github.com/giakki/uncss)。
+
 ## 代码风格检测
 [rubocop](https://github.com/bbatsov/rubocop) 是一个 Ruby 静态代码分析工具，它基于 Ruby 社区的代码风格指南。
 
@@ -81,9 +86,13 @@ end
 
 如果本地检测直接使用 `bundle-audit check --update`
 
+## 代码质量检测
+
+[rails_best_practices](https://github.com/railsbp/rails_best_practices) 可以检测 Rails 项目的代码质量，它可以提供一些改进代码的建议。比如使用 `scope`, 避免使用自动生成的路由，添加数据库索引等。虽然有时候这些建议并不符合你的实际情况，但仍然是一个不错的方法可以帮你的代码变得更干净。
+
 ## 综合代码质量审查
 
-[Code Climate](https://codeclimate.com/) 可以检测测试覆盖率、代码复杂度、重复的代码、安全问题、代码风格等关于代码质量的问题。它集成了上面提到的全部工具。
+[Code Climate](https://codeclimate.com/) 可以检测测试覆盖率、代码复杂度、重复的代码、安全问题、代码风格等关于代码质量的问题。它几乎集成了上面提到的全部工具。
 
 用法还是比较简单的，团队的管理员按照说明设置一下 deploy key 就行。每次 PR 或 commit 后，Code Climate 收到 Github Webhooks 的调用开始进行统计。统计结果会在 PR 的页面或 Feed 中展现，你可以根据该结果决定是否 merge 这个 PR。
 
@@ -119,3 +128,4 @@ bundle exec bundle-audit -v
 * [A Recipe for Rails Continuous Integration](https://mattbrictson.com/rails-continuous-integration)
 * [rubycritic 中文介绍](https://ruby-china.org/topics/28746)
 * [houndci](https://houndci.com/)
+* [rubycritic](https://github.com/whitesmith/rubycritic)
