@@ -8,7 +8,9 @@ author: "Victor"
 ---
 
 ## 让自己熟悉 Ruby
+
 ### 理解 Ruby 中的 `True`
+
 * 除了 `false` 和 `nil` 外所有的值都表示真值
 * 如果你需要区分 `false` 和 `nil`，可以使用 `nil?` 方法或 `==` 操作符并将 `false` 作为左操作对象
 
