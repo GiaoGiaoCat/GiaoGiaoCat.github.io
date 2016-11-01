@@ -13,19 +13,19 @@ author: "Victor"
 * Date 是为了弥补 Time 的缺点创建的，它能轻松地处理较早的时间，如达芬奇的生日（1452年4月15日），还能够智能处理历法改革的日期。但它也有缺点，如不能处理达芬奇的出生时间，它只能处理日期。
 * DateTime 继承了 Date，旨在比上述两者都好。它可以像 Date 那样表示日期，也可以像 Time 那样表示时间。它通常是表示日期——时间值的推荐方式。
 
-###格式化输出
+### 格式化输出
 
 ```ruby
 DateTime.parse(Time.now.to_s).strftime('%Y-%m-%d %H:%M:%S').to_s#就是按照2009-5-14 8：42：13的给定格式输出
 ```
 
-###反向格式化
+### 反向格式化
 
 ```ruby
 DateTime.parse(params['start_date']).strftime('%Y-%m-%d %H:%M:%S').to_s
 ```
 
-###集成多种方式输出
+### 集成多种方式输出
 
 ```ruby
 # config/initializers/date_time_formats.rb
@@ -43,7 +43,7 @@ Time::DATE_FORMATS.merge!(
 Time.now.to_s(:full)#按照之前定义"May 14, 2009 at 08:39 AM"
 ```
 
-###满足变化需求的输出。比如，要求是当前年份，不显示年，其他的年才显示
+### 满足变化需求的输出。比如，要求是当前年份，不显示年，其他的年才显示
 
 ```ruby
 Time::DATE_FORMATS.merge!(
@@ -64,7 +64,7 @@ Time::DATE_FORMATS.merge!(
 => "May 14th, 2007"
 ```
 
-###to_s(format = :default) public
+### to_s(format = :default) public
 
 *:db* format outputs time in *UTC*; all others output time in *local*. Uses TimeWithZone’s *strftime*, so %Z and %z work correctly.
 
@@ -78,7 +78,7 @@ Time::DATE_FORMATS.merge!(
 :rfc822       # => Thu, 25 Dec 2008 14:35:05 +0000
 ```
 
-###可以使用的参数说明
+### 可以使用的参数说明
 
 This is a major reminder, as I constantly have to search for this one whenever it comes to formatting dates and times in Ruby / Rails:
 
