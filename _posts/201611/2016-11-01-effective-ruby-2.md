@@ -107,3 +107,62 @@ end
 ```
 
 在 `SuperSilliness` 中调用的 `super` 并没在继承体系中的超类中找到可重载的方法，但是因为超类中定义了 `method_missing`，当 `super` 调用失败时，自定义的 `method_missing` 方法将丢弃一些有用的信息，在后面的 30 条建议中有替代解决方案。
+
+### 08 初始化子类时调用 `super`
+
+* 如果想要控制对象的初始状态，得写一个 `initialize` 方法并在那里做必要的工作。
+* 创建子类对象时，Ruby 不会自动调用其超类中的 `initialize` 方法，常规的方法查询规则也适用于 `initialize`，只有第一个匹配到的方法会被调用。
+* 可以使用 `super` 来初始化其父类。
+
+```ruby
+class Parent
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Child < Parent
+  def initialize(name, grade)
+    super(name) # Initialize Parent.
+    @grade = grade
+  end
+end
+```
+
+### 09 提防 Ruby 最棘手的解析
+
+* `setter` 方法在调用时需要显示的接受者，否则会被 Ruby 解析为变量赋值。
+* 在实例方法中调用 `setter` 方法时，使用 `self` 作为接受者。
+* 在调用非 `setter` 方法时，不需要显示指定接受者。
+
+### 10 推荐使用 `Struct` 而非 `Hash` 存储结构化数据
+
+* 在处理结构化数据时，如果创建一个新类不那么合适，推荐使用 `Struct` 而非 `Hash`。其中一个原因是，哈希中访问非法的键只会返回 `nil` 而不会引发异常。
+* 将 `Struct::new` 的返回值附给常量，并像类一样使用它。
+* `Struct::new` 方法接收一个可选的块，能在块中定义实例方法和类方法。
+
+```ruby
+class AnnualWeather
+  Reading = Struct.new(:data, :high, :low) do
+    def mean
+      (high + low) / 2.0
+    end
+  end
+
+  def initialize(file_name)
+    @readings = []
+
+    CSV.foreach(file_name, headers: true) do |row|
+      @readings << Reading.new(Date.parse(row[2]), row[10].to_f, row[11].to_f)
+    end
+  end
+
+  def mean
+    return 0.0 if @readings.size.zero?
+    total = @readings.reduce(0.0).do { |sum, reading| sum + reading.mean }
+    total / @readings.size.to_f
+  end
+end
+```
+
+更多内容参考 [Struct vs OpenStruct](/ruby/Struct-vs-OpenStruct/)。
