@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Effective Ruby 2 - 类、对象和模块"
+title:  "Effective Ruby 2 - 类、对象和模块（上）"
 date:   2016-11-01 02:30:00
 categories: ruby
 tags: learningnote
