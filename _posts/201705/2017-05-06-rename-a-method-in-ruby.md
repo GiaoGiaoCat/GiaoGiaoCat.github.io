@@ -40,3 +40,8 @@ end
 $ cat.speak # Says "..."
 $ cat.mew # Says "Mew..."
 ```
+
+
+## 原文链接
+
+* [Rename a method in Ruby](https://coderwall.com/p/gutg6g/rename-a-method-in-ruby)
