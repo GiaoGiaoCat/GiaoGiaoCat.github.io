@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Learning Ruby: class << self"
+title:  "Learning Ruby: class &lt;&lt; self"
 date:   2014-09-01 19:00:00
 categories: ruby
 tags: metaprogramming
 author: "Victor"
 ---
 
-```class << self``` 相当于批量定义了 ```def self.someMethods```
+`class << self` 相当于批量定义了 `def self.someMethods`
 
 在ruby中经常可以见到这样的写法：
 
@@ -34,6 +34,7 @@ end
 可以说是完全一样的。第一种写法的一个好处是，如果需要在一个 class 或者 module 里面定义多个类级别的方法， 这种写法可以少写很多个 "self." :)
 
 还有一个好处是，可以使用 ```attr_reader/attr_accessor``` 之类的 metaprogramming 的技巧。
+
 
 这里还有另一个例子加深理解：
 
@@ -70,11 +71,13 @@ in A'fuc
 A
 ```
 
+
+
 ## 详解
 
 ### 从单例方法定义开始
 
-首先 ```class << foo``` 表达式打开了 ```foo``` 的单例类，它允许你给指定的对象定义一些单例方法。
+首先 `class << foo` 表达式打开了 `foo` 的单例类，它允许你给指定的对象定义一些单例方法。
 
 ```ruby
 a = 'foo'
@@ -89,9 +92,9 @@ a = 'foo'   # new object, new singleton class
 a.inspect   # => "foo"
 ```
 
-### 类和模块的 class << self
+### 类和模块的 class &lt;&lt; self
 
-所以 ```class << self``` 的意思就是打开 ```self``` 的单例类，允许我们重新给 ```self``` 对象定义方法。当 ```self``` 在 class 或者 module 内的时候，我们就是定义 class/module ("static") 方法。
+所以 `class << self` 的意思就是打开 `self` 的单例类，允许我们重新给 `self` 对象定义方法。当 `self` 在 class 或者 module 内的时候，我们就是定义 class/module ("static") 方法。
 
 ```ruby
 class String
@@ -123,7 +126,7 @@ def String.value_of obj
 end
 ```
 
-### 函数内部的 class << self
+### 函数内部的 class &lt;&lt; self
 
 当在一个函数内部，```self``` 用来引用调用该函数的对象。在下面的例子中 ```class << self``` 打开了单例类
 
