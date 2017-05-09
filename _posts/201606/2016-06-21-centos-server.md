@@ -133,6 +133,14 @@ gem install bundler
 gem install mysql2 -v '0.4.4'
 ```
 
+### Install nokogiri gem on CentOS with prerequesites
+
+在使用 mina 部署的时候，如果 nokogiri 的 gem 无法安装，可以先用 deployer 账户登录之后，安装如下依赖
+
+```bash
+sudo yum install libxslt-devel libxml2-devel
+```
+
 ### 其他
 
 ```
