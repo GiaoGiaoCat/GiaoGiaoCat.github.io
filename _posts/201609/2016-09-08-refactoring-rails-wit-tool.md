@@ -90,6 +90,10 @@ end
 
 [rails_best_practices](https://github.com/railsbp/rails_best_practices) 可以检测 Rails 项目的代码质量，它可以提供一些改进代码的建议。比如使用 `scope`, 避免使用自动生成的路由，添加数据库索引等。虽然有时候这些建议并不符合你的实际情况，但仍然是一个不错的方法可以帮你的代码变得更干净。
 
+## 无效路由和控制器方法检测
+
+[traceroute](https://github.com/amatsuda/traceroute) 可以检测项目中没有使用的路由方法和控制器的动作。
+
 ## 综合代码质量审查
 
 [Code Climate](https://codeclimate.com/) 可以检测测试覆盖率、代码复杂度、重复的代码、安全问题、代码风格等关于代码质量的问题。它几乎集成了上面提到的全部工具。
@@ -118,6 +122,11 @@ bundle exec bundle-audit -v
 ```
 
 如果你已经使用了 Code Climate，就不需要在 CI 中集成它们。
+
+## 性能检测
+
+* [rack-mini-profiler](https://github.com/MiniProfiler/rack-mini-profiler) 可以提供开发和产品环境的性能报表。
+* [bullet](https://github.com/flyerhzm/bullet) 帮我们减少 N+1 查询
 
 ## 遗留代码的重构
 
