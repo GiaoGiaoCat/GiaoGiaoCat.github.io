@@ -7,123 +7,176 @@ tags: testing
 author: "Victor"
 ---
 
-在 Ruby 圈里面 Test::Unit 和 RSpec 是最流行的测试库。Test::Unit 是 Ruby 的标准库，但自从 Ruby 1.9 and 2.0，它被 MiniTest 替代。
+更新于：2017年5月13日
 
-这种替换对于使用 Test::Unit 的人来说是透明的，因为 MiniTest 会覆盖且兼容它。当你 require 'test/unit' 的时候，其实底层真正使用的是
- MiniTest::Unit 。
+## 概览
 
-对于喜欢 RSpec 语法的朋友，MiniTest::Spec 也提供了类似的语法。
+`Test::Unit` 是 Rails 默认测试框架的名称，自 Rails 4 开始，其核心功能和断言被 `Minitest` 取代。当你 `require 'test/unit'` 的时候，其实底层真正使用的是 `MiniTest::Unit`。`MiniTest::Spec` 也提供了类似 RSpec 的语法。
 
-## Setup
-
-Gemfile
+### MiniTest::Unit::TestCase
 
 ```ruby
-group :test do
-  gem 'minitest-rails'
-  gem 'minitest-rails-capybara'
-  # gem 'minitest-colorize' # Do NOT use this gem! because of the 'Minitest vs MiniTest for Unit Testing (completely broken)'
-  gem 'minitest-focus'
-end
-```
+require 'minitest/autorun'
 
-如果 ```bundle install``` 无法安装相关 gem 的话，可以试试如下命令
-
-```ruby
-# http://stackoverflow.com/questions/4118055/rails-bundler-doesnt-install-gems-inside-a-group
-bundle install --without nothing #(just clearing cache, now all the gems to be loaded into the ruby loadpath)
-```
-
-```ruby
-rails g minitest:install
-```
-
-修改 test/test_helpe.rb 增加 MiniTest 用到的 lib 和一些辅助方法
-
-```ruby
-ENV["RAILS_ENV"] = "test"
-require File.expand_path("../../config/environment", __FILE__)
-require "rails/test_help"
-require "minitest/rails"
-
-# To add Capybara feature tests add `gem "minitest-rails-capybara"`
-# to the test group in the Gemfile and uncomment the following:
-# require "minitest/rails/capybara"
-
-# Uncomment for awesome colorful output
-require "minitest/pride"
-
-require 'minitest/focus'
-
-class ActiveSupport::TestCase
-    ActiveRecord::Migration.check_pending!
-
-    # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
-  fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-  def self.prepare
-    # Add code that needs to be executed before test suite start
-  end
-  prepare
-
+class TestHipster < MiniTest::Unit::TestCase
   def setup
-    # Add code that need to be executed before each test
+    @hipster = Hipster.new
+    @labels  = Array.new
+    @traits  = ["silly hats", "skinny jeans"]
   end
 
   def teardown
-    # Add code that need to be executed after each test
+    @hipster.destroy!
+  end
+
+  def test_for_helvetica_font
+    assert_equal "helvetica!", @hipster.preferred_font
+  end
+
+  def test_not_mainstream
+    refute @hipster.mainstream?
   end
 end
 ```
 
-修改 config/application.rb
+所有的 `assert` 都有对应的 `refute` 断言。
+
+| Assertion	| Example |
+| ------------- |-------------|
+| `assert	assert` | `@traits.any?, "empty subjects"` |
+| `assert_empty` | `assert_empty @labels` |
+| `assert_equal` | `assert_equal 2, @traits.size` |
+| `assert_in_delta` | `assert_in_delta @traits.size, 1,1` |
+| `assert_in_epsilon` | `assert_in_epsilon @traits.size, 1, 1` |
+| `assert_includes` | `assert_includes @traits, "skinny jeans"` |
+| `assert_instance_of` | `assert_instance_of Hipster, @hipster` |
+| `assert_kind_of` | `assert_kind_of Enumerable, @labels` |
+| `assert_match` | `assert_match @traits.first, /silly/` |
+| `assert_nil` | `assert_nil @labels.first` |
+| `assert_operator` | `assert_operator @labels.size, :== , 0` |
+| `assert_output` | `assert_output("Size: 2") { print "Size: #{@traits.size}"}` |
+| `assert_raises` | `assert_raises(NoMethodError) { @traits.foo }` |
+| `assert_respond_to` | `assert_respond_to @traits, :count` |
+| `assert_same` | `assert_same @traits, @traits, "It's the same object silly"` |
+| `assert_send` | `assert_send [@traits, :values_at, 0]` |
+| `assert_silent` | `assert_silent { "no stdout or stderr" }` |
+| `assert_throws` | `assert_throws(Exception,'is empty') {throw Exception if @traits.any?}` |
+
+### MiniTest#stub
+
+`Minitest` 提供一个简单的 `stub` 方法，我们可以模拟外部依赖返回一些预设的值。
+
 
 ```ruby
-# require 'rails/all'
-# Pick the frameworks you want:
-require 'rake/testtask'
-require "minitest/rails/railtie"
-```
+require 'minitest/autorun'
 
-```ruby
-class Application < Rails::Application
-    # Config minitest-rails
-    # https://github.com/blowmage/minitest-rails#usage
-    config.generators do |g|
-      g.test_framework :minitest, spec: false, fixture: true
+describe Hipster, "Demonstrates stubbing with Minitest" do
+
+  let(:hipster) { Hipster.new }
+
+  it "trendy if time is now" do
+    assert hipster.trendy? DateTime.now
+  end
+
+  it "it is NOT trendy if 2 weeks has past" do
+    DateTime.stub :now, (Date.today.to_date - 14) do
+      refute hipster.trendy? DateTime.now
     end
+  end
 end
 ```
 
-## Create Test db
-
-Rails 4.1.X 号称已经删除 rake db:test:prepare ，而 rake test 会自动 load 数据结构，目前看来是不好使的。
-
-```
-rake db:schema:dump
-rake db:test:prepare
-rake test
-```
-
-## Run Test
+### MiniTest::Mock
 
 ```ruby
-rake minitest # Run default tests
-rake minitest:all # Run all tests
-rake minitest:all:quick # Run all tests, ungrouped for quicker execution
-rake minitest:controllers # Runs tests under test/controllers
-rake minitest:helpers # Runs tests under test/helpers
-rake minitest:models # Runs tests under test/models
-rake test # Run default tests
+require 'minitest/autorun'
+
+# Make all of our Twitter updates hip
+class Twipster
+  def initialize(twitter)
+    @twitter = twitter # A Twitter API client
+  end
+
+  def tweet(message)
+    @twitter.update("#{message} #lolhipster")
+  end
+end
+
+# Uses Mock#expect and Mock#verify
+describe Twipster, "Make every tweet a hipster tweet." do
+  before do
+    @twitter  = MiniTest::Mock.new # Mock our Twitter API client
+  end
+
+  let(:twipster) { Twipster.new(@twitter) }
+  let(:message) { "Skyrim? Too mainstream."}
+
+  it "should append a #lolhipster hashtag and update Twitter with our status" do
+    @twitter.expect :update, true, ["#{message} #lolhipster"]
+    @twipster.tweet(message)
+
+    assert @twitter.verify # verifies tweet and hashtag was passed to `@twitter.update`
+  end
+end
+```
+
+## Rails
+
+### 目录结构
+
+`Minitest` 不关心你如何组织测试文件的目录结构和名称，但是 Rails 开发团队有一些相关的建议。
+
+```
+test/
+  test_helper.rb
+  controllers/
+  fixtures/
+  helpers/
+  integration/   <- Capybara tests go here
+  mailers/
+  models/
+  unit/lib/      <- Tests for your /lib code
+```
+
+### 相关 Gem 推荐
+
+```ruby
+group :development do
+  gem "guard", ">= 2.2.2", :require => false
+  gem "guard-minitest", :require => false
+  gem "rb-fsevent", :require => false
+  gem "terminal-notifier-guard", :require => false
+end
+
+group :test do
+  gem "capybara"
+  gem "connection_pool"
+  gem "launchy"
+  gem "minitest-reporters"
+  gem "mocha"
+  gem "poltergeist"
+  gem "shoulda-context"
+  gem "shoulda-matchers", ">= 3.0.1"
+  gem "test_after_commit"
+end
+```
+
+```ruby
+guard :minitest, :spring => true do
+  watch(%r{^app/(.+)\.rb$})                               { |m| "test/#{m[1]}_test.rb" }
+  watch(%r{^app/controllers/application_controller\.rb$}) { "test/controllers" }
+  watch(%r{^app/controllers/(.+)_controller\.rb$})        { |m| "test/integration/#{m[1]}_test.rb" }
+  watch(%r{^app/views/(.+)_mailer/.+})                    { |m| "test/mailers/#{m[1]}_mailer_test.rb" }
+  watch(%r{^app/workers/(.+)\.rb$})                       { |m| "test/unit/workers/#{m[1]}_test.rb" }
+  watch(%r{^lib/(.+)\.rb$})                               { |m| "test/unit/lib/#{m[1]}_test.rb" }
+  watch(%r{^lib/tasks/(.+)\.rake$})                       { |m| "test/unit/lib/tasks/#{m[1]}_test.rb" }
+  watch(%r{^test/.+_test\.rb$})
+  watch(%r{^test/test_helper\.rb$}) { "test" }
+end
 ```
 
 ## 相关文章
 
-* [Testing Rails with MiniTest](http://blog.crowdint.com/2013/06/14/testing-rails-with-minitest.html)
+* [Minitest Quick Reference](http://www.mattsears.com/articles/2011/12/10/minitest-quick-reference/)
 * [TDD with MiniTest and EventManager](http://tutorials.jumpstartlab.com/academy/workshops/testing_event_manager.html)
-* [A MiniTest::Spec Tutorial: Elegant Spec-Style Testing That Comes With Ruby](http://www.rubyinside.com/a-minitestspec-tutorial-elegant-spec-style-testing-that-comes-with-ruby-5354.html)
 * [minimalicous-testing-in-ruby-1-9](http://blog.arvidandersson.se/2012/03/28/minimalicous-testing-in-ruby-1-9)
