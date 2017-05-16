@@ -34,3 +34,9 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 ```
+
+问题来了，Rails 5 的功能测试已经不再继承 `ActionController::TestCase`，而改为继承 `ActionDispatch::IntegrationTest`。并且取消了 `@request` 变量，我们需要用下面的方式来设置 header。
+
+```ruby
+get admin_path, headers: {'HTTP_AUTHORIZATION' => something }
+```
