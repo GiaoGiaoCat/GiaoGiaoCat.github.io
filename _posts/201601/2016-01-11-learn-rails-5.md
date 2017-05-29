@@ -3,7 +3,7 @@ layout: post
 title:  "测试 Rails 5 的新功能"
 date:   2016-01-11 14:30:00
 categories: rails
-tags: rails5 learningnote
+tags: rails5
 author: "Victor"
 ---
 

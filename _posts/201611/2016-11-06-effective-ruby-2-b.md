@@ -81,7 +81,8 @@ Version.new('2.8.0').between?(a, b) #=> true
 
 ### 14 通过 `protected` 方法共享私有状态
 
-* 一个对象的 `protected` 方法若要被显示接受者调用，除非该对象与接受者是同类对象或具有相同的定义该 `protected` 方法的超类
+* 通过 `protected` 方法，在相关类之间共享私有信息
+* `protected` 方法若要被显示接受者调用，那么这个 `protected` 方法必须处于接受者继承体系中
 
 ### 15 优先使用实例变量而非类变量
 
@@ -134,7 +135,7 @@ class Database < Singleton
 end
 
 Configuration.instance #=> #<Configuration> 这里 @signle 是 Configuration 的类对象的实例变量
-Database.instance #=> #<Database> 这里 @signle 是 Database 的类对象的实例变量，和上面互补影响
+Database.instance #=> #<Database> 这里 @signle 是 Database 的类对象的实例变量，和上面互不影响
 ```
 
 改用类的实例变量之后，不但打破了类和子类的共享关系，还提供了更多的封装性。你可以根据需要提供 `@single` 的访问方法。
