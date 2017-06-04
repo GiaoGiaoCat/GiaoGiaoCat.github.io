@@ -2,7 +2,7 @@
 layout: post
 title:  "如何写好 User Story"
 date:   2017-06-03 11:30:00
-categories: rails
+categories: other
 tags: scrum
 author: "Victor"
 ---

@@ -2,7 +2,7 @@
 layout: post
 title:  "创建用户故事地图 (User Story Mapping) 的8个步骤"
 date:   2017-06-03 11:30:00
-categories: rails
+categories: other
 tags: scrum
 author: "Victor"
 ---
