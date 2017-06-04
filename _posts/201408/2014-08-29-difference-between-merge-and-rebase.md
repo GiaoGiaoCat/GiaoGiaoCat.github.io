@@ -7,7 +7,7 @@ tags: git
 author: "Victor"
 ---
 
-##merge
+## merge
 
 git merge是用来合并两个分支的。
 
@@ -16,7 +16,7 @@ git merge是用来合并两个分支的。
 git merge b
 ```
 
-##cherry-pick
+## cherry-pick
 
 可以选择某一个分支中的一个或几个commit(s)来进行操作。
 
@@ -36,7 +36,7 @@ git check v2.0
 git cherry-pick f79b0b1ffe445cab6e531260743fa4e08fb4048b
 ```
 
-##rebase
+## rebase
 
 有点类似git merge，但是两者又有不同，merge适合那种比较琐碎的，简单的合并，系统级的合并还是用rebase吧。
 
