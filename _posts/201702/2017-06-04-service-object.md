@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "Service Object"
-date:   2017-06-03 11:30:00
+date:   2017-06-04 11:30:00
 categories: rails
 tags: refactoring
 author: "Victor"
 ---
 
-### 什么是 Service Object
+## Service Object 基础
 
 Service Object 没有一个固定的形态，因为它完全就是业务逻辑的封装。
 
@@ -44,6 +44,14 @@ Convention 的意义在于，它就是一个最佳实践的表现形式，Rails 
 * If a service operates on multiple models or no models at all, don't namespace them (Services::DoStuff) or namespace them by logical groups unrelated to models (Services::Maintenance::CleanOldStuff, Services::Maintenance::SendDailySummary, etc.)
 * Some services call other services. Try to not combine multiple calls to other services and business logic in one service. Instead, some services should contain only business logic and other services only a bunch of service calls but no (or little) business logic. This keeps your services nice and modular.
 
+## 我的实践
+
+不喜欢引入太多 gem ，只用一个 active_type 就够了。
+
+1. 一个 service 只做一件事，比如：创建订单，注册用户
+2. `app/models` 存放领域对象模型，`app/services` 存放商业逻辑（含 form 和 query 模型）
+3. 每个领域对象模型单独建立文件夹，文件以 `service` 结尾。例如：`app/services/memberships/become_collaborator_service.rb`
+
 ## 参考
 
 ### articles
@@ -51,6 +59,7 @@ Convention 的意义在于，它就是一个最佳实践的表现形式，Rails 
 * [Service Object 整理和小结](https://ruby-china.org/topics/23892)
 * [7 Patterns to Refactor Fat ActiveRecord Models](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
 * [Service Objects With Rails Using Aldous](https://code.tutsplus.com/tutorials/service-objects-with-rails-using-aldous--cms-23689)
+* [My take on services in Rails](http://blog.sundaycoding.com/blog/2014/11/25/my-take-on-services-in-rails/)
 
 ### gems
 
