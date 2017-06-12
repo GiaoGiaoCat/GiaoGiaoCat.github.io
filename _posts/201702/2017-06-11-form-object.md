@@ -7,63 +7,169 @@ tags: refactoring
 author: "Victor"
 ---
 
-## Service Object 基础
+### 什么是 Form Object
 
-Service Object 没有一个固定的形态，因为它完全就是业务逻辑的封装。
+封装了一个表单对象的 Ruby 类。
 
-### Convention over Configuration
+### 何时使用 Form Object
 
-Convention 的意义在于，它就是一个最佳实践的表现形式，Rails 本质上是一系列 web 开发中最佳实践的集合体。遵循 Convention 的 Rails 项目都长得差不多，这使得 Rails 开发者的经验能够跨项目地重用，大家可以关注在商业逻辑目标上。
+当我们需要在一个表单中更新多个 ActiveRecord 模型的时候，就可以抽取出一个 From Object。这比使用 `accepts_nested_attributes_for` 要好的多。
 
-### 何时使用 Service Object
+一些情况下为了让 controller 保持简单，也会为一些特定操作封装出一个 From Object。比如修改密码，找回密码，登录，注册之类的表单。而根据复杂度不同，可能这些 From Object 又会去调用 Service Object。
 
-因为和业务逻辑比较接近，Service Object 通常用在 Controller 中，但也可以单独使用（比如在 job ， console 或者其他 Service Object 中嵌套使用）。
+### Form Object 和 Service Object 的区别
 
-* 操作逻辑很复杂。
-* 操作涉及到多个 model。
-* 操作涉及到调用外部服务。
-* 操作不是 model 该关注的逻辑（比如定时清理过期数据）。
-* 操作涉及到一系列不同的具体实现（比如用 token 认证或者 password 认证），策略模式就是干这个的。
+代码和功能上没啥区别，只有在抽象哲学层面有点不同。Form Object 是抽象出来提供给 HTML 表单用的。
 
-### 基本原则 Basic principles
+### 例子
 
-* does only one thing and does it well (Unix philosophy)
-* can be run synchronously (i.e. blocking/in the foreground) or asynchronously (i.e. non-blocking/in the background)
-* can be configured as "unique", meaning only one instance of it should be run at any time (including or ignoring parameters)
-* logs all the things (start time, end time, duration, caller, exceptions etc.)
-* has its own exception class(es) which all exceptions that might be raised inherit from
-* does not care whether certain parameters are objects or object IDs
+下面是一个正常的例子。
 
-### 约定 Conventions
+```ruby
+class Signup
+  include Virtus
 
-* Let your services inherit from `Services::Base`
-* Let your query objects inherit from `Services::Query`
-* Put your services in `app/services/`
-* Use a `Services` namespace
-* Give your services "verby" names,  e.g. `app/services/users/delete.rb`
-* If a service operates on multiple models or no models at all, don't namespace them (Services::DoStuff) or namespace them by logical groups unrelated to models (Services::Maintenance::CleanOldStuff, Services::Maintenance::SendDailySummary, etc.)
-* Some services call other services. Try to not combine multiple calls to other services and business logic in one service. Instead, some services should contain only business logic and other services only a bunch of service calls but no (or little) business logic. This keeps your services nice and modular.
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
+  include ActiveModel::Validations
 
-## 我的实践
+  attr_reader :user
+  attr_reader :company
 
-不喜欢引入太多 gem ，只用一个 active_type 就够了。
+  attribute :name, String
+  attribute :company_name, String
+  attribute :email, String
 
-1. 一个 service 只做一件事，比如：创建订单，注册用户
-2. `app/models` 存放领域对象模型，`app/services` 存放商业逻辑（含 form 和 query 模型）
-3. 每个领域对象模型单独建立文件夹，文件以 `service` 结尾。例如：`app/services/memberships/become_collaborator_service.rb`
+  validates :email, presence: true
+  # … more validations …
+
+  # Forms are never themselves persisted
+  def persisted?
+    false
+  end
+
+  def save
+    if valid?
+      persist!
+      true
+    else
+      false
+    end
+  end
+
+private
+
+  def persist!
+    @company = Company.create!(name: company_name)
+    @user = @company.users.create!(name: name, email: email)
+  end
+end
+```
+
+```ruby
+class SignupsController < ApplicationController
+  def create
+    @signup = Signup.new(params[:signup])
+
+    if @signup.save
+      redirect_to dashboard_path
+    else
+      render "new"
+    end
+  end
+end
+```
+
+如果表单中的 `persist!` 逻辑太复杂，您可以将此方法与 `Service Object` 组合。由于 validation 的逻辑通常是关联上下文的，因此可以在 `Form Object` 或 `Service Object` 中进行定义，而不需要在 ActiveRecord model 中定义 validate。
+
+## Form Object with active_type
+
+* Let your form inherit from ApplicationForm
+* Put your forms in `app/forms/`
+* 文件以 form 结尾并能描述出功能。例如：`app/forms/admins/change_password_form.rb`
+* initialize always requires a model that the form represents.
+* `#sync` writes form data back to the model and nested models. This will only use setter methods on the model(s).
+
+### 例子
+
+```ruby
+# app/forms/application_form.rb
+class ApplicationForm < ActiveType::Object
+  self.abstract_class = true
+
+  attribute :form_object
+
+  validates :form_object, presence: true
+  validate :verify_form_object_class_correct
+
+  after_save :sync
+
+  private
+
+  def sync
+    raise NotImplementedError, 'Must be implemented by subtypes.'
+  end
+
+  # NOTE: can implemented by subtypes.
+  def form_object_class
+    self.class.to_s[/\A([^:]+)/, 1].singularize.constantize
+  rescue
+    raise "Could not determine form class from #{self.class}."
+  end
+
+  def verify_form_object_class_correct
+    errors.add :base, :form_object_class_incorrect unless form_object.is_a? form_object_class
+  end
+end
+```
+
+```ruby
+# app/forms/admins/password_form.rb
+class Admins::PasswordForm < ApplicationForm
+  attribute :password
+  attribute :password_confirmation
+
+  validates :password, confirmation: true
+
+  private
+
+  def sync
+    form_object.update(password: password)
+  end
+end
+```
+
+```ruby
+class Admins::PasswordsController < ApplicationController
+  before_action :load_admin, :build_password_form
+
+  def update
+    if @password_form.save
+      redirect_to admins_path, notice: 'Admin password was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  private
+
+  def load_admin
+    @admin = Admin.find(params[:admin_id])
+  end
+
+  def build_password_form
+    @password_form = Admins::PasswordForm.new(form_object: @admin)
+    @password_form.attributes = form_params
+  end
+
+  def form_params
+    form_params = params[:admins_password_form]
+    form_params ? form_params.permit(:password, :password_confirmation) : {}
+  end
+end
+```
 
 ## 参考
 
-### articles
-
-* [Service Object 整理和小结](https://ruby-china.org/topics/23892)
-* [7 Patterns to Refactor Fat ActiveRecord Models](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
-* [Service Objects With Rails Using Aldous](https://code.tutsplus.com/tutorials/service-objects-with-rails-using-aldous--cms-23689)
-* [My take on services in Rails](http://blog.sundaycoding.com/blog/2014/11/25/my-take-on-services-in-rails/)
-
-### gems
-
-* [simple_command](https://github.com/nebulab/simple_command)
-* [services](https://github.com/krautcomputing/services)
-* [aldous](https://github.com/envato/aldous)
-* [rectify](https://github.com/andypike/rectify)
+* [Rails Form Objects With dry-rb](http://cucumbersome.net/2016/09/06/rails-form-objects-with-dry-rb.html)
+* [Reform](https://github.com/trailblazer/reform)
