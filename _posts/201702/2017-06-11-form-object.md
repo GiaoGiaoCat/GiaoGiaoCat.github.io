@@ -13,9 +13,11 @@ author: "Victor"
 
 ### 何时使用 Form Object
 
-当我们需要在一个表单中更新多个 ActiveRecord 模型的时候，就可以抽取出一个 From Object。这比使用 `accepts_nested_attributes_for` 要好的多。
+* 需要在一个表单中更新多个 ActiveRecord 模型，这比使用 `accepts_nested_attributes_for` 要好的多。
+* 提交的数据不需要持久化。
+* 创建一个没有数据库模型支持的表单。
 
-一些情况下为了让 controller 保持简单，也会为一些特定操作封装出一个 From Object。比如修改密码，找回密码，登录，注册之类的表单。而根据复杂度不同，可能这些 From Object 又会去调用 Service Object。
+比如修改密码，找回密码，登录，注册之类的表单。而根据复杂度不同，可能这些 From Object 又会去调用 Service Object。
 
 ### Form Object 和 Service Object 的区别
 
@@ -81,6 +83,8 @@ end
 ```
 
 如果表单中的 `persist!` 逻辑太复杂，您可以将此方法与 `Service Object` 组合。由于 validation 的逻辑通常是关联上下文的，因此可以在 `Form Object` 或 `Service Object` 中进行定义，而不需要在 ActiveRecord model 中定义 validate。
+
+但是这并不意味着，model 里面一个验证都没有。应该把核心的验证逻辑放在 model 中。比如 `User` 模型中应该保留 `email` 唯一性的验证。
 
 ## Form Object with active_type
 
@@ -171,5 +175,8 @@ end
 
 ## 参考
 
+* [#416 Form Objects pro](http://railscasts.com/episodes/416-form-objects)
 * [Rails Form Objects With dry-rb](http://cucumbersome.net/2016/09/06/rails-form-objects-with-dry-rb.html)
-* [Reform](https://github.com/trailblazer/reform)
+* [Extensible Rails 4 Form Object Design](http://stratus3d.com/blog/2015/04/04/extensible-rails-4-form-object-design/)
+* [Reform gem](https://github.com/trailblazer/reform)
+* [formeze gem](https://github.com/timcraft/formeze)
