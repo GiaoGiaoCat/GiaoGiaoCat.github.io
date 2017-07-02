@@ -11,7 +11,7 @@ author: "Victor"
 
 ### 什么是 Service Object
 
-Service Object 没有一个固定的形态，因为它完全就是业务逻辑的封装。
+Service Object 是一个普通的 Ruby 对象，用于将业务逻辑分解为可管理的类和方法。
 
 因为和业务逻辑比较接近，Service Object 通常用在 Controller 中，但也可以单独使用（比如在 job ， console 或者其他 Service Object 中嵌套使用）。
 
@@ -37,14 +37,67 @@ Convention 的意义在于，它就是一个最佳实践的表现形式，Rails 
 * has its own exception class(es) which all exceptions that might be raised inherit from
 * does not care whether certain parameters are objects or object IDs
 
+## 基于 active_type 实现
+
 ### 约定 Conventions
 
 * Let your services inherit from `ApplicationService`
 * Put your services in `app/services/`
 * 文件以 `service` 结尾并能描述出功能。例如：`app/services/memberships/become_collaborator_service.rb`
-* If a service operates on multiple models or no models at all, don't namespace them (Services::DoStuff) or namespace them by logical groups unrelated to models (Services::Maintenance::CleanOldStuff, Services::Maintenance::SendDailySummary, etc.)
-* Some services call other services. Try to not combine multiple calls to other services and business logic in one service. Instead, some services should contain only business logic and other services only a bunch of service calls but no (or little) business logic. This keeps your services nice and modular.
+* 文件继承 `app/services/application_service.rb`
 
+```ruby
+class ApplicationService < ActiveType::Object
+  self.abstract_class = true
+
+  after_save :perform
+
+  private
+
+  def perform
+    raise NotImplementedError, 'Must be implemented by subtypes.'
+  end
+end
+```
+
+### 例子
+
+```ruby
+# app/services/roles/become_admin_service.rb
+class Roles::BecomeAdminService < ApplicationService
+  attribute :forum_id, :integer
+  attribute :user_id, :integer
+
+  belongs_to :user
+  belongs_to :forum
+
+  validate :need_membership
+
+  delegate :members, to: :forum
+
+  private
+
+  def perform
+    return if user.has_role?(:moderator, forum)
+    user.add_role(:admin, forum)
+  end
+
+  def need_membership
+    errors.add :base, :need_membership unless members.include?(user)
+  end
+end
+```
+
+```ruby
+role = Roles::BecomeAdminService.new(forum: @forum, user: @member)
+role.save
+```
+
+### 优势
+
+1. 跟其它的 Rails model 一样，利用 `validate` 方法可以拿到 errors 信息
+2. 所有的业务逻辑都放在 `perform` 中，其它同事只需要关心这一个方法就行
+3. 方便测试
 
 ## 参考
 
