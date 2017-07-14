@@ -101,6 +101,10 @@ dredd https://jsapi.apiary.io/apis/blog41.apib http://blog.dev
 ![](https://cdn-images-1.medium.com/max/800/1*tfq7p-06V2Pzyn-7r5WKJg.png)
 
 
+### 有啥用？？？
+
+你可以先跟客户端开发的兄弟，商议好 API 接口和返回值，然后用 apiary.io 提供的 mock server 让客户端跟服务端同步开发，而不用等你。
+
 ## 相关
 
 * [There Are Four API Design Editors To Choose From Now](https://apievangelist.com/2014/11/21/there-are-four-api-design-editors-to-choose-from-now/)
