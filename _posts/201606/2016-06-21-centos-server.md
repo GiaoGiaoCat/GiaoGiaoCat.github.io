@@ -204,6 +204,11 @@ cat ~/.ssh/id_rsa.pub # 复制到 github 的部署机器人身上
 service sshd restart
 ```
 
+### memcached dependancy problem
+
+`yum install cyrus-sasl-devel.x86_64`
+
+
 ### Nginx 无法访问 assets 文件夹下面的文件
 
 1. 把 assets 在 mina 中配置成 shared 文件
