@@ -20,6 +20,10 @@ LANG=en_US.utf-8
 LC_ALL=en_US.utf-8
 ```
 
+### 欢迎界面
+
+利用 [工具](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) 可以生成一些欢迎字体，放在 `/etc/motd` 就行。
+
 ### 安装依赖
 
 ```bash
@@ -35,6 +39,7 @@ yum -y update
 yum install -y curl-devel nano sqlite-devel libyaml-devel
 yum install -y openssl-devel readline-devel zlib-devel
 
+yum install epel-release
 yum install -y nodejs
 yum install -y npm
 npm install bower -g
@@ -137,6 +142,8 @@ Staging 机器，可以把 Memcached 放在 ECS
 yum install memcached
 systemctl status memcached
 systemctl enable memcached # Be sure that Memcached starts at boot:
+
+yum install cyrus-sasl-devel.x86_64
 ```
 
 ## deployer 执行
