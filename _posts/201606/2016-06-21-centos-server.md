@@ -40,6 +40,53 @@ yum install -y npm
 npm install bower -g
 ```
 
+### 解决 Centos yum 更新出错
+
+显示错误如下：
+
+```
+Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=7&arch=x86_64&repo=updates&infra=stock ...
+```
+
+出现这个错误，主要有两种情况：
+
+1. dns问题
+2. 镜像连接错误
+
+**DNS问题**
+
+测试方法就是 `ping` 外网，发现 `ping` 不通就是这个问题。解决方法：`echo "nameserver 8.8.8.8">>/etc/resolv.conf`
+
+**镜像连接错误**
+
+使用国内的镜像，比如163镜像。
+
+```
+cd /etc/yum.repos.d
+mv CentOS-Base.repo CentOS-Base.repo.bak
+vi CentOS-Base.repo
+```
+
+```
+[base]  
+name=Red Hat Enterprise Linux 7.0 -Base  
+baseurl=http://mirrors.163.com/centos/7/os/$basearch/  
+gpgcheck=1  
+gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7  
+[update]  
+name=Red Hat Enterprise Linux 7.0 -Updates  
+baseurl=http://mirrors.163.com/centos/7/updates/$basearch/  
+gpgcheck=1  
+gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7  
+[extras]  
+name=Red Hat Enterprise Linux 7.0 -Extras  
+baseurl=http://mirrors.163.com/centos/7/extras/$basearch/  
+gpgcheck=1  
+gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7  
+```
+
+保存就行。
+
 ### 安装 Nginx
 
 ```bash
