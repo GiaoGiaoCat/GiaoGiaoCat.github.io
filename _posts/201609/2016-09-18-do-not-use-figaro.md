@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "不要使用 Figaro"
+title:  "也可以不用 Figaro"
 date:   2016-09-18 10:30:00
 categories: rails
 tags: tip
