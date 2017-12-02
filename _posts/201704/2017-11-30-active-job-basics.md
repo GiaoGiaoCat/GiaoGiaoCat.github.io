@@ -318,5 +318,5 @@ end
 
 ## 本文摘自
 
-[Active Job 基础](https://ruby-china.github.io/rails-guides/active_job_basics.html)
-[Active Job 使用](https://book.a-bitcoin.com/activejob/active_job_shi_yong.html)
+* [Active Job 基础](https://ruby-china.github.io/rails-guides/active_job_basics.html)
+* [Active Job 使用](https://book.a-bitcoin.com/activejob/active_job_shi_yong.html)
