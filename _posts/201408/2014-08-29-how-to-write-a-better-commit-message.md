@@ -64,9 +64,13 @@ being redirected to the login form.
 
 这可不是说技术细节。看下面的两个例子：
 
-```Introduce a red/black tree to increase search speed```
+```
+Introduce a red/black tree to increase search speed
+```
 
-```Remove <troublesome gem X>, which was causing <specific description of issue introduced by gem>```
+```
+Remove <troublesome gem X>, which was causing <specific description of issue introduced by gem>
+```
 
 如果你的修改特别明显，就可以忽略这个。
 
@@ -111,6 +115,32 @@ being redirected to the login form.
 * Redirect to the stored location after successfully logging in the user
 ```
 
+## 依赖 Github Issue 的 Commit message 格式
+
+这种工作方式期望团队使用 Github 的 Project 和 Issue 来管理开发任务。这时 Commit message 的 Header 部分应该包含 Issue Number。
+
+```
+[#123] Diverting power from warp drive to torpedoes
+[Closes #123] Torpedoes now sufficiently powered
+[Closes #123][#124][#125] Torpedoes now sufficiently powered
+```
+
+### Message Template
+
+```
+[<optional state> #issueid] (50 chars or less) summary of changes
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen or asterisk is used for the bullet, preceded by a
+single space, with blank lines in between, but conventions vary here
+```
+
 ## Angular 规范的 Commit message 格式
 
 每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。
@@ -137,7 +167,7 @@ Header 部分只有一行，包括三个字段：**type**（必需）、**scope*
 * **style** 格式（不影响代码运行的变动）
 * **refactor** 重构（即不是新增功能，也不是修改bug的代码变动）
 * **test** 增加测试
-* **chore** 构建过程或辅助工具的变动
+* **chore** 构建过程、辅助工具的变动
 
 如果 **type** 为 **feat** 和 **fix**，则该 commit 将肯定出现在 Change log 之中。
 
@@ -146,7 +176,7 @@ Header 部分只有一行，包括三个字段：**type**（必需）、**scope*
 **subject** 是 commit 目的的简短描述，不超过50个字符。
 
 * 以动词开头，使用第一人称现在时，比如 change，而不是 changed 或 changes
-* 第一个字母小写
+* 第一个字母大写
 * 结尾不加句号
 
 ### Body
@@ -203,10 +233,9 @@ Closes #123, #245, #992
 ## 延伸阅读
 
 * [A Note About Git Commit Messages](http://web-design-weekly.com/blog/2013/09/01/a-better-git-commit/)
-* [Writing good commit messages](http://ablogaboutcode.com/2011/03/23/proper-git-commit-messages-and-an-elegant-git-history/)
 * [Proper Git Commit Messages and an Elegant Git History](https://github.com/erlang/otp/wiki/Writing-good-commit-messages)
 * [A Better Git Commit](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
 * [5 Useful Tips For A Better Commit Message ](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message)
 * [好玩的提交信息](http://whatthecommit.com/)
-* [写法规范](https://github.com/ajoslin/conventional-changelog/tree/master/conventions)
 * [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+* [git_commit_message](https://github.com/joelparkerhenderson/git_commit_message)
