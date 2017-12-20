@@ -204,31 +204,6 @@ app/models/invoice/export.rb | Invoice::Export
 * invoice_template.rb
 * invoice_template_period.rb
 * listed_activity_coworkers_summary.rb
-* activity.rb
-* amortization_cost.rb
-* api_exchange.rb
-* api_schema.rb
-* budget_calculator.rb
-* budget_rate_budget.rb
-* budget.rb
-* budget_template_group.rb
-* budget_template.rb
-* business_plan_item.rb
-* business_plan.rb
-* company.rb
-* contact.rb
-* event.rb
-* fixed_cost.rb
-* friction_report.rb
-* internal_working_cost.rb
-* invoice_approval_mailer.rb
-* invoice_approval.rb
-* invoice_item.rb
-* invoice.rb
-* invoice_settings.rb
-* invoice_template.rb
-* invoice_template_period.rb
-* listed_activity_coworkers_summary.rb
 
 看看这文件列表，你能告诉我这个应用是干啥的吗？几乎肯定不会。事实上，它是一个管理项目和发票的应用。
 
