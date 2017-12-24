@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "使用 Webpacker 替换 Rails Asset"
+title:  "使用 Webpacker 替换 Sprockets"
 date:   2017-12-21 11:30:00
 categories: javascript
 tags: rails5
@@ -112,3 +112,9 @@ import './menu-close.svg';
 ```
 
 之后就可以用 `asset_pack_path` 方法来使用这些图片了，比如 `= image_tag asset_pack_path('logo.svg')`。
+
+## 相关
+
+* [Replacing the Rails Asset Pipeline with Webpack and Yarn](http://samuelmullen.com/articles/replacing-the-rails-asset-pipeline-with-webpack-and-yarn/)
+* [Replacing Rails Asset Pipeline with Webpacker](https://www.neontsunami.com/posts/replacing-rails-asset-pipeline-with-webpacker)
+* [Replacing the asset pipeline with Webpack 2 in Rails](http://www.krisquigley.co.uk/2017/02/17/replacing-the-asset-pipeline-with-webpack-2-in-rails.html)

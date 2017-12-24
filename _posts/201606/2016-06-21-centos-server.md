@@ -40,8 +40,11 @@ yum install -y curl-devel nano sqlite-devel libyaml-devel
 yum install -y openssl-devel readline-devel zlib-devel
 
 yum install epel-release
-yum install -y nodejs
-yum install -y npm
+yum install -y nodejs npm
+
+sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+yum install yarn
+
 npm install bower -g
 ```
 
@@ -213,6 +216,18 @@ service sshd restart
 
 1. 把 assets 在 mina 中配置成 shared 文件
 2. `chmod o+x /home/deployer` [参考此文](https://stackoverflow.com/questions/6795350/nginx-403-forbidden-for-all-files)
+
+### Set Unix Environment Variables
+
+先使用 `echo $SHELL` 查看一下自己的 shell 版本，如果是 `bash shell` 可以直接编辑 `~/.bashrc` 文件添加自己的环境变量：
+
+```bash
+export GMAIL_USERNAME="myname@gmail.com"
+```
+
+重新打开一个命令行端口之后，就可以通过 `ENV["GMAIL_USERNAME"]` 的方式访问该变量。
+
+其它方式可以参考 [Rails Environment Variables](http://railsapps.github.io/rails-environment-variables.html)。
 
 ## 相关阅读
 
