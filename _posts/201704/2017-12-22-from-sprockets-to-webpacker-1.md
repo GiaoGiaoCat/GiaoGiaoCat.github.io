@@ -2,8 +2,8 @@
 layout: post
 title:  "从 Sprockets 迁移到 Webpacker（上）"
 date:   2017-12-22 11:30:00
-categories: javascript
-tags: rails5
+categories: rails
+tags: rails5 javascript
 author: "Victor"
 ---
 

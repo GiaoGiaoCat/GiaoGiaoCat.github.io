@@ -2,8 +2,8 @@
 layout: post
 title:  "使用 Webpacker 替换 Sprockets"
 date:   2017-12-21 11:30:00
-categories: javascript
-tags: rails5
+categories: rails
+tags: rails5 javascript
 author: "Victor"
 ---
 

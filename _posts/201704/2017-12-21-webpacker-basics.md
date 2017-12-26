@@ -2,8 +2,8 @@
 layout: post
 title:  "Webpacker 基础"
 date:   2017-12-21 10:30:00
-categories: javascript
-tags: rails5
+categories: rails
+tags: rails5 javascript
 author: "Victor"
 ---
 
