@@ -218,8 +218,9 @@ task :deploy do
   # you can use `run :local` to run tasks on local machine before of after the deploy scripts
   # run(:local){ say 'done' }
 end
-
 ```
+
+编译的话，可以直接用 mina 的 `rails:assets_precompile`。因为 Webpacker hooks up a new `webpacker:compile` task to `assets:precompile`, which gets run whenever you run `assets:precompile`。如果你不用 Sprockets 的话，就直接把 `webpacker:compile` 添加一个别名叫 `assets:precompile`。
 
 ## 相关链接
 
