@@ -159,8 +159,6 @@ Images 和 stylesheets 差不多，假设我们的图片在 `app/javascript/imag
 require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)
 ```
 
-
-
 ## How to include JS from gems
 
 ### 如何通过 Webpacker 的方式集成 `action_cable` 功能？
@@ -180,6 +178,35 @@ require.context('../images/', true, /\.(gif|jpg|png|svg)$/i)
 4. 在 `app/javascript/application.js` 中 `import {} from 'gems/index.js'; //in /vendor/gems`
 
 来自 [issues#57](https://github.com/rails/webpacker/issues/57)
+
+## Right Way to include css framework
+
+如果在 css 中使用下面的方式引入 css framework
+
+```css
+@import '~font-awesome/scss/font-awesome';
+@import '~simple-line-icons/scss/simple-line-icons';
+@import '~bootstrap/dist/css/bootstrap.min';
+@import '~bootstrap/dist/css/bootstrap-theme';
+@import '~jquery.uniform/dist/css/default';
+```
+
+因为 extract-text-webpack-plugin 在打包的时候是不管你 `@import` 顺序的，如果是买来的 theme 写的不够好，经常会发现编译完的 css 里面的选择器会被 bootstrap 默认样式覆盖。参看 [issue#200](https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/200)。
+
+目前看来最简单的解决方案是在 js 里面 `import` CSS 框架文件。
+
+```javascript
+// CSS
+import 'font-awesome/scss/font-awesome';
+import 'simple-line-icons/scss/simple-line-icons';
+import 'bootstrap/dist/css/bootstrap.min';
+import 'bootstrap/dist/css/bootstrap-theme';
+import 'jquery.uniform/dist/css/default';
+
+// Others...
+require.context('../stylesheets/', false, /^\.\/[^_].*\.(css|scss|sass)$/i);
+require.context('../images/', true, /\.(gif|jpg|png|svg)$/i);
+```
 
 
 ## 配合 Mina 的部署
