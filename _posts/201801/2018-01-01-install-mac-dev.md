@@ -63,6 +63,10 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 ## iTerm
 
+* Set hotkey to open and close the terminal to `command + option + i`
+* Go to `profiles -> Default -> Terminal` Check `silence bell` to disable the terminal session from making any sound
+* Download Mediallion theme
+
 ```bash
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Dropbox/Apps/iTerm2"
@@ -81,6 +85,7 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 ## 相关链接
 
 * https://github.com/taniarascia/mac
+* https://github.com/sb2nov/mac-setup
 * https://github.com/nicolashery/mac-dev-setup
 * https://mallinson.ca/osx-web-development/
 * https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/
