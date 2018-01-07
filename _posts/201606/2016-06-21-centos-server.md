@@ -149,6 +149,25 @@ systemctl enable memcached # Be sure that Memcached starts at boot:
 yum install cyrus-sasl-devel.x86_64
 ```
 
+### 安装 Redis
+
+```bash
+yum install epel-release
+yum install redis
+systemctl start redis
+systemctl enable redis # Be sure that redis starts at boot:
+```
+
+Verify the Installation
+
+```bash
+redis-cli ping # PONG
+```
+
+* [Install and Configure Redis on CentOS 7](https://linode.com/docs/databases/redis/install-and-configure-redis-on-centos-7/)
+* [How to install redis server on CentOS 7 / RHEL 7](http://sharadchhetri.com/2014/10/04/install-redis-server-centos-7-rhel-7/)
+
+
 ## deployer 执行
 
 ### 安装 Ruby
