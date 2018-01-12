@@ -74,9 +74,17 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Dropbox/
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 ```
 
+## rbenv
+
+确保安装了 `brew install readline`
+
+```
+RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install 2.5.0
+```
+
 ## Other
 
-1. 用 rbenv 安装所需版本的 Ruby
+1. ss 客户端同步配置文件 `mkdir ~/.ShadowsocksX-NG && ln -s ~/Dropbox/Apps/ShadowsocksX/user-rule.txt ~/.ShadowsocksX-NG/user-rule.txt`
 2. Atom `sync-settings:restore` 同步已经安装的插件和配置
 3. Alfred `defaults write com.runningwithcrayons.Alfred-Preferences-3 dropbox.allowappsfolder -bool TRUE` 然后修改 General 中的 sync 文件夹到 `~/Dropbox/Apps/Alfred`
 4. AirDrop 把 `~/.ssh` 中的 `id_rsa` 和 `id_rsa.pub` 拿过来，所有电脑用同一套 ssh key
