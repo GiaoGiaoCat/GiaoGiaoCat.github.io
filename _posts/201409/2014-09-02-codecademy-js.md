@@ -2,7 +2,7 @@
 layout: post
 title:  "CodeCademy JavaScript 学习笔记"
 date:   2014-09-02 14:30:00
-categories: 'Development'
+categories: javascript
 tags: codecademy learningnote
 author: "Victor"
 ---

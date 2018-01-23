@@ -314,3 +314,9 @@ Turbolinks 允许你给某些元素标记为永久性的。`永久性元素在�
   visibility: hidden;
 }
 ```
+
+### Reloading When Assets Change
+
+Turbolinks 会记录每个页面中 ` <head>` 部分的资源文件的 URLs，一旦发现这些文件有修改就会重载整个页面。这会确保用户总能使用最新版本的 styles 和 scripts。
+
+Annotate asset elements with data-turbolinks-track="reload" and include a version identifier in your asset URLs. The identifier could be a number, a last-modified timestamp, or better, a digest of the asset’s contents, as in the following example.
