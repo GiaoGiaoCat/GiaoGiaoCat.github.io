@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Auto-loading lib files in Rails 4"
+title:  "Auto-loading lib files in Rails 5"
 date:   2014-10-16 20:10:00
 categories: rails
 tags: tip
@@ -141,7 +141,7 @@ config.autoload_paths += %W( #{config.root}/app/models/products )
 ### 想打开一个类，添加猴子补丁
 
 1. 在 **lib/** 下面添加了一些我想要的文件。
-2. 新建一个 ```config/initializers/require_files_in_lib.rb``` 包含如下内容：
+2. 新建一个 `config/initializers/require_files_in_lib.rb` 包含如下内容：
 
 ```ruby
 Dir[Rails.root + 'lib/**/*.rb'].each do |file|
@@ -169,8 +169,13 @@ class Foo::Bar
 end
 ```
 
+## Rails 5 补充
+
+因为线程安全的问题，`Autoloading` 在 Rails 5 默认被禁用了。但是只要使用 `config/initializers/require_files_in_lib.rb` 的方式 `require` 在 `lib` 目录下的文件，就不用担心多余的。
+
 ## 相关链接
 
 * [Rails autoloading — how it works, and when it doesn't](http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell/#fn1)
 * [Rails 3 Autoload Modules/Classes – 3 Easy Fixes](http://www.williambharding.com/blog/technology/rails-3-autoload-modules-and-classes-in-production/)
 * [Tips on Rails 3 load paths](http://hakunin.com/rails3-load-paths)
+* [Load lib files in production (Rails 5)](https://gist.github.com/maxivak/381f1e964923f1d469c8d39da8e2522f)
