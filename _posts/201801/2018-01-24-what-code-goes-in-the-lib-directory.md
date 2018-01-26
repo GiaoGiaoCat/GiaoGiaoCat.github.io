@@ -1,8 +1,6 @@
 ---
 layout: post
 title:  "lib/ 目录下应该放什么代码"
-date:   2014-09-15 17:10:00
-title:  "macOS 配置 ssh-agent"
 date:   2018-01-24 17:10:00
 
 categories: rails
