@@ -29,6 +29,8 @@ Turbolinks 的功能基于 [HTML5 History API](http://caniuse.com/#search=pushSt
 
 ### 使用 Webpacker 安装
 
+在 Gemfile 里面添加 `gem 'turbolinks', '~> 5.0.0'` 并执行 `bundle install`
+
 `yarn add turbolinks`
 
 ```javascript
@@ -36,6 +38,8 @@ Turbolinks 的功能基于 [HTML5 History API](http://caniuse.com/#search=pushSt
 import Turbolinks from 'turbolinks';
 Turbolinks.start();
 ```
+
+注意，turbolinks 这个 gem 仍然需要安装，它用来解决 *Following Redirects* 和 *Redirecting After a Form Submission* 两个问题。
 
 ## 使用 Turbolinks 进行页面导航
 
@@ -274,7 +278,7 @@ Stimulus connects and disconnects these controllers and their associated event h
 
 ### Persisting Elements Across Page Loads
 
-Turbolinks 允许你给某些元素标记为永久性的。`永久性元素在页面加载时保持不变。因此，在页面加载完成之后，你对这些元素进行的更改都不需要再次应用。
+Turbolinks 允许你给某些元素标记为永久性的。永久性元素在页面加载时保持不变。因此，在页面加载完成之后，你对这些元素进行的更改都不需要再次应用。
 
 假设我们有一个购物车的应用。在每个页面的顶部都存在一个购物城，其中含有物品数量。这个计数器是由 JavaScript 代码动态修改的。
 
@@ -317,6 +321,84 @@ Turbolinks 允许你给某些元素标记为永久性的。`永久性元素在�
 
 ### Reloading When Assets Change
 
-Turbolinks 会记录每个页面中 ` <head>` 部分的资源文件的 URLs，一旦发现这些文件有修改就会重载整个页面。这会确保用户总能使用最新版本的 styles 和 scripts。
+Turbolinks 会记录每个页面中 `<head>` 部分的资源文件的 URLs，一旦发现这些 URLs 有修改就会重载整个页面。这会确保用户总能使用最新版本的 styles 和 scripts。
 
-Annotate asset elements with data-turbolinks-track="reload" and include a version identifier in your asset URLs. The identifier could be a number, a last-modified timestamp, or better, a digest of the asset’s contents, as in the following example.
+你需要给资源文件的 `script` 和 `style` 等标签添加 `data-turbolinks-track="reload"` 并且为其 URLs 附上一个版本标记。 标记符号可以是一个数字或者最后修改的时间戳，当然最好是将文件内容 digest 之后的字符串。
+
+```html
+<head>
+  ...
+  <link rel="stylesheet" href="/application-258e88d.css" data-turbolinks-track="reload">
+  <script src="/application-cbd3cd4.js" data-turbolinks-track="reload"></script>
+</head>
+```
+
+### Ensuring Specific Pages Trigger a Full Reload
+
+如果一个页面的 head 部分有 `<meta name="visit-control">` 标签，那么每次访问或载入该页面的时候，Turbolinks 都会强制整页重新加载。当你使用的 JavaScript 库和 Turbolinks 交互有问题很难解决的时候，可是试着用这个变通的方法。（认输了）
+
+```html
+<head>
+  ...
+  <meta name="turbolinks-visit-control" content="reload">
+</head>
+```
+
+### Setting a Root Location
+默认，Turbolinks 仅会加载同样来源的 URL，同样的来源指的是 `protocol, domain name, and port`。其它的 URL 都会进行全页面加载。
+
+有时候你需要缩小这一范围。例如：Turbolinks 应用在 `/app` 路径下，而 non-Turbolinks  类的帮助信息页面在 `/help` 目录下，从 app 到 help 的跳转不使用 Turbolinks。
+
+通过在 `<head>` 中加入 `<meta name="turbolinks-root">` 限定 Turbolinks 的作用域。Turbolinks 只会加载同作用域下相同前缀的 URLs。
+
+```html
+<head>
+  ...
+  <meta name="turbolinks-root" content="/app">
+</head>
+```
+
+### Following Redirects
+当你访问 `/one` 然后服务端重定向到 `/two`, 浏览器的地址栏会显示被重定向后的地址。
+
+因为 Turbolinks 是使用 XMLHttpRequest 进行请求，而 XMLHttpRequest 的重定向动作是透明的。所以服务器如果不进行一些额外改动的话，Turbolinks 无法判断响应是否被重定向过。
+
+为了解决这个问题，可以在响应的 `<head>` 中添加 `Turbolinks-Location`, 这样 Turbolinks 会用你提供的值替换浏览器的最新一条 history 记录。
+
+`turbolinks-rails gem` 会自动为 redirect_to 的响应添加 `Turbolinks-Location` 标记。
+
+### Redirecting After a Form Submission
+提交一段 HTML 表单到服务器，服务端响应请求并重定向到另外一个地址，是 Web 应用中最常见的模式之一。标准的表单提交请求很像 navigation，结果会刷新和加载整个页面。通过 Turbolinks 你可以少量修改代码就实现巨大的性能提升。
+
+方法是改用 XHR 的方式来提交表单，然后服务端返回一段 JavaScript 利用 `Turbolinks.visit` 让浏览器执行动作。
+
+如果表单提交导致服务器发生状态更改影响缓存的页面，考虑使用 `Turbolinks.clearCache()` 清除 Turbolinks 的缓存。
+
+Rails 的 Turbolinks 引擎会为 non-GET XHR 的请求自动实现这一优化过程，并用 `redirect_to` 方法重定向。
+
+### Setting Custom HTTP Headers
+你可以监控 `turbolinks:request-start` 事件，以便在 Turbolinks 发起请求的时候修改 headers。通过 `event.data.xhr` 访问请求中的 XMLHttpRequest 对象，然后随意使用 `setRequestHeader` 方法来修改 headers。
+
+例如，你希望在 Turbolinks 连接被点击的时候在请求中携带 request ID：
+
+```javascript
+document.addEventListener("turbolinks:request-start", function(event) {
+  var xhr = event.data.xhr
+  xhr.setRequestHeader("X-Request-Id", "123...")
+})
+```
+
+## API Reference
+
+### Turbolinks.visit
+
+```javascript
+Turbolinks.visit(location)
+Turbolinks.visit(location, { action: action })
+```
+
+执行 Application Visit 到给定的 location，`action` 可是可选 "advance" 或 "replace" 默认是 "advance"。
+
+如果 location 跨域，超过了 Turbolinks 的作用域或者 `Turbolinks.supported` 是 false 的话，则改用 `window.location` 加载整个页面。
+
+Full List of Events 可以直接去看[官方文档](https://github.com/turbolinks/turbolinks)。
