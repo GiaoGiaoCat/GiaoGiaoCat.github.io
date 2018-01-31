@@ -13,6 +13,7 @@ author: "Victor"
 写下本文的时候，Rails 5.2 都 beta 了。时下，Rails 的前端生态又有一些变化，你需要掌握如下知识：
 
 * HTML & HTML5，JavaScript & ES6
+* [Bootstrap 4](https://getbootstrap.com/)
 * [Yarn](/javascript/yarn-basics/)
 * [Webpack & Webpacker](/rails/webpacker-basics/)
 * [Turbolinks](/rails/turbolinks/)
