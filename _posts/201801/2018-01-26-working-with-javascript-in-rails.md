@@ -17,7 +17,7 @@ author: "Victor"
 * [Yarn](/javascript/yarn-basics/)
 * [Webpack & Webpacker](/rails/webpacker-basics/)
 * [rails-ujs](https://github.com/rails/rails/tree/master/actionview/app/assets/javascripts)
-* [SRJ](/rails/ujs-rjs-srj/)
+* [SJR](/rails/ujs-rjs-srj/)
 * [Turbolinks](/rails/turbolinks/)
 * Airbnb JavaScript Style Guide & [Reasonable System for JavaScript Structure (rsjs)](http://ricostacruz.com/rsjs/)
 
@@ -29,7 +29,7 @@ Yarn 对你的代码来说是一个包管理器，通过它来添加三方的 Ja
 
 干掉 Sprockets，改用 Webpacker。Webpacker 是在 Rails 中使用 Webpack 的方案。
 
-## UJS & SRJ
+## UJS & SJR
 
 这两点都是基于 Ajax 的东西。
 
@@ -80,9 +80,9 @@ Rails.start()
 
 **Rails 内置的方法包含 `form_with`, `link_to`, `button_to`**
 
-## SRJ
+## SJR
 
-UJS 要结合 SRJ 服用效果更佳。
+UJS 要结合 SJR 服用效果更佳。
 
 一个实际的例子，有一个 select 下拉菜单，希望做出联动效果，一旦 select 元素 change，就发起 Ajax 请求并替换页面中的一部分：
 
@@ -101,7 +101,7 @@ $("#permissions_warp").empty()
   .append("<%= escape_javascript(render(partial: 'permission', collection: role.permissions, as: :permission)) %>")
 ```
 
-SRJ 的流程很简单：
+SJR 的流程很简单：
 
 1. Form is submitted via a XMLHttpRequest-powered form.
 2. Server creates or updates a model object.
@@ -116,9 +116,9 @@ SRJ 的流程很简单：
 
 ## Turbolinks
 
-好处不多说，就讲如何配合 UJS 和 SRJ。
+好处不多说，就讲如何配合 UJS 和 SJR。
 
-有些时候，SRJ 返回的 JS 模板，仅需做简单的重定向或刷新当前页面（比如 create.js 和 update.js），那么就可以利用 Turbolinks 的 visit 方法，简单的返回一个模板就行。
+有些时候，SJR 返回的 JS 模板，仅需做简单的重定向或刷新当前页面（比如 create.js 和 update.js），那么就可以利用 Turbolinks 的 visit 方法，简单的返回一个模板就行。
 
 ```javascript
 Turbolinks.visit(location.href)
