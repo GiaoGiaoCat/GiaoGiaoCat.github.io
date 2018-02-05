@@ -16,8 +16,9 @@ author: "Victor"
 * [Bootstrap 4](https://getbootstrap.com/)
 * [Yarn](/javascript/yarn-basics/)
 * [Webpack & Webpacker](/rails/webpacker-basics/)
-* [Turbolinks](/rails/turbolinks/)
 * [rails-ujs](https://github.com/rails/rails/tree/master/actionview/app/assets/javascripts)
+* [SRJ](/rails/ujs-rjs-srj/)
+* [Turbolinks](/rails/turbolinks/)
 * Airbnb JavaScript Style Guide & [Reasonable System for JavaScript Structure (rsjs)](http://ricostacruz.com/rsjs/)
 
 ## Yarn
@@ -28,16 +29,16 @@ Yarn 对你的代码来说是一个包管理器，通过它来添加三方的 Ja
 
 干掉 Sprockets，改用 Webpacker。Webpacker 是在 Rails 中使用 Webpack 的方案。
 
-## Ruby on Rails unobtrusive scripting adapter (rails-ujs)
+## UJS & SRJ
 
-Rails 使用一种叫做 “非侵入式 JavaScript”（Unobtrusive JavaScript）的技术把 JavaScript 依附到 DOM 上。
+这两点都是基于 Ajax 的东西。
 
-Rails 内置的 helper 方法，可以在 HTML 代码中插入 `data` 属性的，`rails-ujs` 提供相关的 JavaScript 代码，带来如下功能：
+Rails 使用一种叫做 “非侵入式 JavaScript”（Unobtrusive JavaScript）的技术把 JavaScript 依附到 DOM 上。其内置的 helper 方法，可以在 HTML 代码中插入 `data` 属性，`rails-ujs` 提供相关的 JavaScript 代码。根据 `data` 属性的不同，带来如下功能：
 
 * 添加确认对话框
-* 为普通的超链接生成 `non-GET` 请求
-* 使用异步 Ajax 的方式提交表单或链接
 * 当表单提交的时候可以自动禁用提交按钮
+* 为普通的超链接生成 `non-GET` 请求 - 重点
+* 使用异步 Ajax 的方式提交表单或链接 - 重点
 
 ### 安装
 
@@ -57,7 +58,7 @@ Rails.start()
 
 这里特别要注意的是，定制远程元素这一部分。这个功能很容易被忽略掉。
 
-页面中有些元素并不指向任何 URL，但是却想让它们触发 Ajax 调用。为元素设定 `data-url` 和 `data-remote` 属性将向指定的 URL 发送 Ajax 请求。还可以通过 `data-params` 属性指定额外的参数，还可以通过 `data-type` 属性明确定义 Ajax 的 dataType。
+页面中有些元素并不指向任何 URL，但是却想让它们触发 Ajax 调用。为元素设定 `data-url` 和 `data-remote` 属性将向指定的 URL 发送 Ajax 请求。还可以通过 `data-params` 属性指定额外的参数，通过 `data-type` 属性明确定义 Ajax 的 dataType。
 
 例如，可以利用这一点在复选框上触发操作：
 
@@ -77,8 +78,54 @@ Rails.start()
 <%= end %>
 ```
 
+**Rails 内置的方法包含 `form_with`, `link_to`, `button_to`**
+
+## SRJ
+
+UJS 要结合 SRJ 服用效果更佳。
+
+一个实际的例子，有一个 select 下拉菜单，希望做出联动效果，一旦 select 元素 change，就发起 Ajax 请求并替换页面中的一部分：
+
+```erb
+<%= form.select :role_id,
+  Role.all.map { |p| [ p.name, p.id ] },
+  { prompt: "Select a Role" },
+  class: "form-control", data: { remote: true, url: group_permissions_url }
+%>
+<div id="permissions_warp"></div>
+```
+
+```javascript
+/* index.js.erb */
+$("#permissions_warp").empty()
+  .append("<%= escape_javascript(render(partial: 'permission', collection: role.permissions, as: :permission)) %>")
+```
+
+SRJ 的流程很简单：
+
+1. Form is submitted via a XMLHttpRequest-powered form.
+2. Server creates or updates a model object.
+3. Server generates a JavaScript response that includes the updated HTML template for the model.
+4. Client evaluates the JavaScript returned by the server, which then updates the DOM.
+
+它的好处如下：
+
+1. 服务端模板代码 DRY
+2. 减轻客户端计算量
+3. 很容易理顺程序执行流程
+
+## Turbolinks
+
+好处不多说，就讲如何配合 UJS 和 SRJ。
+
+有些时候，SRJ 返回的 JS 模板，仅需做简单的重定向或刷新当前页面（比如 create.js 和 update.js），那么就可以利用 Turbolinks 的 visit 方法，简单的返回一个模板就行。
+
+```javascript
+Turbolinks.visit(location.href)
+```
 
 ## 参考
 
 * [在 Rails 中使用 JavaScript](https://ruby-china.github.io/rails-guides/working_with_javascript_in_rails.html)
 * [Turbolinks 5](http://wjp2013.github.io/rails/turbolinks/)
+* [Server-generated JavaScript Responses](https://signalvnoise.com/posts/3697-server-generated-javascript-responses)
