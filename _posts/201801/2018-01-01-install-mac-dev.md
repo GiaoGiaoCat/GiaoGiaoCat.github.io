@@ -89,6 +89,7 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 3. Alfred `defaults write com.runningwithcrayons.Alfred-Preferences-3 dropbox.allowappsfolder -bool TRUE` 然后修改 General 中的 sync 文件夹到 `~/Dropbox/Apps/Alfred`
 4. AirDrop 把 `~/.ssh` 中的 `id_rsa` 和 `id_rsa.pub` 拿过来，所有电脑用同一套 ssh key
 5. 网页登录各种账户 chrome，github 什么的
+6. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
 
 ## 相关链接
 
