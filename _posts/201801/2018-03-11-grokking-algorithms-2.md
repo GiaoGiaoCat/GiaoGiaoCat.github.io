@@ -4,7 +4,7 @@ title:  "图解算法 2"
 date:   2018-03-12 19:45:00
 
 categories: other
-tags: learningnote
+tags: learningnote algorithms
 author: "Victor"
 ---
 

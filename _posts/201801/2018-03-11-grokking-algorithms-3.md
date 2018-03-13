@@ -4,7 +4,7 @@ title:  "图解算法 3"
 date:   2018-03-13 19:45:00
 
 categories: other
-tags: learningnote
+tags: learningnote algorithms
 author: "Victor"
 ---
 

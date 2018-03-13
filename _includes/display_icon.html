@@ -1,4 +1,4 @@
- <div class="pull-left">
+<div class="pull-left">
   <span class="fa-stack fa-lg">
     <i class="fa fa-circle fa-stack-2x"></i>
     {% if post.tags contains 'terminal' %}
@@ -63,6 +63,8 @@
       <i class="fa fa-asterisk fa-stack-1x text-white"></i>
     {% elsif post.tags contains 'bigbinary' %}
       <i class="fa fa-xing fa-stack-1x text-white"></i>
+    {% elsif post.tags contains 'algorithms' %}
+        <i class="fa fa-key fa-stack-1x text-white"></i>
     {% elsif post.tags contains 'proxy' %}
       <i class="fa fa-cloud-upload fa-stack-1x text-white"></i>
     {% endif %}
