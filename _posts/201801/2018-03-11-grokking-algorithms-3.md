@@ -112,3 +112,16 @@ end
 arr = [617, 902, 159, 7, 579, 693, 525, 805, 871, 1002, 748, 473, 161, 271, 129, 632, 546, 894, 162, 637, 313]
 pp quick_sort(arr)
 ```
+
+```ruby
+def quick_sort(a)  
+  (x=a.pop) ? quick_sort(a.select{|i| i <= x}) + [x] + quick_sort(a.select{|i| i > x}) : []  
+end  
+```
+
+## 相关阅读
+
+* [Ruby algorithms and data structures](https://github.com/kanwei/algorithms/tree/master)
+* [各种排序的Ruby实现](http://hideto.iteye.com/blog/280891)
+* [经典排序算法资料及 ruby 实现](https://ruby-china.org/topics/20569)
+* [Ruby 实现各种排序查找算法](http://liuzxc.github.io/blog/sorting-algorithm/)
