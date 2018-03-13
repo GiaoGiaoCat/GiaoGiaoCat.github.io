@@ -21,7 +21,7 @@ author: "Victor"
 * ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/6c35c6c21c30a5643d3100b7993f907b58cf79cf) 对数时间
 * ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/8bc936ac28af050e96d7262b89eb11af36bcc958) 线性时间
 * ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/b4a9cde84a808a1c8b6658032611f99e7fa0bb13) 二次方时间
-* ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/a830bd28003689e75eb85a330c2017413dcceb98) 指数时间
+* ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/a830bd28003689e75eb85a330c2017413dcceb98) 指数时间，这里 c 是算法所需的固定时间，被称为常量
 * ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/f5a7957bb5d704181437f3fcf22b257ecbe699a7) 阶乘时间
 
 [大O小抄](http://bigocheatsheet.com/) 提供了常用的算法时间复杂度，并以图表的形式呈现。可以看一下 [维基百科](https://zh.wikipedia.org/wiki/%E5%A4%A7O%E7%AC%A6%E5%8F%B7)。
@@ -57,7 +57,7 @@ author: "Victor"
 
 调用栈 call stack
 
-* 所有函数调用到进入调用栈
+* 所有函数调用都进入调用栈
 * 调用栈可能很长，这将占用大量的内存
 * 调用另一个函数时，当前函数暂停并处于未完成状态。该函数的所有变量的值都还在内存中
 
