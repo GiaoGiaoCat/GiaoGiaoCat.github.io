@@ -52,7 +52,7 @@ author: "Victor"
 ### 栈
 
 * 有两种操作：压入和弹出
-* 遵循后进先出（LIFO）
+* 遵循后进先出（LIFO，Last In First Out）
 * 大部分功能函数顺序执行，且是可嵌套的，函数调用的顺序符合 “后入先出”（LIFO）顺序，所以用栈来记录
 
 调用栈 call stack
@@ -60,6 +60,12 @@ author: "Victor"
 * 所有函数调用都进入调用栈
 * 调用栈可能很长，这将占用大量的内存
 * 调用另一个函数时，当前函数暂停并处于未完成状态。该函数的所有变量的值都还在内存中
+
+### 队列 queue
+
+* 有两种操作：入队和出队
+* 遵循先进先出（FIFO，First In First Out）
+
 
 ### 散列表 hash table
 
@@ -92,6 +98,28 @@ def get_page(url)
   end
 end
 ```
+
+## 图
+
+* 图由节点 node 和边 edge 组成，相邻的节点被成为邻居。
+* 可以用散列表来表示图的结构。
+
+```ruby
+graph = {}
+# you 是节点，"alice", "bob", "claire" 是邻居
+graph["you"] = ["alice", "bob", "claire"]
+```
+
+* 有向图 directed graph
+* 无向图 undirected graph
+
+### 拓扑排序
+
+* A 依赖于 B，在列表中任务 A 就必须在任务 B 后面。
+
+### 树
+
+树是一种特殊的图，没有往后指的边。
 
 ## 相关阅读
 

@@ -8,7 +8,7 @@ tags: learningnote algorithms
 author: "Victor"
 ---
 
-## 算法
+## 查找算法
 ### 二分法查找 Binary Search
 
 * 场景：当数据量很大适宜采用该方法
@@ -36,6 +36,49 @@ def binary_search(arr, i)
   end
 end
 ```
+
+### 广度优先搜索 breadth-first search
+
+能够找出两样东西之间的最短距离。主要用来解决最短路径问题 shortest-path problem，用于图的算法。
+
+* 场景：编写国际跳棋AI，计算最少走多少步就可以获胜
+* 场景：编写拼写检查器，计算最少编辑多少个地方就可以将错误的单词改正
+
+它解决两类问题。
+
+1. 从节点 A 出发，有前往节点 B 的路径吗
+2. 从节点 A 出发，前往节点 B 的哪条路径最短
+
+时间复杂度：O(V+E)，V vertice 为顶点，E 为边数
+
+1. 你从起点沿着每条边前行，运行时间至少为 O（边数）
+2. 你还使用了一个队列，其中包含要检查的每个邻居，将每个邻居添加到队列需要的时间是固定的，O(1)
+3. 你需要对每个邻居节点都这样做，需要的时间我 O（节点数）
+
+**你需要按加入顺序检查搜索列表中的节点，否则找到的就不是最短路径，因此搜索列表必须是队列。**
+
+**另外，对于检查过的人，务必不要再去检查，否则可能导致无限循环。**
+
+```ruby
+def search(name)
+  search_queue = []
+  search_queue += graph[name]
+  searched = [] # 用于记录检查过的人
+  while search_queue.any?
+    person = search_queue.shift # remove first element
+    next if searched.include?(person)
+    if person_is_seller(person)
+      return true
+    else
+      search_queue += graph[person]
+      searched << person
+    end
+    false
+  end
+end
+```
+
+更好的写法在这里 [Breadth-first search (BFS)](https://github.com/brianstorti/ruby-graph-algorithms/tree/master/breadth_first_search)
 
 ## 排序算法
 排序算法有很多，包括插入排序，冒泡排序，堆排序，归并排序，选择排序，计数排序，基数排序，桶排序，快速排序等。
