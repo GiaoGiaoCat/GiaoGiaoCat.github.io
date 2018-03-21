@@ -80,6 +80,86 @@ end
 
 更好的写法在这里 [Breadth-first search (BFS)](https://github.com/brianstorti/ruby-graph-algorithms/tree/master/breadth_first_search)
 
+### 狄克斯特拉算法 Dijkstra's algorithm
+
+只适用于有向无环图，寻找最短路径。不能有负权边（使用另外一种 贝尔曼-福特 算法）。
+
+算法过程：
+
+1. 找出最便宜的节点，也就是可以在最短时间内到达的节点。并确保没有到该节点的更便宜的路径
+2. 更新该节点的邻居的开销
+3. 重复这个过程，直到对图中每个节点都这样做了
+4. 计算最终路径（通过沿父节点回溯，得到了完整的交换路径）
+
+实现这个算法一般需要准备如下材料：
+
+* 一个散列存储图的数据（算法需要处理的原始数据）
+* 一个散列存储每个节点的开销
+* 一个散列存储父节点
+* 一个数组记录处理过的节点
+
+```ruby
+# 图的数据
+graph = {}
+graph["start"] = {}
+graph["start"]["a"] = 6
+graph["start"]["b"] = 2
+graph["a"] = {}
+graph["a"]["fin"] = 1
+graph["b"] = {}
+graph["b"]["a"] = 3
+graph["b"]["fin"] = 5
+graph["fin"] = {} # 终点没有邻居
+# 每个节点的开销
+costs = {}
+costs["a"] = 6
+costs["b"] = 2
+costs["fin"] = Float::INFINITY # 终点的开销目前是无限大
+# 父节点的列表
+parents = {}
+parents["a"] = "start"
+parents["b"] = "start"
+parents["fin"] = nil
+
+
+def search(graph, costs, parents)
+  # 记录处理过的节点
+  processed = []
+
+  node = find_lowest_cost_node(costs, processed) # 在未处理的节点中找出开销最小的节点
+  while node # 所有节点都被处理后，结束
+    cost = costs[node]
+    neighbors = graph[node]
+    neighbors.keys.each do |n|
+      new_cost = cost + neighbors[n] # 经过当前节点前往该节点的路程
+      if costs[n] > new_cost # 如果经当前节点前往邻居更近
+        costs[n] = new_cost # 更新邻居节点的开销
+        parents[n] = node # 邻居节点的父节点设置为当前节点
+      end
+    end
+    processed.push(node) # 当前节点标记为已经处理过
+    node = find_lowest_cost_node(costs, processed) # 找出接下来要处理的节点，并循环
+  end
+end
+
+def find_lowest_cost_node(costs, processed)
+  lowest_cost = Float::INFINITY
+  lowest_cost_node = nil
+  processed
+  costs.each do |node, cost|
+    if cost < lowest_cost && !processed.include?(node)
+      lowest_cost = cost
+      lowest_cost_node = node
+    end
+  end
+  lowest_cost_node
+end
+
+search(graph, costs, parents)
+costs
+parents
+```
+
 ## 排序算法
 排序算法有很多，包括插入排序，冒泡排序，堆排序，归并排序，选择排序，计数排序，基数排序，桶排序，快速排序等。
 

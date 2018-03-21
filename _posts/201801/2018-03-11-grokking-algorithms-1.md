@@ -105,6 +105,7 @@ end
 * 可以用散列表来表示图的结构。
 
 ```ruby
+# 图
 graph = {}
 # you 是节点，"alice", "bob", "claire" 是邻居
 graph["you"] = ["alice", "bob", "claire"]
@@ -112,6 +113,17 @@ graph["you"] = ["alice", "bob", "claire"]
 
 * 有向图 directed graph
 * 无向图 undirected graph
+* 加权图 weighted graph
+* 非加权图 unweighted graph
+
+```ruby
+# 有向加权图
+graph = {}
+# 需要储存起点到邻居的开销
+graph["start"] = {}
+graph["start"]["a"] = 6
+graph["start"]["b"] = 2
+```
 
 ### 拓扑排序
 
