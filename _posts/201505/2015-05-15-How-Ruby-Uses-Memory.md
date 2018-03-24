@@ -174,7 +174,37 @@ end
 
 遵循下面的模式：找到引发问题的地方，优化性能，进行性能测试。
 
+## 补充
+
+**Ruby 不会自动释放，只会回收，所以内存消耗只会越来越大。** 参见 [Ruby 的内存陷阱](https://ruby-china.org/topics/25584)。
+
+### GC参数调整
+
+[Ruby 2.1: RGenGC](http://tmm1.net/ruby21-rgengc/) 非常详细地介绍了各个参数的意义，还提供了github用的参数配置。
+
+```ruby
+export RUBY_GC_HEAP_INIT_SLOTS=500000
+export RUBY_GC_HEAP_FREE_SLOTS=700000
+export RUBY_GC_HEAP_GROWTH_FACTOR=1.25
+export RUBY_GC_HEAP_GROWTH_MAX_SLOTS=300000
+export RUBY_GC_MALLOC_LIMIT=80000000
+export RUBY_GC_OLDMALLOC_LIMIT=80000000
+```
+
+## Ruby 2.X 之后的改进
+
+### Ruby 2.2 的 可回收 symbol
+
+> Q: 请描述一下 Symbol 可能引起的内存泄露？
+> A: Symbol 不会被 GC 回收，如果频繁调用 `#to_sym` 方法将字符串转换成 Symbol 的话，会耗费大量内存。
+
+简单的说，现在这个问题不存在了。`String#to_sym` 和 `String#intern` 获得动态 symbol 都是可以被回收的。参见 [Ruby 2.2 的 可回收 symbol](https://ruby-china.org/topics/21498)。
+
 ## 相关链接
 
 * [原文：How Ruby Uses Memory](http://www.sitepoint.com/ruby-uses-memory/)
-* [Ruby 的内存陷阱](https://ruby-china.org/topics/25584)
+* [引起内存泄漏的 gems 列表](https://github.com/ASoftCo/leaky-gems)
+* [Incremental Garbage Collection in Ruby 2.2](https://blog.heroku.com/incremental-gc)
+* [Debugging a Memory Leak on Heroku](https://blog.codeship.com/debugging-a-memory-leak-on-heroku/)
+* [The Definitive Guide to Ruby Heap Dumps, Part I](https://blog.codeship.com/the-definitive-guide-to-ruby-heap-dumps-part-i/)
+* [The Definitive Guide to Ruby Heap Dumps, Part II](https://blog.codeship.com/the-definitive-guide-to-ruby-heap-dumps-part-ii/)
