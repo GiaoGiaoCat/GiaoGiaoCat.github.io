@@ -155,6 +155,7 @@ bundle outdated # 检查哪些 gem 需要更新
 * [Gemfile Best Practices & Discourse](http://mcdowall.info/gemfile-best-practices-and-discourse/)
 * [Heroku: Specifying a Ruby Version](https://devcenter.heroku.com/articles/ruby-versions)
 * [Bundler: Specifying a Ruby Version](http://bundler.io/v1.12/gemfile_ruby.html)
+* [Kill Your Dependencies](http://www.mikeperham.com/2016/02/09/kill-your-dependencies/)
 
 相关工具站点：
 
