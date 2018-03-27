@@ -10,6 +10,17 @@ author: "Victor"
 
 Gemfile.lock 让 developer machine, CI server, production environment 保持相同的依赖环境。
 
+首先要知道，我们应该尽可能减少对 gem 的依赖。因为：
+
+Some software engineering rules:
+
+* No code runs faster than no code.
+* No code has fewer bugs than no code.
+* No code uses less memory than no code.
+* No code is easier to understand than no code.
+
+Kill those dependencies. Your gems and apps will be better for it.
+
 ### BAD
 
 devise and figaro are locked without telling me why.
