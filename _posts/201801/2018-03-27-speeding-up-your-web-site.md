@@ -68,9 +68,14 @@ author: "Victor"
 * 浏览器的性能已经足够快，不要因为“过渡优化”牺牲代码的可读性。
 * 先做简单见效快的优化，再做复杂见效慢的优化。一张未压缩的大图片可能抵消辛辛苦苦做的全部其他技术优化。
 
+## 性能标定与标准
+
+
+
 ## 相关链接
 
 * [来，聊一聊性能优化](https://zhuanlan.zhihu.com/p/32150769)
 * [说走就走的性能优化之旅](https://zhuanlan.zhihu.com/p/23834442)
 * [雅虎前端优化35条规则翻译](https://github.com/creeperyang/blog/issues/1)
 * [雅虎前端优化35条规则原文](https://developer.yahoo.com/performance/rules.html)
+* [页面加载与API服务响应--- 性能标定与标准](https://zhuanlan.zhihu.com/p/34020557)
