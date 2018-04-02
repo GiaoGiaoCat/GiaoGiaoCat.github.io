@@ -17,6 +17,8 @@
 .post-item .post-sum p,
 .post-item .post-sum ol,
 .post-item .post-sum ul { margin: 1.6em 0; }
+.post-item .post-sum li > ul { margin: 0; font-size: 0.9em; }
+.post-item .post-sum li > ul > li { font-size: 0.9em; }
 .post-sum h2 {
   font-size: 24px;
   font-weight: bold;
