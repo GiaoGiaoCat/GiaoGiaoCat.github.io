@@ -101,6 +101,24 @@ end
   * 使用 group 来分组，并使用 block 的方式，避免使用 single line group `gem 'web-console', group: :development`
   * group 的排序应该是 `default(general), production, assets, test, development`
 * **Update often**
+* gem versions
+  * Use a *pessimistic version* in the Gemfile for gems that follow semantic versioning, such as rspec, factory_girl, and capybara.
+  * Use a *versionless* Gemfile declarations for gems that are safe to update often, such as pg, thin, and debugger.
+  * Use an *exact version* in the Gemfile for fragile gems, such as Rails.
+
+```ruby
+# exact version
+gem 'nokogiri', '1.0.3'
+gem 'webrat', '0.3.1'
+
+# pessimistic version
+gem 'nokogiri', '~> 1.0.3'
+gem 'webrat', '~> 0.3.1'
+
+# versionless
+gem 'nokogiri'
+gem 'webrat'
+```
 
 遗留项目升级的实践方案：
 
