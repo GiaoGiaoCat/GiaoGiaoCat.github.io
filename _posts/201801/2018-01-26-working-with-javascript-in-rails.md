@@ -4,7 +4,7 @@ title:  "在 Rails 中使用 JavaScript"
 date:   2018-01-26 17:10:00
 
 categories: rails
-tags: advanced
+tags: javascript
 author: "Victor"
 ---
 
