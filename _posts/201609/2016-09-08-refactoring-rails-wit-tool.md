@@ -90,6 +90,8 @@ end
 
 [rails_best_practices](https://github.com/railsbp/rails_best_practices) 可以检测 Rails 项目的代码质量，它可以提供一些改进代码的建议。比如使用 `scope`, 避免使用自动生成的路由，添加数据库索引等。虽然有时候这些建议并不符合你的实际情况，但仍然是一个不错的方法可以帮你的代码变得更干净。
 
+[ruby-metrics](https://github.com/johnewart/ruby-metrics) 也是很不错的工具。但是我更推荐 [rubycritic](https://github.com/whitesmith/rubycritic) 因为它的更新很活跃。
+
 ## 无效路由和控制器方法检测
 
 [traceroute](https://github.com/amatsuda/traceroute) 可以检测项目中没有使用的路由方法和控制器的动作。
