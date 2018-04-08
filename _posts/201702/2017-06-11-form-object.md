@@ -23,6 +23,15 @@ author: "Victor"
 
 代码和功能上没啥区别，只有在抽象哲学层面有点不同。Form Object 是抽象出来提供给 HTML 表单用的。
 
+### 使用 `accepts_nested_attributes_for` 怎么了？
+
+你可能看过这篇文章 [accepts_nested_attributes_for with Has-Many-Through Relations](https://robots.thoughtbot.com/accepts-nested-attributes-for-with-has-many-through), 并且觉得 Rails Way 很棒啊，但是这会带来如下问题：
+
+* 你的 model 需要关心 view 是如何收集数据的
+* 强迫 view 的结构必须和 model 的结构和 relationships 对应起来
+* ActiveRecord 对象增加更多复杂的 API
+* 当同一个模型中存在两个 `accepts_nested_attribtutes_for` 或者一个 `accepts_nested_attribtutes_for` 关联的 model 存在其它 relationships 的时候，很容易使人迷惑
+
 ### 例子
 
 下面是一个正常的例子。
@@ -173,9 +182,81 @@ class Admins::PasswordsController < ApplicationController
 end
 ```
 
+如果你的 From Object 要同时保存两个对象，可以参考下面的代码。
+
+```ruby
+class Registration
+  # Make this model play nice with `form_for`. Gives us validations, initialize, etc
+  include ActiveModel::Model
+
+  # Accessors for the fields we are exposing in the form
+  attr_accessor :email, :password, :zip
+
+  # This is an implementation detail of our authentication (Clearance). It's ultimately going to
+  # sign this object in and that process expects a user object that has these fields available
+  delegate :remember_token, :id, to: user
+
+  # For this object to be valid, we want the child objects (user and profile) to be valid. This is
+  # the validation method that does this.
+  validate :validate_children
+
+  # We tell registration it's a user. This will keep it pointing to Users controller and allow it to use
+  # user translations
+  def self.model_name
+    User.model_name
+  end
+
+  # This is what our controller calls to save the user.
+  def save
+    if valid?
+      # Create a transaction. If any of the database stuff in here fails, they will raise an exception
+      # (because they are bang methods) and rollback the transaction.
+      ActiveRecord::Base.transaction do
+        user.save!
+        profile.save!
+      end
+    end
+  end
+
+  private
+
+  # Initialize the user object with the arguments that apply to user
+  def user
+    @user ||= User.new(email: email, password: password)
+  end
+
+  # initialize the profile object with the arguments that apply to profile
+  def profile
+    @profile ||= user.build_profile(zip: zip)
+  end
+
+  # the implementation of our validation method. We just delegate to our
+  # two child objects which define their validations (presence on all fields in this case)
+  def validate_children
+    if user.invalid?
+      promote_errors(user.errors)
+    end
+
+    if profile.invalid?
+      promote_errors(profile.errors)
+    end
+  end
+
+  # Errors on `user` or `profile` aren't helpful to us because `user.email` isn't on our form. `email` is however.
+  # Take all errors from our child objects and promote them to the same field on the base object. This will make
+  # them render properly on the form.
+  def promote_errors(child_errors)
+    child_errors.each do |attribute, message|
+      errors.add(attribute, message)
+    end
+  end
+end
+```
+
 ## 参考
 
 * [#416 Form Objects pro](http://railscasts.com/episodes/416-form-objects)
+* [Form Objects](https://forum.upcase.com/t/form-objects/2267)
 * [Rails Form Objects With dry-rb](http://cucumbersome.net/2016/09/06/rails-form-objects-with-dry-rb.html)
 * [Extensible Rails 4 Form Object Design](http://stratus3d.com/blog/2015/04/04/extensible-rails-4-form-object-design/)
 * [Reform gem](https://github.com/trailblazer/reform)
