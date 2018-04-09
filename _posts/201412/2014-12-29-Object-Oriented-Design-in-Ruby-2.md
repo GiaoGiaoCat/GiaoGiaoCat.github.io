@@ -102,10 +102,9 @@ class Gear
 end
 ```
 
-#### 隐藏数据结构。依赖一个复杂的数据结构是非常糟糕的。
+#### 隐藏数据结构
 
-
-#### 依赖一个复杂的数据结构的缺点
+依赖一个复杂的数据结构是非常糟糕的。
 
 * 发送和接受双方都要了解 data 的数据结构。
 * ``diameters`` 方法不仅含有如何计算的公式，还要掌握如何存取钢圈和轮胎的方法。
@@ -113,6 +112,7 @@ end
 * 数据结构一旦更改，每一个引用它的地方都需要更改。
 
 ```ruby
+# BAD
 class ObscuringReferences
   attr_reader :data
   def initialize(data)
@@ -126,26 +126,20 @@ class ObscuringReferences
 end
 ```
 
-#### 结构和意义分离
-
-* 使用 Ruby 的 Struct 类来包裹结构。
-* Struct 是一种将大量属性绑定在一起的便捷方式，它使用了访问器方法，且无需编写类。
-* 如果你不得不接受一个混乱的数据结构，至少将这种混乱隐藏起来。
-* 重构后 ``diameters`` 方法对数组内部结构一无所知。
+如果你不得不接受一个混乱的结构，请使用 Struct 类来包裹结构，将这种混乱隐藏起来。
 
 ```ruby
-class ObscuringReferences
+# GOOD
+class RevealingReferences
   attr_reader :wheels
+
   def initialize(data)
     @wheels = wheelify(data)
   end
 
   def diameters
-    # 0 代表钢圈，1代表论坛
     wheels.collect { |wheel| wheel.rim + (wheel.tire * 2) }
   end
-
-  private
 
   Wheel = Struct.new(:rim, :tire)
   def wheelify(data)
@@ -157,6 +151,8 @@ data = [[622, 20], [622, 23], [599, 30]]
 o = ObscuringReferences.new(data)
 puts o.diameters
 ```
+
+重构后 ``diameters`` 方法对数组内部结构一无所知。
 
 ### 全面推行单一职责原则
 
