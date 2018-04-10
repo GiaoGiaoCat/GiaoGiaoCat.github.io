@@ -12,11 +12,12 @@ author: "Victor"
 * `pull` = `fetch + merge`
 * `HEAD` 指向的是现在使用中的分支的最后一次更新。通常默认指向 master 分支的最后一次更新。通过移动 HEAD，就可以变更使用的分支。
 * `~` 指定HEAD之前的提交记录，`^` 指定使用哪个为根节点。
-![](https://github.com/wjp2013/wjp2013.github.io/blob/master/assets/images/pictures/2014-09-26-Git-Cheat-Sheet/capture_stepup1_3_2.png)
-
 * `fast-forward` 合并 bugfix 分支到 master 分支时，master 状态没有被改过，通过把 master 分支的位置移动到 bugfix 的最新分支上，Git 就会合并。这样的合并被称为 fast-forward（快进）合并。
 
-![](https://github.com/wjp2013/wjp2013.github.io/blob/master/assets/images/pictures/2014-09-26-Git-Cheat-Sheet/capture_stepup1_4_1.png)
+
+![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/2014-09-26-Git-Cheat-Sheet/capture_stepup1_3_2.png)
+
+![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/2014-09-26-Git-Cheat-Sheet/capture_stepup1_4_1.png)
 
 
 ## 创建
@@ -156,6 +157,7 @@ $ git push --tags
 ```bash
 # 将分支合并到当前HEAD中：
 $ git merge <branch>
+$ git merge --squash <branch> # 汇合主题分支的提交，然后合并提交到目标分支
 
 # 将当前HEAD版本重置到分支中:
 # Don't rebase published commit!
@@ -173,21 +175,6 @@ $ git mergetool
 # 在编辑器中手动解决冲突后，标记文件为`已解决冲突`
 $ git add <resolved-file>
 $ git rm <resolved-file>
-```
-
-### rebase
-
-假设有两个分支，master 和 issue。
-
-```bash
-$ git checkout issue
-$ git rebase master
-# 解决冲突
-$ git add myfile.txt
-$ git rebase --continue
-# Applying: some text
-$ git checkout master
-$ git merge issue
 ```
 
 ## 撤销
@@ -208,11 +195,17 @@ $ git revert <commit>
 # 将HEAD重置到上一次提交的版本，并放弃之后的所有修改：
 $ git reset --hard <commit>
 
+# 放弃工作目录下最后两次的所有修改
+$ git reset --hard HEAD~~
+
 # 将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改：
 $ git reset <commit>
 
 # 将HEAD重置到上一次提交的版本，并保留未提交的本地修改：
 $ git reset --keep <commit>
+
+# 在 reset 之前的提交可以参照 ORIG_HEAD，Reset 错误的时候，在 ORIG_HEAD 上 reset 就可以还原到 reset 前的状态
+$ git reset --hard ORIG_HEAD
 
 # 将本地仓库重置成与远端一样：
 $ git fetch origin git reset --hard origin/master
