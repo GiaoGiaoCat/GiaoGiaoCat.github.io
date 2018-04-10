@@ -27,7 +27,7 @@ author: "Victor"
 现在推荐替代品 [PurifyCSS](https://github.com/purifycss/purifycss) 和 [UnCSS](https://github.com/giakki/uncss)。
 
 ## 代码风格检测
-[rubocop](https://github.com/bbatsov/rubocop) 是一个 Ruby 静态代码分析工具，它基于 Ruby 社区的代码风格指南。
+[rubocop](https://github.com/bbatsov/rubocop) 是一个 Ruby 静态代码分析工具，它基于 Ruby 社区的[代码风格指南](https://github.com/bbatsov/ruby-style-guide)。
 
 在 Gemfile 中增加
 
@@ -37,13 +37,22 @@ group :development do
 end
 ```
 
-然后在项目的根目录增加 .rubocop.yml 配置文件。
-
+在后面使用 `-R` 参数 适配 Rails 风格的检查。
 在后面使用 `-a` 参数可以自动修复错误。
 
 ```shell
-rubocop app/models/entrance_guard/key.rb -a
+$ rubocop [options] [file1, file2, ...]
+$ rubocop -R
+$ rubocop app/models/entrance_guard/key.rb -a
 ```
+
+`test.rb:4:5: W: end at 4, 4 is not aligned with if at 2, 2`
+
+输出结构的第2个位置 `W` 指的是违规的等级，以此是：Convention, Warning, Error, Fatal。
+
+###
+
+然后在项目的根目录增加 .rubocop.yml 配置文件。
 
 在 Atom 下配置：
 

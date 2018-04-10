@@ -7,8 +7,19 @@ tags: git
 author: "Victor"
 ---
 
-## 创建
+## 基础概念
 
+* `pull` = `fetch + merge`
+* `HEAD` 指向的是现在使用中的分支的最后一次更新。通常默认指向 master 分支的最后一次更新。通过移动 HEAD，就可以变更使用的分支。
+* `~` 指定HEAD之前的提交记录，`^` 指定使用哪个为根节点。
+![](https://github.com/wjp2013/wjp2013.github.io/blob/master/assets/images/pictures/2014-09-26-Git-Cheat-Sheet/capture_stepup1_3_2.png)
+
+* `fast-forward` 合并 bugfix 分支到 master 分支时，master 状态没有被改过，通过把 master 分支的位置移动到 bugfix 的最新分支上，Git 就会合并。这样的合并被称为 fast-forward（快进）合并。
+
+![](https://github.com/wjp2013/wjp2013.github.io/blob/master/assets/images/pictures/2014-09-26-Git-Cheat-Sheet/capture_stepup1_4_1.png)
+
+
+## 创建
 
 ```bash
 # 复制一个已创建的仓库:
@@ -60,6 +71,7 @@ $ git log 1 -p
 $ git log --pretty=oneline
 
 # 以树状图显示提交历史：
+# --graph 能以文本形式显示更新记录的流程图, --oneline 能在一行中显示提交的信息，--decorate 显示包含标签。
 $ git log --graph --oneline --decorate --all
 
 # 显示所有提交（仅显示提交的hash和message）：
@@ -93,36 +105,47 @@ $ git branch --track <new-branch> <remote-branch>
 # 删除本地分支:
 $ git branch -d <branch>
 
-# 给当前版本打标签：
+# 给当前版本打轻标签：
 $ git tag <tag-name>
+
+# 给当前版本打注解标签：
+$ git tag -a <tagname>
+$ git tag -am "some text" <tagname> # -m 选项添加注解
+$ git tag -n # 显示标签的列表和注解
+$ git tag -d <tagname> # 删除标签
 ```
 
-##更新与发布
+## 更新与发布
 
 ```bash
 # 列出对当前远程端的操作：
 $ git remote -v
 
 # 显示远程端的信息：
-$ git remote show <remote>
+$ git remote show <remote-name>
 
 # 添加新的远程端：
-$ git remote add <remote> <url>
+# 可以给远程数据库取一个别名 <remote-name>，下次推送的时候直接使用别名就好。
+# 推送或者拉取的时候，如果省略了远程数据库的名称，则默认使用名为 origin 的远程数据库。因此一般都会把远程数据库命名为 origin。
+$ git remote add <remote-name> <url>
+$ git remote add origin git@github.com:[your_space_id]/[your_project_key].git
 
 # 下载远程端版本，但不合并到HEAD中：
-$ git fetch <remote>
+$ git fetch <remote-name>
 
 # 下载远程端版本，并自动与HEAD版本合并：
-$ git remote pull <remote> <url>
+$ git remote pull <remote-name> <url>
 
 # 将远程端版本合并到本地版本中：
 $ git pull origin master
 
 # 将本地版本发布到远程端：
-$ git push origin <remote> <branch>
+# 指定了`-u` 选项，那么下一次推送时就可以省略分支名称了。
+# 首次运行指令向空的远程数据库推送时，必须指定远程数据库名称和分支名称。
+$ git push origin <remote-name> <branch>
 
 # 删除远程端分支：
-git push <remote> --delete <branch> (since Git v1.7.0)
+git push <remote-name> --delete <branch> (since Git v1.7.0)
 
 # 发布标签:
 $ git push --tags
@@ -150,6 +173,21 @@ $ git mergetool
 # 在编辑器中手动解决冲突后，标记文件为`已解决冲突`
 $ git add <resolved-file>
 $ git rm <resolved-file>
+```
+
+### rebase
+
+假设有两个分支，master 和 issue。
+
+```bash
+$ git checkout issue
+$ git rebase master
+# 解决冲突
+$ git add myfile.txt
+$ git rebase --continue
+# Applying: some text
+$ git checkout master
+$ git merge issue
 ```
 
 ## 撤销
