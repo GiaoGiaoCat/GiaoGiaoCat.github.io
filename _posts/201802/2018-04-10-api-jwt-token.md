@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "API User Token 设计"
+title:  "JWT"
 date:   2018-04-10 15:05:00
 
-categories: rails
-tags: advanced
+categories: other
+tags: api
 author: "Victor"
 ---
 
@@ -16,25 +16,27 @@ author: "Victor"
 
 * 如何提供第三方调用
 * HTTP 协议明文传输信息而造成的安全问题
-* session 引起的 CSRF 跨站请求伪造的攻击的问题
+* 如何保证请求的唯一性，避免重放攻击
 
 ### session 和 cookie
 
 传统的用户登录认证中，因为 http 是无状态的，所以都是采用 session 方式。用户登录成功，服务端会保存一个 session，给客户端一个 sessionId，客户端会把 sessionId 保存在 cookie 中，每次请求都会携带这个 sessionId。
 
-## JWT
+## JWT Token
+
+Token 说到底也就是个字符串，重点是这个字符串该怎么写才会比较合理。
 
 ### 优势
 
 * 简洁 Compact：数据量小
-* 自包含 Self-contained：减少了需要查询数据库的需要
+* 自包含 Self-contained：在后续请求中减少查询数据库的几率
 * 能保证令牌无法伪造
 
 ### 介绍
 
 ![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/2018-04-10-api-jwt-token/20180227200506327.png)
 
-Token 说到底也就是个字符串，重点是这个字符串该怎么写才会比较合理。JWT（Json Web Token）本质上是一种 Token 的设计规范，RFC 7519。
+JWT（Json Web Token）本质上是一种 Token 的设计规范，RFC 7519。
 
 整体结构为：
 
@@ -92,8 +94,32 @@ JWT 的过期和刷新也很好做，但设计上无法做到服务端禁用，�
 
 ### 服务端禁用
 
-用户登录我们需要创建 `token -> uid` 的关系，用户退出时需要需删除 `token -> uid` 的关系。用户更新密码时我们也要更新对应的关系。
+用户登录我们需要创建 `token -> uid` 的关系，用户退出时需要需删除 `token -> uid` 的关系。也可以实现用户管理自己的登录设备和 token，删除指定的 token，就像手机微信登出网页版一样。
+
 查询 redis 缓存中的 uid，如果获取不到这说明该 token 已过期或被服务端禁用。
+
+```
+secret_key = account.password_salt ＃签发令牌的密钥
+```
+
+另外，用密码哈希做签名，当用户重置密码后，之前的 JWT 也就失效了。
+
+### 数据量大小是否方便传输
+
+假如我们的 payload 如下
+
+```
+{
+ "sub": "1234567890",
+ "name": "John Doe",
+ "admin": true,
+ "jti": "8bf764e7-c887-4c7d-9e35-aa95ea65a57a",
+ "iat": 1523454554,
+ "exp": 1523458154
+}
+```
+
+生成的 token 体积是 0.6 KB。这点数据量，算啥啊。
 
 ## 关于 Signature
 
@@ -141,7 +167,6 @@ HMAC 就是使用了单项散列函数来构造消息认证码的一种方法（
 ### 小结
 
 JWT 中被称为 Signature 的部分，其实是前两部分的消息认证码 MAC。在 JWT 中密钥并不与客户端共享，其为服务器独有。这样一来只有服务器可以发 Token，而客户端因为缺少密钥而无法伪造 Token。
-
 
 ## 相关链接
 
