@@ -22,6 +22,11 @@ author: "Victor"
 
 传统的用户登录认证中，因为 http 是无状态的，所以都是采用 session 方式。用户登录成功，服务端会保存一个 session，给客户端一个 sessionId，客户端会把 sessionId 保存在 cookie 中，每次请求都会携带这个 sessionId。
 
+* [How Rails Sessions Work](https://www.justinweiss.com/articles/how-rails-sessions-work/)
+* [详解SESSION与COOKIE的区别](http://blog.sina.com.cn/s/blog_59e16a4d0100q3yn.html)
+* [Cookie/Session机制详解](https://blog.csdn.net/fangaoxin/article/details/6952954)
+* [理解Cookie和Session机制](https://my.oschina.net/xianggao/blog/395675)
+
 ## JWT Token
 
 Token 说到底也就是个字符串，重点是这个字符串该怎么写才会比较合理。
