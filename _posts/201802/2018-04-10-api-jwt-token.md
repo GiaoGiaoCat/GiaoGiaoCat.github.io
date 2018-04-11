@@ -170,6 +170,7 @@ JWT 中被称为 Signature 的部分，其实是前两部分的消息认证码 M
 
 ## 相关链接
 
+* [Life in a post-database world: using crypto to avoid DB writes](https://neosmart.net/blog/2015/using-hmac-signatures-to-avoid-database-writes/) 这篇文章很棒，值得一读
 * [Introduction to JSON Web Tokens](https://jwt.io/introduction/)
 * [CAS](https://www.apereo.org/projects/cas)
 * [10 Things You Should Know about Tokens](https://auth0.com/blog/ten-things-you-should-know-about-tokens-and-cookies/)
