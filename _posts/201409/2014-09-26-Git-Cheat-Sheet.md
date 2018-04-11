@@ -223,3 +223,4 @@ $ git stash pop
 
 * [Git Cheat Sheet](https://github.com/flyhigher139/Git-Cheat-Sheet)
 * [git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
+* [猴子都能懂的GIT入门](https://backlog.com/git-tutorial/cn/intro/intro1_1.html)
