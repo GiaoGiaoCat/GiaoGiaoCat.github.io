@@ -16,6 +16,7 @@ PlantUML 是一个画图脚本语言，用它可以快速地画出各种 UML 图
 
 ```
 brew install graphviz
+brew install plantuml
 apm install language-plantuml
 apm install plantuml-viewer
 ```
