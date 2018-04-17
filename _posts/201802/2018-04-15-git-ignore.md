@@ -8,7 +8,7 @@ tags: git
 author: "Victor"
 ---
 
-## .gitignore 一些规则
+### .gitignore 一些规则
 
 * 所有空行或者以注释符号 # 开头的行都会被 Git 忽略。
 * 可以使用 glob 模式匹配。
