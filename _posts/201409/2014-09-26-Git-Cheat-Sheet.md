@@ -57,6 +57,11 @@ $ git commit -m 'message here'
 # 修改上次提交
 # Don't amend published commits!
 $ git commit --amend
+
+# 移除文件并连带从工作目录中删除文件，以后不会出现在未跟踪文件清单中
+$ git rm <resolved-file>
+# 从仓库中删除，但仍然保留在当前工作目录中。
+$ git rm --cached <resolved-file>
 ```
 
 ## 提交历史
@@ -174,7 +179,6 @@ $ git mergetool
 
 # 在编辑器中手动解决冲突后，标记文件为`已解决冲突`
 $ git add <resolved-file>
-$ git rm <resolved-file>
 ```
 
 ## 撤销
