@@ -10,21 +10,47 @@ author: "Victor"
 
 ### .gitignore 一些规则
 
-* 所有空行或者以注释符号 # 开头的行都会被 Git 忽略。
-* 可以使用 glob 模式匹配。
-* 匹配模式最后跟反斜杠 `/` 说明要忽略的是目录。
-* 要忽略执行模式意外的文件或目录，可以在模式前加上惊叹号 `!` 取反。
+* 所有空行或者以 `#` 开头的行都会被 Git 忽略
+* 可以使用 glob 模式匹配
+* 匹配模式最后跟反斜杠 `/` 说明要忽略的是目录
+* 以 `/` 开头防止递归
+* 要忽略执行模式意外的文件或目录，可以在模式前加上惊叹号 `!` 取反
 
 ### glob
 
 所谓 glob 模式是指 shell 使用的简化的正则表达式。
 
 * 星号 `*` 匹配零或多个任意字符。
+* 星号 `**` 匹配任意中间目录，比如：`a/**/z` 可以匹配 `a/z, a/b/z 或 a/b/c/z` 等。
 * `[abc]` 匹配任何一个列在方括号中的字符。
 * `?` 只匹配一个任意字符。
 * 如果方括号中使用短划线分割两个字符，表示所有在这两个字符范围内的都可以匹配 `[0-9]`。
 
-git 的所有命令后面都可以使用 glob 模式，比如 `git rm log/\*.log`
+git 的所有命令后面都可以使用 glob 模式，比如 `git rm log/\*.log` 注意到 `*` 之前的反斜杠 `\`， 因为 Git 有它自己的文件模式扩展匹配方式，所以我们不用 shell 来帮忙展开。 此命令删除 `log/` 目录下扩展名为 `.log` 的所有文件。
+
+类似的还有 `git rm \*~` 命令为删除以 `~` 结尾的所有文件。
+
+### 简单的例子
+
+```bash
+# no .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in the build/ directory
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory
+doc/**/*.pdf
+```
 
 ### Rails Project 的例子
 
@@ -120,3 +146,7 @@ node_modules/
 # Editor
 *.sublime-workspace
 ```
+
+## 相关链接
+
+* https://github.com/github/gitignore

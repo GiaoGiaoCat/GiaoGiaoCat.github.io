@@ -42,4 +42,37 @@ commit2: add test2.c
 commit1: add test1.c
 ```
 
-这里也可以使用另外一种方法来实现：```git cherry-pick 63ee781```
+这里也可以使用另外一种方法来实现：`git cherry-pick 63ee781`
+
+### Git log 常用选项
+
+| 选项 | 说明 |
+|---|---|
+| -p | 按补丁格式显示每个更新之间的差异 |
+| --stat | 显示每次更新的文件修改统计信息 |
+| --shortstat | 只显示 --stat 中最后的行数修改添加移除统计 |
+| --name-only | 仅在提交信息后显示已修改的文件清单 |
+| --name-status | 显示新增、修改、删除的文件清单 |
+| --abbrev-commit | 仅显示 SHA-1 的前几个字符，而非所有的 40 个字符 |
+| --relative-date | 使用较短的相对时间显示（比如，“2 weeks ago”） |
+| --graph | 显示 ASCII 图形表示的分支合并历史 |
+| --pretty | 使用其他格式显示历史提交信息。可用的选项包括 oneline，short，full，fuller 和 format（后跟指定格式） |
+
+### 限制输出长度
+
+* 除了用 `-n` 来限制输出 log 的条数，还可以用 `--since` 和 `--until` 按照时间作限制。
+* 用 `--author` 选项显示指定作者的提交，用 `--grep` 选项搜索提交说明中的关键字。
+* 要得到同时满足这两个选项搜索条件的提交，就必须用 `--all-match` 选项。
+* `-S` 列出那些添加或移除了某些字符串的提交。
+* 可以在 git log 选项的最后指定它们的路径。因为是放在最后位置上的选项，所以用两个短划线 `--` 隔开之前的选项和后面限定的路径名。
+
+```bash
+# 列出所有最近两周内的提交
+$ git log --since=2.weeks
+
+# 想找出添加或移除了某一个特定函数的引用的提交
+$ git log -Sfunction_name
+
+# 2018 年 4 月期间，Junio Hamano 提交的但未合并的测试文件
+$ git log --pretty="%h - %s" --author=gitster --since="2018-04-01" --before="2018-05-01" --no-merges -- t/
+```
