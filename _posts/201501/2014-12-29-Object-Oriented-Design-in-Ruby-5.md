@@ -67,7 +67,7 @@ deactivate Trip
 deactivate SomeObject
 ```
 
-![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/Object-Oriented-Design-in-Ruby/05-01.png)
+![](http://wjp2013.github.io/assets/images/pictures/Object-Oriented-Design-in-Ruby/05-01.png)
 
 ### 让问题复杂些
 
