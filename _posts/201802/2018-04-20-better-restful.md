@@ -40,9 +40,13 @@ REST 的使用场景是 Machine-to-machine 的系统集成，目标是让服务�
 
 一个架构符合 REST 原则，就称它为 RESTful 风格。
 
+很多人在尚未真正理解 REST 的一些核心概念的情况下，就到处吹自己设计的 API 是 RESTful API，大佬 Fielding 忍无可忍发了一篇博客意思是，RESTful API 必须是超文本驱动的，也就是 HATEOAS 这个概念。
+
 **只要把 HTTP 标准和扩展的 RFC 看完，就会觉得 RESTful 就是按 HTTP 说的那样用。只是很多人的 HTTP 没按 HTTP 说的那样用。**
 
 ### RESTful API 设计指南
+
+每个人都想从头开始设计他们自己的 API，即使从业务的角度看并没什么意义。
 
 详细看 [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
 
@@ -112,6 +116,16 @@ URL 主体是资源，是个名词。而且也仅支持 HTTP 协议，规定了�
 JSON-RPC 无法像 REST 一样享受 HTTP 的各种优点(standard interface, stateless, cache..)，又必须承担 HTTP 作为基于文本的协议，payload 过大传输的成本以及序列化反序列化的开销。
 
 如果你想寻求一种 RPC 框架，Thrift 或 protobuf 无疑更合适。
+
+## RFC
+
+Request For Comments（RFC），是一系列以编号排定的文件。文件收集了有关因特网相关资讯，以及 UNIX 和因特网社群的软件文件。
+
+所有关于 Internet 的正式标准都是以 RFC 文档形式出版。但大量的 RFC 文档都不是正式的标准，出版目的都是为了提供信息。
+
+RFC 文档在成为官方标准前一般至少要经历 4 个阶段：因特网草案、建议标准、草案标准、因特网标准。
+
+[RFC文档目录](http://man.chinaunix.net/develop/rfc/default.htm)
 
 ## 相关阅读
 
