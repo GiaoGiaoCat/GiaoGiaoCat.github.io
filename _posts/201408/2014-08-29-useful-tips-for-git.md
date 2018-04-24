@@ -104,6 +104,12 @@ git fsck --no-reflog | awk '/dangling commit/ {print $3}'
 
 拿到SHA1的值只要再apply就可以了
 
+### 统计每天的代码量
+
+```bash
+git log --author="$(git config --get user.name)" --pretty=tformat: --numstat --since=1am --stat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s removed lines : %s total lines: %s\n",add,subs,loc }' -
+```
+
 ### 参考
 
 * [git 小技巧](https://github.com/xiaobeicn/programming-skills-summary/tree/master/git)
