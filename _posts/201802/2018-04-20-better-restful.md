@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "RESTful 风格的优势是什么"
+title:  "RESTful & JSON API"
 date:   2018-04-20 12:00:00
 
 categories: tool
@@ -12,15 +12,17 @@ author: "Victor"
 
 ## 前提
 
-**永远不要跟业界通行的方法背着干，这不是个个人偏好的问题，是关系到项目生死的大事。**
+**永远不要跟业界通行的方法背着干，这不是个人偏好的问题，是项目生死的大事。**
 
 所谓代码风格、接口形式、各种林林总总的格式规定，其实都是为了在团队内部形成共识、防止个人习惯差异引起的混乱。
 
-JSON-RPC 当然也是有规范的，但相比 REST 实在宽松太多了。注意：多数时候我们提到的规范一词都是 specification 的意思，不是 regulation 的意思，其本身并没有约束力。
+JSON-RPC 当然也是有规范的，但相比 REST 实在宽松太多了。
+
+注意：多数时候我们提到的规范一词都是 specification 的意思，不是 regulation 的意思，其本身并没有约束力。
 
 ## REST
 
-这一段太长不想看，那只要继续这一句 **就是用 URL 定位资源，用 HTTP METHOD 描述操作，看 HTTP STATUS CODE 就知道结果如何。**
+这一段太长不想看，那只要看这一句 **就是用 URL 定位资源，用 HTTP METHOD 描述操作，看 HTTP STATUS CODE 就知道结果如何。**
 
 REST -- Resource Representational State Transfer 直接翻译：资源在网络中以某种表现形式进行状态转移。抱歉，这个中文我完全不懂什么意思。
 
