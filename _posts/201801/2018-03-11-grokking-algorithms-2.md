@@ -73,3 +73,9 @@ def binary_search(array, key, low=0, high=array.size-1)
   binary_search(array, key, low, high)
 end
 ```
+
+### 贪婪
+
+每次都选择局部最优解，最终得到的就是全局最优解。
+
+在有些情况下，完美是优秀的敌人。有时候，只要找到一个大致解决问题的算法，此时贪婪算法正好可派上用场，因为实现容易，得到的结果又与正确结果相当接近。
