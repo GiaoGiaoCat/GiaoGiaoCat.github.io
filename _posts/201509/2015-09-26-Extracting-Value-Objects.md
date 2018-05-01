@@ -13,9 +13,25 @@ author: "Victor"
 
 ### 什么是 Value Objects
 
+Value Object 是 [Domain Driven Design (DDD)](https://en.wikipedia.org/wiki/Domain-driven_design) 的一个重要概念。
+
+#### Entities vs Value Objects
+
+For example, a Person could be an Object within our application. A person will have a name, email address and password as well as many other attributes. Within our database this person is represented by an id. This means that the person could change their name, email and password but it would still be the same person. When an object can change it’s attributes but remain the same object we call it an Entity. An Entity is mutable because it can change it’s attributes without changing the identity of the object. The Entity object will maintain the identity because it has an id in the database.
+
+假设我们的应用程序需要跟踪用户当前的位置，每当用户登录的时候我们就创建一个新的 Location 对象。这个 Location 对象只储存经纬度，Location 对象就是 Value Object，因为我们不关注它究竟是哪一个实例，只关注经纬度属性。
+
+当用户再次登录的时候，我们不需要改变原来的 Location 对象属性，而是简单的重新创建一个就行。Location 对象从创建到销毁的过程中都不会改变自己的属性，它是 `immutable` 的，这是 Value Object 的特征之一。
+
+另一个重要的区别是，判断两个 Value Object 是否相等并不是基于 identity。以上面的例子来说，判断两个 Person 是否是同一个对象，是判断数据库 id，而判断两个 Location 是否相等只需要判断经纬度是否一致。
+
+#### How to identify Value Objects
+
+最简单区分 Entities 和 Value Object 的方法是看这个对象是否需要一个 id。而一个对象是否需要 id 主要取决于程序的上下文或者要看它是否需要被持久化。
+
 > A small simple object, like money or a date range, whose equality isn’t based on identity.
 
-* 值对象是依赖于它们的值而不是身份的一种简单对象。
+* 值对象是依赖于它们的值而不是身份(identity)的一种简单对象。
 * 它们通常是不可变的。例如：Ruby 标准库中的 Date, URI, Pathname 等。
 * Rails 应用程序中定义的特定域的值对象也是如此（下面的代码中的`ATTRS`）。从 ActiveRecords 中提取它们是常见的重构方法。
 
@@ -460,6 +476,7 @@ end
 
 ## 相关文章
 
+* [What is the difference between Entities and Value Objects?](https://www.culttt.com/2014/04/30/difference-entities-value-objects/)
 * [7 Patterns to Refactor Fat ActiveRecord Models](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
 * [ValueObject](https://martinfowler.com/bliki/ValueObject.html)
 * [Value Objects Explained with Ruby](https://www.sitepoint.com/value-objects-explained-with-ruby/)
