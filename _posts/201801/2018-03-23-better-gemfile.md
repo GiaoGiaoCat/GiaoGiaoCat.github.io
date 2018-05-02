@@ -153,6 +153,8 @@ bundle outdated # 检查哪些 gem 需要更新
 * `~> 5.0.0` is equivalent to `>= 5.0.0 <5.1`
 * `~> 2.3` will allow `2.3.1, 2.5.0` but not `3.0.0`
 
+详见 [Gemfile 中版本号的说明](/rails/gemfile-version/)
+
 ### Gems 推荐
 
 * [bullet](https://github.com/flyerhzm/bullet) help to kill N+1 queries and unused eager loading
