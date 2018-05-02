@@ -129,7 +129,18 @@ RFC 文档在成为官方标准前一般至少要经历 4 个阶段：因特网�
 
 [RFC文档目录](http://man.chinaunix.net/develop/rfc/default.htm)
 
-## 相关阅读
+## 相关
+
+### 工具
+
+* [apiary.io](https://apiary.io/)
+* [api blueprint](https://apiblueprint.org/)
+
+### 范例
+
+* [Teambition Core Api](https://docs.teambition.com/#me-get_preference)
+
+### 相关阅读
 
 * [Architectural Styles and the Design of Network-based Software Architectures](http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm)
 * [从消费者的角度评估REST的价值](http://hippoom.github.io/blogs/value-of-hypermedia-from-client-perspective.html)
