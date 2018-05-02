@@ -11,6 +11,8 @@ author: "Victor"
 
 有时候需要在不相关的对象之间共享行为。
 
+### 找出角色
+
 前面介绍的 Preparer 就是一个角色。那些实现了 `preparer` 接口的对象扮演了这个角色。而 Preparer 角色的存在表明了还存在有一个平行的 Preparable 角色。该接口包含了 Preparer 希望发送给 Preparable 的所有信息，也就是 `bicycles, customers, vehicle`。
 
 尽管 Preparer 角色有多个演员，但它非常简单，直接通过接口来定义就行。为了扮演这个角色，对象只需要实现自己的 `prepare_trip` 方法。
@@ -19,7 +21,39 @@ author: "Victor"
 
 在 Ruby 中，这类混入内容都被称为模块 `module`，它允许你一次定义一组命名方法，这些命名方法独立于类，并且可以混入到任何对象。
 
-### 查找方法
+### 组织职责
+
+在决定是否要创建鸭子类型，并把共享行为变成一个模块之前，必须要知道正确的做法。
+
+以一个具体的旅行调度问题为例，在特定的时间点需要安排旅行，涉及自行车、机械师和摩托车。这些领域对象都有一些自己独特的特征，自行车和摩托车需要保养，机械师需要休息。具体的要求是：在两次旅行之间，自行车的交付时间为至少一天，摩托车交付时间最少三天，机械师的交付时间是四天。
+
+假设有一个 Schedule 类，实现了如下三种方法：
+
+```ruby
+scheduled?(target, starting, ending)
+add(target, starting, ending)
+remove(target, starting, ending)
+```
+
+target 的实例包含 Bicycle, Vehicle, Mechanic。Schedule 会检查传入的 target 的类，以决定 lead time 来计算 starting。
+
+![](http://wjp2013.github.io/assets/images/pictures/Object-Oriented-Design-in-Ruby/07-05.png)
+
+通过上图可以看到，我们在这一过程中 Schedule 会检查类，以便知道要使用什么值。这说明 Schedule 知道的太多，这种知识不应该属于 Schedule，而应该属于 Schedule 正检查的那个类。
+
+### 删除不必要的依赖关系
+
+#### 发现 Schedulable 鸭子类型
+
+Schedule 会检查类型，以确定在变量里要放什么值，这一事实表明这个变量名应该成为一条消息，进而发送给每一个传入的对象。很好，我们发现了 Schedulable 鸭子类型。
+
+我们用一张新的时序图来阐述这一过程。从 `schedulable?` 方法里移除了对类的检查，并调整这个方法，以便将 `lead_days` 消息发送给传入的参数 `target`。
+
+![](http://wjp2013.github.io/assets/images/pictures/Object-Oriented-Design-in-Ruby/07-06.png)
+
+Schedule 显然并不关心 `target` 的类，它只希望这个对象能应答某个特性的消息 `lead_days`。这种基于消息的期望，脱离了对类的依赖，并且暴露了这样一个角色：它被所有的 target 扮演，并且在时序图里清晰可见。
+
+#### 让对象自己说话
 
 
 
