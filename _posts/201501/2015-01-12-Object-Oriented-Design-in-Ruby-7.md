@@ -55,11 +55,110 @@ Schedule 显然并不关心 `target` 的类，它只希望这个对象能应答�
 
 #### 让对象自己说话
 
+发现和使用鸭子类型让代码得到了改善，它移除了 Schedule 对特定类名的依赖，从而让程序更灵活和更容易维护。不过，上面的时序图仍然包含了不必要的依赖。
 
+暂时忘记上面的例子，举一个更极端的例子。假设有一个 StringUtils 类，它实现了管理字符串的方法，你可以发送 `StringUtils.empty?(some_string)` 来询问某个字符串是否为空。
+
+如果你已经有一定关于 Ruby 的经验，那么马上就能发现这个想法很傻。字符串是对象，它有自己的行为，会自我管理。让第三方来管理字符串的行为会增加不必要的依赖。
+
+这个例子说明了一个 Ruby 中的一个重要道理 **对象应该自我管理**。 它们应该包含自己的行为。如果你对 B 对象感兴趣，那么你不应该被迫知道 A 对象。即使你只是用 A 来查找关于 B 对象的事情，也不应该这样做。
+
+所以上面的时序图违反了这一原则，询问 Schedule 的某个目标是否可调度，有点像在问 StringUtils 类，某个字符串是否为空。
+
+就像字符串本身应该有 `empty?` 方法一样，那些 target 也应该响应 `schedulable?` 消息，这个消息应该被添加到 Schedulable 角色的接口里。
+
+### 编写具体代码
+
+虽然我们发现了 `schedulable?` 但是还不知道它应该写在哪里，代码包含什么内容。但是我们记得前一章提到的一个技术 **抽取父类的正确方法应该是，先将方法全部放到子类然后再根据需要移动到父类中。**
+
+好，先把 `schedulable?` 放在 Bicycle 里再说。
+
+![](http://wjp2013.github.io/assets/images/pictures/Object-Oriented-Design-in-Ruby/07-07.png)
+
+```ruby
+class Bicycle
+  attr_reader :schedule, :size, :chain, :tire_size
+
+  # 注入 Schedule 并提供默认值
+  def initialize(args = {})
+    @schedule = args[:schedule] || Schedule.new
+    #...
+  end
+
+  # 如果这辆车在范围时间内可用则返回 true
+  def schedulable?(start_date, end_date)
+    !schedulable?(start_date - lead_days, end_date)
+  end
+
+  # Return the schedule's answer.
+  def scheduled?
+    schedule.scheduled?(self, start_date, end_date)
+  end
+
+  # Return the number of lead_days before a Bicycle can be scheduled.
+  def lead_days
+    1
+  end
+end
+```
+
+```ruby
+class Schedule
+  def scheduled?(schedulable, start_date, end_date)
+    puts "This #{schedulable.class} is not scheduled between #{start_date} and #{end_date}"
+    false
+  end
+end
+```
+
+Bicycle 可以正确调整开始日期，并将 Schedule 是谁以及 Schedule 做了什么的知识，隐藏在了 Bicycle 里面。
+
+### 提取抽象
+
+我们已经知道了 `schedulable?` 方法应该做什，现在就该抽取 module 了。
+
+```ruby
+module Schedulable
+  attr_writer :schedule
+
+  def schedule
+    @schedule ||= ::Schedule.new
+  end
+
+  def schedulable?(start_date, end_date)
+    !schedulable?(startt_date - lead_days, end_date)
+  end
+
+  def scheduled?(start_date, end_date)
+    schedule.scheduled?(self, start_date, end_date)
+  end
+
+  # Could be implemented by who mixins me.
+  def lead_days
+    0
+  end
+end
+```
+
+```ruby
+class Bicycle
+  include Schedulable
+
+  def lead_days
+    1
+  end
+end
+```
+
+消息模式从向 Bicycle 发送 `schedulable?` 消息，变成了向 Schedulable 发送 `schedulable?`。
+
+![](http://wjp2013.github.io/assets/images/pictures/Object-Oriented-Design-in-Ruby/07-08.png)
+
+经典继承与通过模块实现代码共享的差别是： “是一个” 与 “像一个” 的差别，不同的选择带来不同的后果。但这两种编码技术很相似，而且它们都依赖消息委托。
 
 ### 继承角色行为
 
-模块是个很强大的工具，你可以编写出难以理解、调试或扩展的代码。你的任务不是避开这些技术，而是学着用正确的理由、在正确的地方、以正确的方式使用它们。
+模块是个很强大的工具，你可以编写出难以理解、调试或扩展的代码。但你的任务不是避开这些技术，而是学着用正确的理由、在正确的地方、以正确的方式使用它们。
 
 首先要做到的是正确的编写可继承的代码。
 
@@ -71,12 +170,12 @@ Schedule 显然并不关心 `target` 的类，它只希望这个对象能应答�
 
 1. 使用类似 type 或 category 这类名字的变量来确定发送什么消息给 self
   * 缺点：每次有新的类型加入时，必须更改代码
-  * 使用继承来重构
-  * 优势：可以通过添加新的子类来创建新的子类型，会在不改变现有代码的基础上扩展这个层次结构
+  * 建议：使用继承来重构
+  * 优势：可以通过添加新的子类来创建新的子类型，在不改变现有代码的基础上扩展这个层次结构
 2. 当某个发送对象要检查接收对象的类，以确定所发送的消息时
   * 缺点：每次引入新的接收类，必须更改代码
-  * 使用鸭子对象来重构
-  * 优势：原来的发送者不用在担心任何事，每个接收者都可以理解这条公共消息
+  * 建议：使用鸭子对象来重构
+  * 优势：原来的发送者不用再担心任何事，每个接收者都可以理解这条公共消息
 
 ### 坚持抽象
 
@@ -85,8 +184,6 @@ Schedule 显然并不关心 `target` 的类，它只希望这个对象能应答�
 ### 重视契约
 
 我们在编写子类时应该遵守里氏替换原则 LSP，既接受相同类型的输入，以及返回同样类型的输出。也就是说子类可以在任何情况下替换其父类。
-
-### 里氏替换原则 LSP
 
 里氏替换原则 LSP 的解释：对于一个健全的类型系统，其子类型必须能够替换它们的父类型。
 
@@ -119,6 +216,9 @@ Schedule 显然并不关心 `target` 的类，它只希望这个对象能应答�
 
 ## 小结
 
-* 当扮演公共角色的对象需要共享行为时，可以通过 Ruby 的模块实现。模块里定义的代码可以添加到任何对象，其中包括类实例、类本身或者另一个模块。
+* 当扮演公共角色的对象需要共享行为时，可以通过 Ruby 的模块实现。
+* 模块里定义的代码可以添加到任何对象，其中包括类实例、类本身或者另一个模块。
+* 编写子类时应该遵守里氏替换原则 LSP。
 * 模块应该使用模板方法模式，从而让哪些包含它们的类型可以提供自己特殊化的内容。
 * 模块也应该实现钩子方法，以避免那些混入了模块的类型必须发送 `super` 消息才能知道算法。
+* 代码应该是浅层结构，以方便理解和减少错误。
