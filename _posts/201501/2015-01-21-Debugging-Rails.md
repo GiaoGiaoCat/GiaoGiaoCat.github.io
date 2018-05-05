@@ -7,6 +7,8 @@ tags: debug
 author: "Victor"
 ---
 
+## Debugging Rails Applications
+
 ## Debugging Rails With Built-in Tools
 
 ### Ruby compiler checks
@@ -80,4 +82,3 @@ Rack middleware 会拦截每一个请求和改变响应的内容。在调试阶�
 * Google Search Results
 * Email delivery reports
 * New Relic
-
