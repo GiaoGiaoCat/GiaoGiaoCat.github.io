@@ -196,6 +196,7 @@ JWT 中被称为 Signature 的部分，其实是前两部分的消息认证码 M
 * [ActionController::HttpAuthentication::Token](http://api.rubyonrails.org/classes/ActionController/HttpAuthentication/Token.html)
 * [Building a simple token based authorization API with Rails](https://engineering.musefind.com/building-a-simple-token-based-authorization-api-with-rails-a5c181b83e02)
 * [Token Based Authentication in Rails](https://www.codeschool.com/blog/2014/02/03/token-based-authentication-rails/)
+* [理解JWT的使用场景和优劣](http://blog.didispace.com/learn-how-to-use-jwt-xjf)
 
 ### Gems
 
