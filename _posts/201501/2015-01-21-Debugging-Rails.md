@@ -9,6 +9,8 @@ author: "Victor"
 
 ## Debugging Rails Applications
 
+
+
 ## Debugging Rails With Built-in Tools
 
 ### Ruby compiler checks
