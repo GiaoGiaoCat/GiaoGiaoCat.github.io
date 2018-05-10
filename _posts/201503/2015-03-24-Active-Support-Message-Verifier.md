@@ -57,7 +57,7 @@ end
 
 ## 延伸阅读
 
-* [原文 ActiveSupport宝藏之MessageVerifier](http://www.xinshengyin.com/ruby/activesupport-message-verifier/)
+* [原文 ActiveSupport宝藏之MessageVerifier](http://www.xinshengyin.com/ruby/activesupport-message-verifier)
 * [Reading Rails - How Does MessageVerifier Work?](http://www.monkeyandcrow.com/blog/reading_rails_how_does_message_verifier_work/)
 * [Signing and encrypting data with tools built-in to Rails](http://vesavanska.com/2013/signing-and-encrypting-data-with-tools-built-in-to-rails/)
 * [Rails 4.1 Message Verifier](https://www.youtube.com/watch?v=qNJbe1HWXDA)
