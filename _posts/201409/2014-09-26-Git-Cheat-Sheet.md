@@ -226,8 +226,16 @@ $ git fetch origin git reset --hard origin/master
 
 ```bash
 $ git stash
+$ git stash save "Your stash message" # stash with message
+$ git stash save -u # stash untracked files, as same as `git stash save --include-untracked`
 $ git stash list
-$ git stash pop
+$ git stash apply stash@{1}
+$ git stash pop # stash apply and delete it
+$ git stash pop stash@{1}
+$ git stash drop stash@{1}
+$ git stash show stash@{1} #
+$ git stash clear # deletes all the stashes
+$ git stash branch <name> stash@{1} # creates a new branch with the latest stash, and then deletes the latest stash
 ```
 
 ## 原文链接
@@ -235,3 +243,4 @@ $ git stash pop
 * [Git Cheat Sheet](https://github.com/flyhigher139/Git-Cheat-Sheet)
 * [git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)
 * [猴子都能懂的GIT入门](https://backlog.com/git-tutorial/cn/intro/intro1_1.html)
+* [Git stash](https://dev.to/srebalaji/useful-tricks-you-might-not-know-about-git-stash-117e)
