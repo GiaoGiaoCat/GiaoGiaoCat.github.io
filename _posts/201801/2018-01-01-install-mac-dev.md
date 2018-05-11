@@ -20,13 +20,16 @@ author: "Victor"
 * `Trackpad >` Tap to click
 * `Keyboard > Key Repeat >` Fast (all the way to the right)
 * `Keyboard > Delay Until Repeat >` Short (all the way to the right)
+* `Keyboard > Shortcuts > Input Sources` Select the previous input source `CMD + 空格`，其它禁用
+* `Keyboard > Shortcuts > Spotlight` Show Spotlight Search `ALT + CMD + 空格`，其它禁用
+* `Keyboard > Shortcuts` 选择下一个输入法使用 `CMD + 空格`，其它禁用
 * `Dock >` Automatically hide and show the Dock
 
 ## DropBox
 
 先配好全局跳墙，然后去 DropBox 官网下载客户端并登录同步自己的文件夹。这里有 Mackup 的全部配置。
 
-## Homebrew
+## Homebrew & oh-my-zsh
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -65,6 +68,8 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 * Set hotkey to open and close the terminal to `command + option + i`
 * Go to `profiles -> Default -> Terminal` Check `silence bell` to disable the terminal session from making any sound
+* Go to `General -> Preferences` Check `Load preferences from a custom folder or URL:` 选 `~/Dropbox/Apps/iterm2`
+* 修改 Profile 之后可以手动点 `General -> Preferences -> Save settings to Folder`
 * Download Mediallion theme
 
 ```bash
@@ -90,6 +95,14 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 4. AirDrop 把 `~/.ssh` 中的 `id_rsa` 和 `id_rsa.pub` 拿过来，所有电脑用同一套 ssh key
 5. 网页登录各种账户 chrome，github 什么的
 6. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
+7. 启用 sublime text 的 package 
+
+## 其它软件的安装
+
+* Downie
+* Kaleidoscope
+* Abstract
+* mubu
 
 ## 相关链接
 
