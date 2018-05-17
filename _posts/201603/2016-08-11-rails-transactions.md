@@ -302,3 +302,4 @@ end
 * [Prevent MySQL deadlocks in your Rails application](https://www.brightbox.com/blog/2014/11/13/preventing-mysql-deadlocks/)
 * [Troubleshooting and avoiding deadlocks — MySQL/Rails](https://hackernoon.com/troubleshooting-and-avoiding-deadlocks-mysql-rails-766913f3cfbc)
 * [Rails transactions and locks… a failed story](https://medium.com/dak42/rails-transactions-and-locks-a-failed-story-5c12e5b6e71d)
+* [MySQL锁机制分析](http://codingo.xyz/index.php/2018/05/16/mysql2)
