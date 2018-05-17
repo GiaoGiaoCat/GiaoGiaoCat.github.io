@@ -9,7 +9,7 @@ author: "Victor"
 
 用了将近 10 年的 Mac 终于在 2017 年底的倒数第2天买了第一台 MacbookPro。怎么样一边玩游戏一边把电脑开发环境配置好呢？
 
-开机之后先登录 MAS 更新系统补丁，安装Xcode。
+开机之后先登录 MAS 更新系统补丁，安装Xcode 或 `xcode-select --install`，搞定 Shadowsocks。
 
 ## Preferences
 
@@ -33,6 +33,7 @@ author: "Victor"
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew tap homebrew/bundle
 ```
 
 如果开局已经登录 MAS 下面这步就可以忽略了。
@@ -95,7 +96,7 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 4. AirDrop 把 `~/.ssh` 中的 `id_rsa` 和 `id_rsa.pub` 拿过来，所有电脑用同一套 ssh key
 5. 网页登录各种账户 chrome，github 什么的
 6. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
-7. 启用 sublime text 的 package 
+7. 启用 sublime text 的 package
 
 ## 其它软件的安装
 
