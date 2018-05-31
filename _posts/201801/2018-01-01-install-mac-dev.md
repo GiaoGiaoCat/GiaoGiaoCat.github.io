@@ -97,6 +97,7 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 5. 网页登录各种账户 chrome，github 什么的
 6. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
 7. 启用 sublime text 的 package
+8. `defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false` holding down a key won't repeat it
 
 ## 其它软件的安装
 
@@ -115,3 +116,4 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 * https://github.com/Homebrew/homebrew-bundle
 * https://robots.thoughtbot.com/brewfile-a-gemfile-but-for-homebrew
 * https://github.com/sharat/vscode-brewfile
+* https://www.sublimetext.com/docs/3/vintage.html
