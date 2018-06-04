@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Rails 中的代表继承"
+title:  "Rails 中的单表继承"
 date:   2018-05-31 12:00:00
 
 categories: rails
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   def guest?
     raise NotImplementError, "Must be implemented in subclasses."
-  end  
+  end
 
   #etc...
 end
