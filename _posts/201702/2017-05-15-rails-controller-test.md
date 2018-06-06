@@ -98,3 +98,4 @@ Rails 中再也没有功能测试 `controller tests` 这一说法了，现在它
 
 * [Upgrading Rails 5 Controller Tests](http://blog.napcs.com/2016/07/03/upgrading-rails-5-controller-tests/)
 * [Changes to test controllers in Rails 5](http://blog.bigbinary.com/2016/04/19/changes-to-test-controllers-in-rails-5.html)
+* [Upgrading Rails 4 Controller Tests to Rails 5](http://engineering.appfolio.com/appfolio-engineering/2018/5/25/upgrading-rails-4-controller-tests-to-rails-5)
