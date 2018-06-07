@@ -71,11 +71,17 @@ REST 的使用场景是 Machine-to-machine 的系统集成，目标是让服务�
 * HTTP 本身提供了丰富的内容协商手段，无论是缓存，还是资源修改的乐观并发控制，都可以以业务无关的中间件来实现。
 * 降低消费者对服务内部实现细节的耦合
 
+### HTTP 幂等性
+
+幂等性是分布式系统设计中十分重要的概念，而 HTTP 的分布式本质也决定了它在 HTTP 中具有重要地位。简单的说 **除 POST 之外的所有方法都是幂等** 的。
+
+* [HTTP请求-幂等、安全概念](https://blog.csdn.net/zcmuczx/article/details/79397029)
+* [编程中的幂等性 —— HTTP幂等性](https://blog.csdn.net/scratlc/article/details/78205363)
+* [理解HTTP幂等性](https://www.cnblogs.com/weidagang2046/archive/2011/06/04/2063696.html)
+
 ### HTTP 状态码
 
 2XX/3XX 都是请求成功，但是结果不同。4XX 是请求出错，5XX 是服务器处理出现错误。
-
-![](https://pic4.zhimg.com/80/v2-35a9a08efff828645c5d980f0166c832_hd.jpg)
 
 相关阅读：
 
