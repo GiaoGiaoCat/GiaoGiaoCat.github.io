@@ -78,10 +78,6 @@ class ConsiderAllRequestJsonMiddleware
 end
 ```
 
-## 另一种方法
-
-
-
 ## 原文链接
 
 * [Content-Type application/json by default in Rails 5
