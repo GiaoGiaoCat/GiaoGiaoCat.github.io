@@ -50,8 +50,6 @@ $ rubocop app/models/entrance_guard/key.rb -a
 
 输出结构的第2个位置 `W` 指的是违规的等级，以此是：Convention, Warning, Error, Fatal。
 
-###
-
 然后在项目的根目录增加 .rubocop.yml 配置文件。
 
 在 Atom 下配置：
@@ -80,6 +78,13 @@ end
 
 brakeman 的用法还是比较简单的，平时我们在项目的目录下直接执行 `brakeman` 就行。
 
+关于 SQL 注入和 Rails 的安全还可参考如下：
+
+* [Fixing SQL Injection Vulnerabilities in Ruby/Rails](http://gavinmiller.io/2015/fixing-sql-injection-vulnerabilities/)
+* [Rails SQL Injection](https://rails-sqli.org/)
+* [SQL Injection in Rails](https://rorsecurity.info/sql-injection-in-rails)
+* [Securing Rails Applications](http://guides.rubyonrails.org/security.html)
+* [Ruby on Rails Cheatsheet](https://www.owasp.org/index.php/Ruby_on_Rails_Cheatsheet)
 
 ## 依赖安全检测
 
@@ -93,7 +98,7 @@ group :development do
 end
 ```
 
-如果本地检测直接使用 `bundle-audit check --update`
+如果本地检测直接使用 `bundle audit check --update`
 
 ## 代码质量检测
 
