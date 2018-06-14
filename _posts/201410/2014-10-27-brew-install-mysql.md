@@ -7,6 +7,16 @@ tags: mac database
 author: "Victor"
 ---
 
+### 注意：改用 MariaDB 更简单
+
+```
+xcode-select --install
+brew info mariadb
+brew install mariadb
+mysql_install_db
+mysql_secure_installation
+```
+
 ### Step-by-step
 
 ```bash
@@ -84,6 +94,7 @@ sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO
 
 ### 相关链接
 
+* [Installing MariaDB 10.1.16 on Mac OS X](https://mariadb.com/resources/blog/installing-mariadb-10116-mac-os-x-homebrew)
 * [brew install mysql on mac os](http://stackoverflow.com/questions/4359131/brew-install-mysql-on-mac-os)
 * [mac os 安装 mysql总是出现cannot find mysql.sock](https://ruby-china.org/topics/794)
 * [在 Mac 下用 Homebrew 安装 MySQL](http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/)
