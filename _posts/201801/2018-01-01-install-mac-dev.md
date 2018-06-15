@@ -101,10 +101,12 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 
 ## 其它软件的安装
 
-* Downie
 * Kaleidoscope
-* Abstract
 * mubu
+
+## 可能遇到的问题
+
+* [『修复』做了个GFWList PAC最新下载地址，可用于更新 SSR PC客户端的PAC](https://doub.io/ss-jc59/)
 
 ## 相关链接
 
