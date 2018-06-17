@@ -1,8 +1,0 @@
-<section class="panel panel-default portlet-item">
-  <header class="panel-heading"><strong>{{ page.title | capitalize }}</strong></header>
-  <section class="panel-body">
-    {% for post in site.categories[page.title] %}
-      {% include list_post.html %}
-    {% endfor %}
-  </section>
-</section>
