@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Rails 中的单表继承"
+title:  "让 Content-Type 默认使用 application/json"
 date:   2018-06-05 12:00:00
 
 categories: rails
