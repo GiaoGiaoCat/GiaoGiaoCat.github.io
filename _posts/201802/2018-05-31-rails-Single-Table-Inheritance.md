@@ -22,6 +22,8 @@ Single Table Inheritance (separate classes, one table) 单表继承就是一张�
 2. 是否需要对数据库中的所有对象进行查询操作？
 3. 是所有对象都有相同的属性，但是不同的行为吗？
 
+如果你要跨子类进行查询，那么毫无疑问要用 STI。
+
 ### 具体实现
 
 ```bash
@@ -100,26 +102,62 @@ class Member < User
 end
 ```
 
-## 抽象类 abstract_class
-
-当你有几个子类要继承同一个父类，但是并不是 STI 的时候，在父类声明 `abstract_class`，在子类声明各自的 table_name。
+## 使用多态来替换 STI
 
 ```ruby
-class Shape < ActiveRecord::Base
-  self.abstract_class = true
+# Suppose the AccountHolder parent class is used
+# to simply have an association with an account so
+# both corporations and people can have accounts.
+
+class Account < ActiveRecord::Base
+  belongs_to :account_holder
+end
+
+class AccountHolder < ActiveRecord::Base
+  has_one :account
+end
+
+class Corporation < AccountHolder
+end
+
+class Person < AccountHolder
 end
 ```
 
-```bash
-Polygon = Class.new(Shape)
-Square = Class.new(Polygon)
+```ruby
+# Just use a polymorphic association instead
 
-Shape.table_name   # => nil
-Polygon.table_name # => "polygons"
-Square.table_name  # => "polygons"
-Shape.create!      # => NotImplementedError: Shape is an abstract class and cannot be instantiated.
-Polygon.create!    # => #<Polygon id: 1, type: nil>
-Square.create!     # => #<Square id: 2, type: "Square">
+class Account < ActiveRecord::Base
+  belongs_to :account_holdable, polymorphic: true
+end
+
+class Corporation < AccountHolder
+  has_one :account, as: :account_holdable
+end
+
+class Person < AccountHolder
+  has_one :account, as: :account_holdable
+end
+```
+
+```ruby
+# As such, accounts would need the polymorphic columns
+# `account_holdable_type` and `account_holdable_id` which
+# would describe the class as well as the primary key, respectively.
+
+class CreateAccounts < ActiveRecord::Migration[5.0]
+  def change
+    create_table :accounts do |t|
+
+      # ... various fields
+
+      t.integer :account_holdable_id
+      t.string  :account_holdable_type
+
+      t.timestamps
+    end
+  end
+end
 ```
 
 ## 相关阅读
