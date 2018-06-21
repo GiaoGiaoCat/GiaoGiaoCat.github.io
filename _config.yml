@@ -1,11 +1,14 @@
 # Site settings
 title: "脱线道士维克多"
+email: wjp2013@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://wjp2013.github.io" # the base hostname & protocol for your site
+url: "https://wjp2013.github.io/" # the base hostname & protocol for your site
 github_username: wjp2013
 
 timezone: Beijing
-plugins: ['jekyll-paginate']
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
 
 # Build settings
 highlighter: rouge
