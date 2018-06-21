@@ -108,7 +108,7 @@ end
 
 ## 抽象类 abstract_class
 
-当你有几个子类要继承同一个父类，但是并不是 MTI 的时候，可以在父类声明 `abstract_class`，在子类声明各自的 table_name。
+当你有几个子类要继承同一个父类，但是父类并不存在对应的 table，可以在父类声明 `abstract_class`，在子类声明各自的 table_name。
 
 ```ruby
 class Shape < ActiveRecord::Base
@@ -130,5 +130,5 @@ Square.create!     # => #<Square id: 2, type: "Square">
 
 ## 相关阅读
 
-* [Rails 的单表继承和多态关联](https://segmentfault.com/a/1190000010016287)
-* [STI and Polymorphic Associations](http://railscasts.com/episodes/394-sti-and-polymorphic-associations)
+* [When To Use Single Table Inheritance vs Multiple Table Inheritance](https://medium.com/@User3141592/when-to-use-single-table-inheritance-vs-multiple-table-inheritance-db7e9733ae2e)
+* [Multiple table inheritance with ActiveRecord](http://hakunin.com/mti)
