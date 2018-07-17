@@ -134,7 +134,9 @@ Active Record 通过检查数据库生成的 db/schema.rb 文件或 SQL 文件�
 * `inclusion` 属性的值是否在指定的集合中
 * `length` 验证属性值的长度
 * `numericality` 检查属性的值是否只包含数字，默认情况下，匹配的值是可选的正负符号后加整数或浮点数
-* `presence` 检查指定的属性是否为非空值
+* `presence` 检查指定的属性是否为非空值，会在关联的对象上调用 `blank?` 和 `marked_for_destruction?` 方法。
+* `absence` 验证指定的属性值是否为空，会在关联的对象上调用 `present?` 和 `marked_for_destruction?` 方法
+* `uniqueness` 验证属性值是否是唯一的，**需要配合数据库的唯一性索引来确保不会出现相同的字段值**
 
 ```ruby
 validates :terms_of_service, acceptance: { accept: 'yes' }
@@ -152,7 +154,42 @@ validates :subdomain, exclusion: { in: %w(www us ca jp) }
 validates :legacy_code, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
 validates :registration_number, length: { minimum: 2, maximum: 500, in: 6..20, is: 6 }
 validates :games_played, numericality: { only_integer: true } # numericality 默认不接受 nil 值
+validates :name, :login, :email, absence: true
 ```
+
+```ruby
+class LineItem < ApplicationRecord
+  belongs_to :order
+  validates :order, presence: true # 如果要确保关联对象存在，需要测试关联的对象本身是否存在，而不是用来映射关联的外键
+end
+
+class Order < ApplicationRecord
+  has_many :line_items, inverse_of: :order # 为了能验证关联的对象是否存在，要在关联中指定 :inverse_of 选项
+end
+```
+
+```ruby
+class LineItem < ApplicationRecord
+  belongs_to :order
+  validates :order, absence: true # 要测试关联的对象本身是否为空，而不是用来映射关联的外键
+end
+
+class Order < ApplicationRecord
+  has_many :line_items, inverse_of: :order # 为了能验证关联的对象是否为空，要在关联中指定 :inverse_of 选项。
+end
+```
+
+因为 `false.blank?` 的返回值是 true，所以如果要验证布尔值字段是否存在，要使用下述验证中的一个：
+
+```ruby
+validates :boolean_field_name, inclusion: { in: [true, false] }
+validates :boolean_field_name, exclusion: { in: [nil] }
+```
+
+### validates_with 和 validates_each
+
+
+
 
 ## 相关链接
 
