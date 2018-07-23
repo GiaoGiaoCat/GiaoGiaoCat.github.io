@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "重读 Rails Guide"
+title:  "重读 Rails Guide 1"
 date:   2018-07-12 13:00:00
 
 categories: rails
@@ -188,8 +188,203 @@ validates :boolean_field_name, exclusion: { in: [nil] }
 
 ### validates_with 和 validates_each
 
+* `validates_with` 把记录交给其他类做验证，参数是一个类或一组类，没有默认的错误消息。在做验证的类中要手动把错误添加到记录的错误集合中。
+* 做验证的类在整个应用的生命周期内只会初始化一次，而不是每次验证时都初始化，所以使用实例变量时要特别小心。如果做验证的类很复杂，必须要用实例变量，可以用纯粹的 Ruby 对象代替。
+* `validates_each` 使用代码块中的代码验证属性。
 
+```ruby
+class GoodnessValidator < ActiveModel::Validator
+  def validate(record)
+    if options[:fields].any?{|field| record.send(field) == "Evil" }
+      record.errors[:base] << "This person is evil"
+    end
+  end
+end
 
+class Person < ApplicationRecord
+  validates_with GoodnessValidator, fields: [:first_name, :last_name]
+end
+```
+
+```ruby
+class Person < ApplicationRecord
+  validate do |person|
+    GoodnessValidator.new(person).validate
+  end
+end
+
+class GoodnessValidator
+  def initialize(person)
+    @person = person
+  end
+
+  def validate
+    if some_complex_condition_involving_ivars_and_private_methods?
+      @person.errors[:base] << "This person is evil"
+    end
+  end
+  # ...
+end
+```
+
+```ruby
+class Person < ApplicationRecord
+  validates_each :name, :surname do |record, attr, value|
+    record.errors.add(attr, 'must start with upper case') if value =~ /\A[[:lower:]]/
+  end
+end
+```
+
+### 常用的验证选项
+
+`:message` 选项的值是一个字符串或一个 Proc 对象。
+
+* 字符串消息中可以包含 `%{value}、%{attribute} 和 %{model}`
+* Proc 形式的消息有两个参数：验证的对象，以及包含 `:model、:attribute 和 :value` 键值对的散列
+
+```ruby
+
+class Person < ApplicationRecord
+  # 直接写消息
+  validates :name, presence: { message: "must be given please" }
+
+  # 带有动态属性值的消息。%{value} 会被替换成属性的值
+  # 此外还可以使用 %{attribute} 和 %{model}
+  validates :age, numericality: { message: "%{value} seems wrong" }
+
+  # Proc
+  validates :username,
+    uniqueness: {
+      # object = 要验证的 person 对象
+      # data = { model: "Person", attribute: "Username", value: <username> }
+      message: ->(object, data) do
+        "Hey #{object.name}!, #{data[:value]} is taken already! Try again #{Time.zone.tomorrow}"
+      end
+    }
+end
+```
+
+`on:` 定义自定义的上下文。必须把上下文的名称传给 valid?、invalid? 或 save 才能触发自定义的上下文。
+
+```ruby
+class Person < ApplicationRecord
+  validates :email, uniqueness: true, on: :account_setup
+  validates :age, numericality: true, on: :account_setup
+end
+
+person = Person.new
+person.valid?(:account_setup) # 会执行上述两个验证，但不保存记录。
+person.save(context: :account_setup) # 在保存之前在 account_setup 上下文中验证 person。显式触发时，可以只使用某个上下文验证，也可以不使用某个上下文验证。
+```
+
+### 严格验证
+
+数据验证还可以使用严格模式，当对象无效时抛出 `ActiveModel::StrictValidationFailed` 异常，还可以通过 :strict 选项指定抛出什么异常：
+
+```ruby
+class Person < ApplicationRecord
+  validates :name, presence: { strict: true }
+end
+
+Person.new.valid?  # => ActiveModel::StrictValidationFailed: Name can't be blank
+```
+
+```ruby
+class Person < ApplicationRecord
+  validates :token, presence: true, uniqueness: true, strict: TokenGenerationException
+end
+
+Person.new.valid?  # => TokenGenerationException: Token can't be blank
+```
+
+### 条件验证
+
+* `:if, :unless` 的值可以是符号、字符串、Proc 或数组。
+* 同一个条件会用在多个验证上，这时可以使用 `with_options` 方法
+
+```ruby
+class Order < ApplicationRecord
+  validates :card_number, presence: true, if: :paid_with_card?
+
+  def paid_with_card?
+    payment_type == "card"
+  end
+end
+
+class Account < ApplicationRecord
+  validates :password, confirmation: true, unless: Proc.new { |a| a.password.blank? }
+end
+
+class User < ApplicationRecord
+  with_options if: :is_admin? do |admin|
+    admin.validates :password, length: { minimum: 10 }
+    admin.validates :email, presence: true
+  end
+end
+```
+
+### 自定义验证
+
+1. 自定义的验证类继承自 `ActiveModel::Validator`，必须实现 `validate` 方法，其参数是要验证的记录，然后验证这个记录是否有效。自定义的验证类通过 `validates_with` 方法调用。
+2. 自定义的验证类中验证单个属性，最简单的方法是继承 `ActiveModel::EachValidator` 类。此时，自定义的验证类必须实现 `validate_each` 方法。
+3.
+
+```ruby
+class MyValidator < ActiveModel::Validator
+  def validate(record)
+    unless record.name.starts_with? 'X'
+      record.errors[:name] << 'Need a name starting with X please!'
+    end
+  end
+end
+
+class Person
+  include ActiveModel::Validations
+  validates_with MyValidator
+end
+```
+
+```ruby
+class EmailValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors[attribute] << (options[:message] || "is not an email")
+    end
+  end
+end
+
+class Person < ApplicationRecord
+  validates :email, presence: true, email: true
+end
+```
+
+### 处理验证错误
+
+* `errors[]` 用于获取某个属性上的错误消息，返回结果是一个由该属性所有错误消息字符串组成的数组，每个字符串表示一个错误消息。如果字段上没有错误，则返回空数组。
+* `add` 方法用于手动添加某属性的错误消息，它的参数是属性和错误消息
+* `errors.full_messages`（或等价的 errors.to_a）方法以对用户友好的格式显示错误消息
+* `errors.add` 方法可以为返回的错误详情散列指定验证程序类型，如果想提升错误详情的信息量，可以为 `errors.add` 方法提供额外的键，指定不允许的字符。
+* `errors[:base]` 错误消息可以添加到整个对象上，而不是针对某个属性
+* 在无效的对象上调用 `errors.clear` 方法后，对象还是无效的，虽然 errors 集合为空了
+* `size` 方法返回对象上错误消息的总数
+
+```ruby
+class Person < ApplicationRecord
+  def a_method_used_for_validation_purposes
+    errors.add(:name, "cannot contain the characters !@#%*()_-+=")
+  end
+
+  def a_method_used_for_validation_purposes
+    errors.add(:name, :invalid_characters, not_allowed: "!@#%*()_-+=")
+  end
+end
+
+person.valid?
+person.errors.messages #=> {:name=>["can't be blank", "is too short (minimum is 3 characters)"]}
+person.errors[:name] #=> ["is too short (minimum is 3 characters)"]
+person.errors.full_messages #=> ["Name cannot contain the characters !@#%*()_-+="]
+person.errors.details[:name] #=> [{error: :invalid_characters}]
+```
 
 ## 相关链接
 
