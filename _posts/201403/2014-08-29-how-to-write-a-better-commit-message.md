@@ -168,6 +168,7 @@ Header 部分只有一行，包括三个字段：**type**（必需）、**scope*
 * **refactor** 重构（即不是新增功能，也不是修改bug的代码变动）
 * **test** 增加测试
 * **chore** 构建过程、辅助工具的变动
+* **perf** 提高性能
 
 如果 **type** 为 **feat** 和 **fix**，则该 commit 将肯定出现在 Change log 之中。
 
