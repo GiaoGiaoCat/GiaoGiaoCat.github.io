@@ -15,6 +15,8 @@ brew info mariadb
 brew install mariadb
 mysql_install_db
 mysql_secure_installation
+mysql.server start # start MariaDB Server
+brew services start mariadb # To auto-start MariaDB Server
 ```
 
 ### Step-by-step
