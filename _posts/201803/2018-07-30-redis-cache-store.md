@@ -32,14 +32,14 @@ gem 'hiredis', '~> 0.6.1'
 
 不需要配置 Redis cache store 会自动尝试使用更快的 hiredis。
 
-```yaml
+```ruby
 # config/environments/*.rb
 config.cache_store = :redis_cache_store, { url: ENV['REDIS_URL'] }
 ```
 
 产品环境下可能配置会比较复杂
 
-```yaml
+```ruby
 cache_servers = %w(redis://cache-01:6379/0 redis://cache-02:6379/0)
 config.cache_store = :redis_cache_store, { url: cache_servers,
 
@@ -64,6 +64,19 @@ ActiveSupport::Cache::Store 本身就支持的参数仍然有效。
 * `:expires_in` - This option sets an expiration time in seconds for the cache entry when it will be automatically removed from the cache.
 * `:race_condition_ttl` - This option is used in conjunction with the `:expires_in` option. It will prevent race conditions when cache entries expire by preventing multiple processes from simultaneously regenerating the same entry (also known as the dog pile effect). This option sets the number of seconds that an expired entry can be reused while a new value is being regenerated. It's a good practice to set this value if you use the `:expires_in` option.
 
+[详见这里](https://api.rubyonrails.org/classes/ActiveSupport/Cache.html)
+
+同样也可以配置多个 Redis Server，注意下面的 `driver: :hiredis` 参数是多余的。
+
+```ruby
+redis_servers = %w[
+  redis://localhost:6379/0
+  redis://localhost:6380/0
+  redis://localhost:6381/0
+]
+
+config.cache_store = :redis_cache_store, { driver: :hiredis, url: redis_servers }
+```
 
 ## 一些注意事项
 
