@@ -3,7 +3,7 @@ layout: post
 title:  "常用的 Google 搜索技巧"
 date:   2017-11-29 11:30:00
 categories: tool
-tags: tip
+tags: google
 author: "Victor"
 ---
 
