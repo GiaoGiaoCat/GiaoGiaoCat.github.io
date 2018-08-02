@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Dart 语言程序设计 1"
-date:   2018-07-30 13:00:00
+date:   2018-08-01 13:00:00
 
 categories: dart
 tags: learningnote
@@ -10,7 +10,7 @@ author: "Victor"
 
 Dart 的目标是结构化的 Web 开发语言。既可以快速原型开发，又可以组织大型代码库。既可以用在桌面版和移动版的浏览器中，也可以在服务器端使用。
 
-* 可选类型，在动态语言的基础上结合了静态语言的优点
+* 本质是动态类型语言，可选类型，在动态语言的基础上结合了静态语言的优点
 * 类和接口是统一的，每个类都有一个隐士接口
 * 工厂构造函数和命名构造函数、getter/setter 方法、语言级别的级联调用
 * 面向对象和并发编程
@@ -94,9 +94,11 @@ assert(lineCount == null); // assert() 在生产环境中会被忽略，在开�
 
 #### Final 和 const
 
-如果不打算修改变量的值，则可以使用 final 或 const 来声明。final 只能设置一次，可以用变量来初始化；const 是编译时常量，只能用编译时常量来初始化。顶级的 final 或 类变量只在第一次使用时被初始化。
+`final` 或 `const` 来声明常量，并且可忽略 `var` 和类型。
 
-**实例变量可以是 final 但不能是 const**
+* `final` 只能设置一次，可以用变量来初始化
+* top-level `final` 或 类变量只在第一次使用时被初始化
+* **实例变量可以是 final 但不能是 const**
 
 ```dart
 final name = 'Bob'; // Without a type annotation
@@ -110,8 +112,23 @@ const time = new DateTime.now(); //Error，new DateTime.now()不是const常量
 name = 'Alice'; // Error: a final variable can only be set once.
 ```
 
-const 定义的变量为编译时常量。如果 const 变量为类级别，则称为静态常量。
+* `const` 是编译时常量，只能用编译时常量来初始化
+* 如果 `const` 为类级别，则称为 `static const`
+* `const` 变量等号右边的值可以是：number 或 string 的字面量，其它的 const variable，常数运算结果
+* `const` 也可以用来定义常数值，该常数值可以赋值给其它变量，参考下面的例子
 
+```dart
+var foo = const [];
+final bar = const [];
+const baz = []; // Equivalent to `const []`
+```
+
+最后，只要这个变量不是 `final` 或 `const` 声明的，那么即便它曾经被赋值了一个常量，你也可以在需要的时候重新给这个变量赋值。如下：
+
+```dart
+var foo = const [];
+foo = [1, 2, 3]; // Was const []
+```
 
 
 ## 相关
