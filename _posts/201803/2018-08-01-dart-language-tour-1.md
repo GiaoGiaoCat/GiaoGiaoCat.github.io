@@ -130,7 +130,6 @@ var foo = const [];
 foo = [1, 2, 3]; // Was const []
 ```
 
-
 ## 相关
 
 * [SPDY](https://baike.baidu.com/item/SPDY/3399551?fr=aladdin)

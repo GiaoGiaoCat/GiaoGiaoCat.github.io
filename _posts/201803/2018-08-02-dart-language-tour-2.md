@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Dart 语言程序设计 2"
-date:   2018-08-01 13:00:00
+title:  "Dart 语言程序设计 2 - 数据类型"
+date:   2018-08-02 13:00:00
 
 categories: dart
 tags: learningnote
@@ -120,8 +120,76 @@ assert(iMeantToDoThis.isNaN);
 ```
 
 ### Lists
+在 Dart 中的数组是 List objects，所以这里不叫 Array 而叫 List。列表类型有许多很有用的方法，具体可以看 Generics 和 Collections 的文档。
+
+```dart
+// 这里分析器会推断 list 的类型为 List<int>，所以如果将来为其追加非 int 类型的对象，则分析器会引发运行时错误
+var list = [1, 2, 3];
+
+assert(list.length == 3);
+assert(list[0] == 1);
+list[1] = 5
+assert(list[1] == 5);
+```
+
+需要创建一个列表类型的编译时常量，需要在列表前增加 const
+
+```dart
+var constantList = const [1, 2, 3];
+// constantList[1] = 1; // Uncommenting this causes an error.
+```
 
 ### Maps
+
+分析器会推导 Map 的类型，如果传递与推导类型不符的键值对会出发分析器或运行时错误。Map 许多很有用的方法，具体可以看 Generics 和 Maps 的文档。
+
+```dart
+// 分析器会推导 gifts 的类型是 Map<String, String>
+var gifts = {
+  // Key:    Value
+  'first': 'partridge',
+  'second': 'turtledoves',
+  'fifth': 'golden rings'
+};
+
+// 分析器会推导 gifts 的类型是 Map<int, String>
+var nobleGases = {
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+};
+```
+
+```dart
+// new Map() 可以简写成 Map()
+var gifts = Map();
+gifts['first'] = 'partridge';
+
+var nobleGases = Map();
+nobleGases[2] = 'helium';
+
+var gifts = {'first': 'partridge'};
+gifts['fourth'] = 'calling birds'; // Add a key-value pair, just as you would in JavaScript
+
+var gifts = {'first': 'partridge'};
+assert(gifts['first'] == 'partridge');
+
+var gifts = {'first': 'partridge'};
+assert(gifts['fifth'] == null); // If you look for a key that isn’t in a map, you get a null in return
+
+assert(gifts.length == 2);
+```
+
+创建一个 map 类型的编译时常量，也要在 map 字面量前面标注 const
+
+```dart
+final constantMap = const {
+  2: 'helium',
+  10: 'neno',
+  18: 'argon',
+};
+// constantMap[2] = 'Helium'; // Uncommenting this causes an error.
+```
 
 ### Runes
 
