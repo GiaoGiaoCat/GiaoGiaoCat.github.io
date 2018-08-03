@@ -40,7 +40,109 @@ bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
 
 #### 可选的 named 参数
 
+定义函数参数的时候，可以使用 `{param1, param2, …}` 的方式定义 nameed 参数。采用 `paramName: value` 的方式调用，例如：
+
+```dart
+/// Sets the [bold] and [hidden] flags ...
+void enableFlags({bool bold, bool hidden}) {...}
+
+enableFlags(bold: true, hidden: false);
+```
+
+使用 `@required` 来标明参数为必填，如果必填参数忘了填，那么分析器会帮我们检查出来。
+
+```dart
+const Scrollbar({Key key, @required Widget child})
+```
+
+`@required` 是定义在 [meta](https://pub.dartlang.org/packages/meta) 包中，所以在使用前需要先导入 package:meta/meta.dart 或者导入含有 meta 的其他包，比如 Flutter 的 package:flutter/material.dart。
+
+#### 可选的 positional 参数
+
+如果一个参数被 `[]` 包裹住，则这个参数就是可选参数。
+
+```dart
+String say(String from, String msg, [String device]) {
+  var result = '$from says $msg';
+  if (device != null) {
+    result = '$result with a $device';
+  }
+  return result;
+}
+```
+下面是一些调用的例子：
+
+```dart
+assert(say('Bob', 'Howdy') == 'Bob says Howdy');
+assert(say('Bob', 'Howdy', 'smoke signal') == 'Bob says Howdy with a smoke signal');
+```
+
+#### 默认参数值
+
+函数可以用 = 为参数设置默认值，默认值必须是编译时常量，如果不设置默认值，那么参数的默认值是 null。
+
+```dart
+/// Sets the [bold] and [hidden] flags ...
+void enableFlags({bool bold = false, bool hidden = false}) {...}
+
+// bold will be true; hidden will be false.
+enableFlags(bold: true);
+```
+
+```dart
+String say(String from, String msg, [String device = 'carrier pigeon', String mood]) {
+  var result = '$from says $msg';
+  if (device != null) {
+    result = '$result with a $device';
+  }
+  if (mood != null) {
+    result = '$result (in a $mood mood)';
+  }
+  return result;
+}
+
+assert(say('Bob', 'Howdy') == 'Bob says Howdy with a carrier pigeon');
+```
+
+```dart
+void doStuff(
+    {List<int> list = const [1, 2, 3],
+    Map<String, String> gifts = const {
+      'first': 'paper',
+      'second': 'cotton',
+      'third': 'leather'
+    }}) {
+  print('list:  $list');
+  print('gifts: $gifts');
+}
+```
+
 ### main() 函数
+
+每个应用程序都必须有一个顶级 `main()` 函数，作为应用程序的入口点。`main()` 函数返回void，并具有可选的 `List<String>` 作为参数。
+
+**..操作符是 Dart 语言中的级联操作符，级联操作可以对一个对象执行多个操作。**
+
+```dart
+void main() {
+  querySelector('#sample_text_id')
+    ..text = 'Click me!'
+    ..onClick.listen(reverseText);
+}
+```
+
+下面是接受参数的命令行应用程序的 main() 函数的示例，也可以使用 [arg libray](https://pub.dartlang.org/packages/args) 来定义和解析命令行参数:
+
+```dart
+// Run the app like this: dart args.dart 1 test
+void main(List<String> arguments) {
+  print(arguments);
+
+  assert(arguments.length == 2);
+  assert(int.parse(arguments[0]) == 1);
+  assert(arguments[1] == 'test');
+}
+```
 
 ### 函数优先原则
 
@@ -193,6 +295,5 @@ assert(foo() == null);
 
 ## 相关
 
-* [SPDY](https://baike.baidu.com/item/SPDY/3399551?fr=aladdin)
 * [A Tour of the Dart Language](https://www.dartlang.org/guides/language/language-tour)
 * [Dart 学习笔记](http://www.cndartlang.com/dart/page/4)

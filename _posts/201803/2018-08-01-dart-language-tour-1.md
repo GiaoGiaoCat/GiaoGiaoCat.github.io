@@ -22,7 +22,7 @@ Dart 的目标是结构化的 Web 开发语言。既可以快速原型开发，�
 
 ```
 brew tap dart-lang/dart
-brew install dart
+brew install dart --devel
 ```
 
 安装 vscode 的 Dart 插件 https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code
