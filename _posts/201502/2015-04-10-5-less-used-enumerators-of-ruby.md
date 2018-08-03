@@ -110,6 +110,7 @@ end
 => [#<Person:0x007fa21a848848>, #<Person:0x007fa21a848820>]
 ```
 
-## 原文
+## 相关阅读
 
 * [5 less used Enumerators of Ruby](http://codingwithaxe.com/5-less-used-enumerators-of-ruby)
+* [Ruby: How to Iterate "the Right Way"](http://jeromedalbert.com/ruby-how-to-iterate-the-right-way/)
