@@ -117,8 +117,62 @@ void main() {
 }
 ```
 
+### 构造函数 Constructors
+
+声明一个和类名相同的函数，来作为类的构造函数。最常见的构造函数是 `generative constructor` 用来创建一个类的新实例：
+
+```dart
+class Point {
+  num x, y;
+  Point(num x, num y) {
+    // There's a better way to do this, stay tuned.
+    this.x = x;
+    this.y = y;
+  }
+}
+```
+
+`this` 关键字引用当前实例。仅在名称冲突时候使用 `this` 关键字，否则 Dart 会忽略它。将构造函数参数分配给实例变量的模式非常常见，Dart 为此专门实现了语法糖，所以上面的代码可以简写为：
+
+```dart
+class Point {
+  num x, y;
+
+  // Syntactic sugar for setting x and y before the constructor body runs.
+  Point(this.x, this.y);
+}
+```
+
+#### 默认构造函数
+
+如果不声明构造函数，则会提供默认的构造函数。默认构造函数没有参数，并调用父类中的无参数构造函数。
+
+#### 构造函数不会被继承
+
+子类不从父类继承构造函数。如果一个子类没有声明构造函数，只会生成一个默认的无参数的构造函数。
+
+#### 命名构造函数
+
+使用命名构造函数可以为一个类实现多个构造函数，并且让其更清晰：
+
+```dart
+class Point {
+  num x, y;
+
+  Point(this.x, this.y);
+
+  // Named constructor
+  Point.origin() {
+    x = 0;
+    y = 0;
+  }
+}
+```
+
+请记住，构造函数不能继承，所以父类中的命名构造函数在子类中也同样无法继承。如果希望子类也拥有和父类一样名字的构造函数，则必须在子类中实现该构造函数。
+
 ## 相关
 
 * [A Tour of the Dart Language](https://www.dartlang.org/guides/language/language-tour)
 * [Dart 学习笔记](http://www.cndartlang.com/dart/page/4)
-* [Dart 语言简易教程 - 五](https://www.jianshu.com/p/78d317b2ea79)
+* [Dart 语言简易教程 - 六](https://www.jianshu.com/p/78d317b2ea79)
