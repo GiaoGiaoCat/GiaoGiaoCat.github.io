@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Ruby 元编程"
+title:  "关于 Ruby 元编程"
 date:   2018-09-24 12:00:00
 
 categories: ruby
