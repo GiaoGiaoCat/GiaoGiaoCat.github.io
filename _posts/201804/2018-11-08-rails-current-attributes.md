@@ -122,6 +122,7 @@ end
 * `Current` 应该只被用来处理少数的顶级全局变量，例如 `account, user` 和 request details。因为所有请求的所有操作都或多或少的用得上这些属性。
 * **绝对不要把 controller 专用的属性放在这里。**
 
+这里还有一个反向的观点，认为引入了类似全局变量的东西，会增加 Rails 项目代码的理解复杂度，详见 [Rails' CurrentAttributes considered harmful](https://ryanbigg.com/2017/06/current-considered-harmful)
 
 ## 相关链接
 
