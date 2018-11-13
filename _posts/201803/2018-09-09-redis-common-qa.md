@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Reids 常见面试问题汇总"
+title:  "Redis 常见面试问题汇总"
 date:   2018-09-09 14:00:00
 
 categories: tool
