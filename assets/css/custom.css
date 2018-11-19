@@ -1,5 +1,5 @@
 @media (min-width: 1200px) {
-/*  .container {
+  /*  .container {
     width: 99%;
   }*/
 }
@@ -16,9 +16,19 @@
 
 .post-item .post-sum p,
 .post-item .post-sum ol,
-.post-item .post-sum ul { margin: 1.6em 0; }
-.post-item .post-sum li > ul { margin: 0; font-size: 0.9em; }
-.post-item .post-sum li > ul > li { font-size: 0.9em; }
+.post-item .post-sum ul {
+  margin: 1.6em 0;
+}
+
+.post-item .post-sum li>ul {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.post-item .post-sum li>ul>li {
+  font-size: 0.9em;
+}
+
 .post-sum h2 {
   font-size: 24px;
   font-weight: bold;
@@ -26,6 +36,7 @@
   margin: 1.6em 0;
   border-bottom: 1px solid #D9D9D9;
 }
+
 .post-sum h3 {
   font-size: 20px;
   font-weight: bold;
@@ -33,6 +44,7 @@
   margin: 1.6em 0;
   border-bottom: 1px dashed rgb(232, 232, 232);
 }
+
 .post-sum h4 {
   margin: 1.2em 0;
   font-weight: bold;
@@ -42,26 +54,39 @@
   /*color: #fb6b5b;*/
   color: #109D84;
 }
-.post-item .post-sum a:link { text-decoration: underline; }
-.post-item .post-sum a:hover { text-decoration: none; }
-.post-sum p img { max-width: 100%; }
 
-.pagination > li > a, .pagination > li > span { color: rgb(142, 193, 101); }
+.post-item .post-sum a:link {
+  text-decoration: underline;
+}
 
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus {
+.post-item .post-sum a:hover {
+  text-decoration: none;
+}
+
+.post-sum p img {
+  max-width: 100%;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+  color: rgb(142, 193, 101);
+}
+
+.pagination>li>a:hover,
+.pagination>li>span:hover,
+.pagination>li>a:focus,
+.pagination>li>span:focus {
   color: rgb(142, 193, 101);
   background-color: #eee;
   border-color: #ddd;
 }
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus {
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
   background-color: rgb(142, 193, 101);
   border-color: rgb(142, 193, 101);
 }
@@ -69,6 +94,7 @@
 .img-circle {
   border: 1px solid #CCC;
 }
+
 .progress-xxs {
   height: 1px;
 }
@@ -79,24 +105,33 @@
   border-collapse: collapse;
   border-color: gray;
 }
+
 .post-sum table td,
 .post-sum table th {
   padding: 6px 15px;
   border-top: 1px solid #f1f1f1;
 }
-.post-sum table thead > tr > th {
+
+.post-sum table thead>tr>th {
   border-bottom: 1px solid #ebebeb;
   background: #f5f5f5;
   border-right: 1px solid #f1f1f1;
 }
-.post-sum table > tbody > tr:nth-child(odd) > td,
-.post-sum table > tbody > tr:nth-child(odd) > th {
+
+.post-sum table>tbody>tr:nth-child(odd)>td,
+.post-sum table>tbody>tr:nth-child(odd)>th {
   background-color: #f9f9f9;
 }
-.post-sum table > thead th {
+
+.post-sum table>thead th {
   background: #f5f5f5;
   border-right: 1px solid #f1f1f1;
 }
-.post-sum table > thead th:last-child {
+
+.post-sum table>thead th:last-child {
   border-right: none;
+}
+
+.post-sum em {
+  color: rgb(240, 17, 73);
 }
