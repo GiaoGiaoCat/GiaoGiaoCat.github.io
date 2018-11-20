@@ -16,7 +16,7 @@ author: "Victor"
 
 ## 方案 1
 
-先介绍最优方案，使用 Ruby 的 stdlib 中的 Gem::Version。不需要引用，直接用就行。
+先介绍最优方案，使用 Ruby 的标准库中的 Gem::Version。不需要引用，直接用就行。
 
 ```shell
 # Compares if a version is greater than other.
