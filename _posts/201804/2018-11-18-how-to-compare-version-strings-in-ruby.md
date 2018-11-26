@@ -36,7 +36,7 @@ Gem::Version.new(nil) < Gem::Version.new('2.0.1')
 
 ## 方案 2
 
-自己撸个猴子补丁。
+自己撸个类。
 
 ```ruby
 class Version < Array
