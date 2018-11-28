@@ -166,6 +166,56 @@ end
 
 ## Active Record 关联
 
+模型之间的关联能让常规操作变得更简单。关联使用宏式调用实现，用声明的形式为模型添加功能。Rails 会维护两个模型之间的 主键-外键 关系，而且还会向模型中添加很多实用的方法。
+
+### 关联的类型
+
+* belongs_to
+* has_one
+* has_many
+* has_many :through
+* has_one :through
+* has_and_belongs_to_many
+
+### 小技巧和注意事项
+
+#### 控制缓存
+
+关联添加的方法都会使用缓存，记录最近一次查询的结果，以备后用。缓存还会在方法之间共享。
+
+```ruby
+author.books                 # 从数据库中检索图书
+author.books.size            # 使用缓存的图书副本
+author.books.reload.empty?   # 丢掉缓存的图书副本
+                             # 重新从数据库中检索
+```
+
+#### 避免命名冲突
+
+所以关联的名字不能和 `ActiveRecord::Base` 中的实例方法同名。例如，关联的名字不能为 `attributes` 或 `connection`。
+
+#### 控制关联的作用域
+
+默认情况下，关联只会查找当前模块作用域中的对象。如果在模块中定义 Active Record 模型，知道这一点很重要。
+
+下面这段代码就不能正常运行，因为 Supplier 和 Account 在不同的作用域中：
+
+```ruby
+module MyApplication
+  module Business
+    class Supplier < ApplicationRecord
+       has_one :account
+    end
+  end
+
+  module Billing
+    class Account < ApplicationRecord
+       belongs_to :supplier
+    end
+  end
+end
+```
+
 ## Active Record 查询接口
 
 ## 相关链接
