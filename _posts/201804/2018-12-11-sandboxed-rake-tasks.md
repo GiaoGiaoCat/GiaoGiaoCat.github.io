@@ -4,7 +4,7 @@ title:  "为 Rails 的 Rake 添加 sandbox 模式"
 date:   2018-11-27 12:00:00
 
 categories: rails
-tags: tip
+tags: rake
 author: "Victor"
 ---
 

@@ -4,7 +4,7 @@ title:  "Ruby 中的状态机"
 date:   2018-11-27 12:00:00
 
 categories: rails
-tags: tip
+tags: gems
 author: "Victor"
 ---
 
