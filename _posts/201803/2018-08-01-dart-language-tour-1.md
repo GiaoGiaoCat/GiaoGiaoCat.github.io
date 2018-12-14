@@ -97,10 +97,11 @@ assert(lineCount == null); // assert() 在生产环境中会被忽略，在开�
 
 #### Final 和 const
 
-`final` 或 `const` 来声明常量，并且可忽略 `var` 和类型。
+如果你以后不打算修改一个变量，可以使用 `final` 或 `const` 来声明常量，以此来代替 `var` 和类型的方式声明变量。
 
 * `final` 只能设置一次，可以用变量来初始化
-* top-level `final` 或 类变量只在第一次使用时被初始化
+* `const` 变量是编译时常量，`const` 变量也同时是 `final` 变量
+* top-level 的 `final` 或 类中的 `final` 变量只在第一次使用时被初始化
 * **实例变量可以是 final 但不能是 const**
 
 ```dart
@@ -116,7 +117,7 @@ name = 'Alice'; // Error: a final variable can only be set once.
 ```
 
 * `const` 是编译时常量，只能用编译时常量来初始化
-* 如果 `const` 为类级别，则称为 `static const`
+* 如果 `const` 为类级别，请定义为 `static const`
 * `const` 变量等号右边的值可以是：number 或 string 的字面量，其它的 const variable，常数运算结果
 * `const` 也可以用来定义常数值，该常数值可以赋值给其它变量，参考下面的例子
 
