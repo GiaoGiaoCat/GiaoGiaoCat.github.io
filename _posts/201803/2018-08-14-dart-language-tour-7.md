@@ -101,7 +101,8 @@ class Point {
 ```
 
 * 所有未初始化的实例变量值均为 null
-* 每个实例变量都同时有一个 getter 方法，
+* 每个实例变量都同时有一个 getter 方法，非空的变量会额外增加 setter 方法，后面后专门讲这部分。
+*
 
 ```dart
 class Point {
