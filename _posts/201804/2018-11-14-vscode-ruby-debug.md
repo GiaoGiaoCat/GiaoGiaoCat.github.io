@@ -8,7 +8,9 @@ tags: editor
 author: "Victor"
 ---
 
-## Bust A Gem
+## ~~Bust A Gem~~
+
+**这个插件和 GitLens 冲突，而且对于 symbol 的解析很有问题，建议不要用。**　
 
 通过使用 [ripper-tags](https://github.com/tmm1/ripper-tags) 创建 TAGS 文件，为 Ruby 项目提供 *Go to Definition* 功能的扩展。
 
@@ -158,6 +160,23 @@ max_files: 5000
 ## Ruby (by Peng Lv)
 
 未完待续懒得写
+
+## 还不如学好如何在 VS Code 中好好用 Terminal
+
+* [Key Bindings for Visual Studio Code](https://code.visualstudio.com/docs/getstarted/keybindings)
+* [Mastering VS Code's Terminal](https://www.growingwiththeweb.com/2017/03/mastering-vscodes-terminal.html)
+* [Integrated Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)
+
+```json
+[
+  { "key": "ctrl+`", "command": "workbench.action.terminal.focus",
+                        "when": "!terminalFocus" },
+  { "key": "ctrl+`", "command": "workbench.action.focusActiveEditorGroup",
+                        "when": "terminalFocus" }
+]
+```
+
+我把 ` ctrl+` ` 快捷键改成在激活的 terminal 窗口和上一个活动窗口之间切换。
 
 ## 相关链接
 
