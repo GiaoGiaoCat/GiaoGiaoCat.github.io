@@ -49,7 +49,7 @@ b = temp
 
 因为这个值交换算法用到了中间变量，而中间变量又要占用一个格子，所以这个算法的空间复杂度用大 O 表示法表示就是 O(1)。
 
-![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/2018-12-17-about-algorithm-complexity/01.png)
+![](https://wjp2013.github.io/assets/images/pictures/2018-12-17-about-algorithm-complexity/01.png)
 
 相比较而言，算法的空间复杂度比较简单，所以我们在讨论一个算法时，更多的是讨论算法的时间复杂度。
 
@@ -62,7 +62,7 @@ b = temp
 * O(n2)，如选择排序算法。
 * O(n!)，如著名的旅行商问题。
 
-![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/2018-12-17-about-algorithm-complexity/02.png)
+![](https://wjp2013.github.io/assets/images/pictures/2018-12-17-about-algorithm-complexity/02.jpg)
 
 算法的速度，指的并不是时间，而是增速，反应的在图中就是曲线的斜率，可以看到，随着输入的增加，有的算法所需要的时间越来长，也就是使用这种算法的程序会越来越慢。
 
