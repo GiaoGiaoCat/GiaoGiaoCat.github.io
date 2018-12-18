@@ -4,7 +4,7 @@ title:  "常见的索引方式"
 date:   2018-12-15 12:00:00
 
 categories: other
-tags: tip
+tags: knowledge
 author: "Victor"
 ---
 

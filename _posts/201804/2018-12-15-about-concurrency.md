@@ -4,7 +4,7 @@ title:  "处理并发的方式"
 date:   2018-12-15 12:00:00
 
 categories: other
-tags: tip
+tags: knowledge
 author: "Victor"
 ---
 
