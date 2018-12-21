@@ -240,3 +240,4 @@ Closes #123, #245, #992
 * [好玩的提交信息](http://whatthecommit.com/)
 * [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 * [git_commit_message](https://github.com/joelparkerhenderson/git_commit_message)
+* [Write good git commit message](https://juffalow.com/other/write-good-git-commit-message)
