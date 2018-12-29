@@ -40,7 +40,7 @@ User.create_or_find_by!(username: "sikachu")
 
 该方法内部，`create` 在意外发生时抛出一个 `ActiveRecord::RecordNotUnique` 异常，随后使用 `find_by!` 找到该记录。
 
-虽然这违反了 [不要使用异常来进行流程控制](http://wiki.c2.com/?DontUseExceptionsForFlowControl)，但在这个情况下，应该是可行的，因为可以通过后端数据库来保持数据的一致性。
+虽然这违反了 [不要使用异常来进行流程控制](http://wiki.c2.com/?DontUseExceptionsForFlowControl)。但在这个情况下，应该是可行的，因为可以通过后端数据库来保持数据的一致性。
 
 ## 相关链接
 
