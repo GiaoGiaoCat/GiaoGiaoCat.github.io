@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "使用 Antigen 管理 Oh-My-Zsh Plugins"
+title:  "使用 Antigen 管理 Zsh Plugins"
 date:   2019-01-03 12:00:00
 
 categories: tool
