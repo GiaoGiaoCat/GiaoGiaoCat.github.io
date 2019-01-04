@@ -1,11 +1,17 @@
 ---
 layout: post
-title:  "git 用法合集"
+title:  "git 用法合集以及 git-extras"
 date:   2014-08-29 11:58:00
 categories: tool
 tags: git
 author: "Victor"
 ---
+
+### 学一堆命令不如先装个 git-extras
+
+git-extras 为 Git 提供了一大堆好用的扩展工具。服用之前需要先安装 `brew install git-extras`。
+
+好用的命令太多了啊 [Commands.md](https://github.com/tj/git-extras/blob/master/Commands.md)
 
 ### 善用 .gitignore 忽略某些文件
 
