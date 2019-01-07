@@ -93,13 +93,34 @@ export LC_CTYPE=en_US.UTF-8
 source $HOME/.oh-my-zsh/custom/victor.zsh
 ```
 
-### 更新
-
-现在更新插件，再也不用像 Oh-My-Zsh 时代用 Git 来搞了，只需要一条命令就搞定。
+### 其它命令
 
 ```
-antigen update
+antigen help
+antigen update # 更新插件
+antigen revert # 回退到更新插件之前
+antigen list [--simple|--short|--long] # 列出所有安装的插件
+antigen cleanup # 清理掉所有当前未使用的插件
+antigen purge example/bundle [--force] # 从文件系统上删除插件
+antigen reset # 清除生成的缓存，这个命令经常与 antigen init 配合使用
+antigen use # 加载 zsh 框架，比如 oh-my-zsh 和 prezto
+antigen theme # 切换提示符的主题
+antigen apply # 所有之前所做的更改
 ```
+
+### 介绍一些 zsh 插件和命令
+
+* zsh-autosuggestions 根据历史记录即时提示，brew 不用安装配方就能用。
+* autojump 是一款 [FS Jumping](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview#fs-jumping) 工具，无脑跳跃进入各种目录。
+* extract 解压插件，直接使用 `x xxx.rar` 就行，不用记命令
+* zsh-syntax-highlighting 给命令添加颜色，brew 不用安装配方就能用。
+
+* `d` 按回车，看到最近的历史记录，再输入数字，可以执行那条命令
+* `zsh_stats` 使用频率前 20 的命令是什么
+* `take` 看看 `which take` 就知道它有什么用了
+* `clipcopy` 和 `clippaste` 剪贴板和命令行的交互
+* `...`, `....`
+* [官方 wiki](https://github.com/robbyrussell/oh-my-zsh/wiki)
 
 ## 相关阅读
 
