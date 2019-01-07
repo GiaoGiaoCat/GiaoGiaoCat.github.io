@@ -110,11 +110,10 @@ antigen apply # 所有之前所做的更改
 
 ### 介绍一些 zsh 插件和命令
 
-* zsh-autosuggestions 根据历史记录即时提示，brew 不用安装配方就能用。
-* autojump 是一款 [FS Jumping](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview#fs-jumping) 工具，无脑跳跃进入各种目录。
+* zsh-autosuggestions 根据历史记录即时提示，brew 不用安装配方就能用
+* zsh-syntax-highlighting 给命令添加颜色，brew 不用安装配方就能用
+* autojump 是一款 [FS Jumping](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview#fs-jumping) 工具，无脑使用 `j` 跳跃进入各种目录
 * extract 解压插件，直接使用 `x xxx.rar` 就行，不用记命令
-* zsh-syntax-highlighting 给命令添加颜色，brew 不用安装配方就能用。
-
 * `d` 按回车，看到最近的历史记录，再输入数字，可以执行那条命令
 * `zsh_stats` 使用频率前 20 的命令是什么
 * `take` 看看 `which take` 就知道它有什么用了
