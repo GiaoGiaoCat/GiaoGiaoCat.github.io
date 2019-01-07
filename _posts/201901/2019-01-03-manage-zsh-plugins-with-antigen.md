@@ -53,12 +53,14 @@ antigen bundle brew-cask
 antigen bundle bundler
 antigen bundle common-aliases
 antigen bundle colored-man
+antigen bundle extract
 antigen bundle gitfast
 antigen bundle git-extras
 antigen bundle rails
 antigen bundle rake
 antigen bundle ruby
 antigen bundle safe-paste
+antigen bundle sublime
 antigen bundle thefuck
 antigen bundle vi-mode
 
@@ -67,8 +69,8 @@ antigen bundle ssh-agent
 
 # Plugins not part of Oh-My-Zsh can be installed using githubusername/repo
 antigen bundle zsh-users/zsh-autosuggestions
+# antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
 
 # Tell Antigen that you're done.
 antigen apply
