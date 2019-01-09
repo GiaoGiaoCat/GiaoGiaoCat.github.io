@@ -135,3 +135,4 @@ antigen apply # 所有之前所做的更改
 * [awesome-zsh-plugins](https://project-awesome.org/unixorn/awesome-zsh-plugins)
 * [awesome-shell](https://github.com/alebcay/awesome-shell)
 * [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line)
+* [10 Tools To Power Up Your Command Line](https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4)
