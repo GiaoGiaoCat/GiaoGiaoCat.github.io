@@ -22,7 +22,7 @@ Antigen 的灵感来自 Vim 的包管理器 Vundle。你需要做的就是在 `.
 
 先装好各种依赖。
 
-1. `brew install autojump thefuck bash-completion git-extras bat`
+1. `brew install autojump thefuck bash-completion git-extras bat hr`
 2. 安装 colorls，直接参考 [带图标的 ls 命令](/tool/color-ls/)
 3. `brew install antigen`
 
@@ -123,6 +123,7 @@ antigen apply # 所有之前所做的更改
 * `...`, `....`
 * [bat](https://github.com/chinanf-boy/bat-zh) 一个 cat 的克隆版本，建议直接修改 cat 的 alias
 * [官方 wiki](https://github.com/robbyrussell/oh-my-zsh/wiki)
+* `hr` 或者 `hr '*'` 命令可以输出一个横线
 
 ## 相关阅读
 
