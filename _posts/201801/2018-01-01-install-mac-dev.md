@@ -9,7 +9,7 @@ author: "Victor"
 
 用了将近 10 年的 Mac 终于在 2017 年底的倒数第2天买了第一台 MacbookPro。怎么样一边玩游戏一边把电脑开发环境配置好呢？
 
-开机之后先登录 MAS 更新系统补丁，安装Xcode 或 `xcode-select --install`，搞定 Shadowsocks。
+开机之后先登录 MAS 更新系统补丁，安装Xcode 或 `xcode-select --install`，搞定 ClashX。
 
 ## Preferences
 
@@ -29,11 +29,12 @@ author: "Victor"
 
 先配好全局跳墙，然后去 DropBox 官网下载客户端并登录同步自己的文件夹。这里有 Mackup 的全部配置。
 
-## Homebrew & oh-my-zsh
+## Homebrew & Zsh Plugins
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew tap homebrew/bundle
+brew tap caskroom/cask
 ```
 
 如果开局已经登录 MAS 下面这步就可以忽略了。
@@ -46,6 +47,8 @@ mas signin email@email.com
 执行 `brew bundle exec -- bundle install` 搞定全部软件。
 
 [这里](https://gist.github.com/wjp2013/66dbd649203e822eb6da110300fead47) 是我的 Brewfile。
+
+按照[这篇文章](/tool/manage-zsh-plugins-with-antigen/)把 Zsh Plugins 配置好，这一步会同时把字体配置好。
 
 ## Mackup
 
@@ -90,23 +93,18 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 
 ## Other
 
-1. ss 客户端同步配置文件 `mkdir ~/.ShadowsocksX-NG && ln -s ~/Dropbox/Apps/ShadowsocksX/user-rule.txt ~/.ShadowsocksX-NG/user-rule.txt`
-2. Atom `sync-settings:restore` 同步已经安装的插件和配置
-3. Alfred `defaults write com.runningwithcrayons.Alfred-Preferences-3 dropbox.allowappsfolder -bool TRUE` 然后修改 General 中的 sync 文件夹到 `~/Dropbox/Apps/Alfred`
-4. AirDrop 把 `~/.ssh` 中的 `id_rsa` 和 `id_rsa.pub` 拿过来，所有电脑用同一套 ssh key
-5. 网页登录各种账户 chrome，github 什么的
-6. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
-7. 启用 sublime text 的 package
-8. `defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false` holding down a key won't repeat it
+1. VSCode `Sync:download settings` 同步已经安装的插件和快捷键等配置
+2. Alfred `defaults write com.runningwithcrayons.Alfred-Preferences-3 dropbox.allowappsfolder -bool TRUE` 然后修改 General 中的 sync 文件夹到 `~/Dropbox/Apps/Alfred`
+3. AirDrop 把 `~/.ssh` 中的 `id_rsa` 和 `id_rsa.pub` 拿过来，所有电脑用同一套 ssh key
+4. 网页登录各种账户 chrome，github, things, spotify 什么的
+5. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
+6. `defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false` holding down a key won't repeat it
+7. `sudo spctl --master-disable` 启用安装任何来源的应用
 
 ## 其它软件的安装
 
 * Kaleidoscope
 * mubu
-
-## 可能遇到的问题
-
-* [『修复』做了个GFWList PAC最新下载地址，可用于更新 SSR PC客户端的PAC](https://doub.io/ss-jc59/)
 
 ## 相关链接
 
