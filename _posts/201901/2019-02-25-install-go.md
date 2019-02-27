@@ -26,13 +26,34 @@ export GOPATH=$HOME/Documents/Go
 
 ```bash
 # Edit your ~/.zshrc or ~/.bash_profile file to add the following line
-export PATH="$PATH:$(go env GOPATH)/bin:$(go env GOROOT)/bin"
+export PATH="$PATH:$(go env GOPATH)/bin:$(go env GOROOT)/bin:$GOPATH/bin"
 ```
 
 ```bash
 $ go env
 $ go version
 ```
+
+### 环境变量
+
+* $GOROOT 表示 Go 在你的电脑上的安装位置，它的值一般都是 `$HOME/go`，你也可以安装在别的地方。
+* $GOPATH 默认采用和 $GOROOT 一样的值，但从 Go 1.1 版本开始，你必须修改为其它路径。
+
+**Go 编译器支持交叉编译，也就是说你可以在一台机器上构建运行在具有不同操作系统和处理器架构上运行的应用程序，也就是说编写源代码的机器可以和目标机器有完全不同的特性（操作系统与处理器架构）。**
+
+为了区分本地机器和目标机器，你可以使用 `$GOHOSTOS` 和 `$GOHOSTARCH` 设置目标机器的参数，这两个变量只有在进行交叉编译的时候才会用到。
+
+### 格式化代码
+
+建议在提交代码前统一格式化代码 `gofmt -w *.go`。 `gofmt map1` 会格式化并重写 map1 目录及其子目录下的所有 Go 源文件。
+
+如果不加参数 -w 则只会打印格式化后的结果而不重写文件。
+
+### 生成代码文档
+
+`go doc` 工具会从 Go 程序和包文件中提取顶级声明的首行注释以及每个对象的相关注释，并生成相关文档。
+
+详见这里 https://www.kancloud.cn/kancloud/the-way-to-go/72451
 
 ## 配置和使用 GoLand
 
