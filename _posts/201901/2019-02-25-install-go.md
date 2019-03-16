@@ -112,6 +112,20 @@ $GOPATH/bin/hello
 hello
 ```
 
+### Debug
+
+首先安装官方的 VSCode Go 扩展，然后配置好 `GOPATH`。
+
+
+1. `brew install go-delve/delve/delve`
+2. 在 Go 的 workspace 下执行 `go get github.com/derekparker/delve`
+3. 在 VSCode command `shift + cmd + p` 中执行 Go: Install/Update Tools
+
+可能需要重启 VSCode 才行。
+
+* https://74th.github.io/vscode-debug-specs/golang/
+* https://flaviocopes.com/go-debugging-vscode-delve/
+
 ## 相关
 
 * [Get Setup](http://www.golangbootcamp.com/book/get_setup)
