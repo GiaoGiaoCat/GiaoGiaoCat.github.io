@@ -125,6 +125,7 @@ hello
 
 * https://74th.github.io/vscode-debug-specs/golang/
 * https://flaviocopes.com/go-debugging-vscode-delve/
+* https://scotch.io/tutorials/debugging-go-code-with-visual-studio-code
 
 ## 相关
 
