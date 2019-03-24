@@ -127,6 +127,10 @@ hello
 * https://flaviocopes.com/go-debugging-vscode-delve/
 * https://scotch.io/tutorials/debugging-go-code-with-visual-studio-code
 
+### 作废
+
+谢谢你看到这里，学习 Go 3 周之后，发现 1.11 开始更推荐使用 module 而不是 GOPATH，所以我会单独起一篇如何用 VSCode 开发 Go 的文章，本文关于编辑器部分的知识都过时了。
+
 ## 相关
 
 * [Get Setup](http://www.golangbootcamp.com/book/get_setup)
