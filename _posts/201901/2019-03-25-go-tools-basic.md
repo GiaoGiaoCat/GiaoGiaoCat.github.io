@@ -33,6 +33,44 @@ go run -gcflags "-m -l" main.go
 ### go get
 `go get 远程包` 比如 `go get github.com/davyxu/cellnet` 自动获取并编译，根据实际情况可能在 GOPATH 的 bin 或者 pkg 目录下。
 
+### 在 Mac 下编译 CentOS 的项目
+
+Golang 支持交叉编译，在一个平台上生成另一个平台的可执行程序。
+
+先用 `uname -a` 看一下服务的内核/操作系统/CPU信息，类似：
+
+```
+Linux iZj6c3c0r3hzuijqjarmtxZ 3.10.0-957.5.1.el7.x86_64 #1 SMP Fri Feb 1 14:54:57 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+x86_64 这个架构亦称 amd64。
+
+* GOOS：目标平台的操作系统（darwin、freebsd、linux、windows）
+* GOARCH：目标平台的体系架构（386、amd64、arm）
+* 交叉编译不支持 CGO 所以要禁用它
+
+
+```bash
+# Mac 下编译 Linux 和 Windows 64位可执行程序
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o rebot main.go
+```
+
+```bash
+# linux
+GOOS=linux GOARCH=amd64 go build -ldflags "-w -s" -o web
+# windows
+GOOS=windows GOARCH=amd64 go build -ldflags "-w -s" -o web
+# mac
+GOOS=darwin GOARCH=amd64 go build -ldflags "-w -s" -o web
+```
+
+### 在 centos 上运行
+
+最简单的方法就是 `nohup ./rebot &`，想了解一下更高级的用法可以看下面：
+
+* http://supervisord.org/
+* https://pm2.io/doc/en/runtime/overview/ -- 推荐，因为 UI 好看
+
 ## 测试
 
 单元测试，是指对软件中的最小可测试单元进行检查和验证。单元是认为规定的最小的被测功能模块。单元测试实在软件开发过程中要进行的最低级别的测试活动，应在个例的情况下进行测试。
