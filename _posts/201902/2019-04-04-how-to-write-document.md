@@ -10,6 +10,8 @@ author: "Victor"
 
 公式是一種思維框架，是一種經驗導向的方法論，將你過去的經驗總結和抽象，得到高度概括的因素。
 
+世上有两件难事，第一是把别人的钱放在自己的口袋里，第二种是把自己的思想放进别人的脑袋里。而写作作为传递思想的一种方式，条理清晰是对我们最基本的要求。
+
 ## 基础
 
 ### 为什么写文档
@@ -65,9 +67,22 @@ MECE 法则是指我们在分析问题时，把整体层层分解为要素的过
   * 你要使用 2 次二分法
   * 重要紧急，重要不紧急，不重要但紧急，不重要也不紧急
 
-
+![](http://wjp2013.github.io/assets/images/pictures/2019-04-04-how-to-write-document/MECE.png)
 
 ### 金字塔原理
+
+金字塔原理就是要先表明中心思想，再说论点、论据，然后层层延伸，状如金字塔。
+
+#### 使用步骤
+
+1. 结论先行，中心思想在最开头
+2. 以上统下，上层思想是下层的概括
+3. 归纳分组，每组思想属于一个统一的范畴
+4. 逻辑递进，每组思想有一定的逻辑顺序
+5. 补充：纵向疑问问答、横向四大顺序（结构、时间、总分、演绎）
+
+![](http://wjp2013.github.io/assets/images/pictures/2019-04-04-how-to-write-document/01.png)
+![](http://wjp2013.github.io/assets/images/pictures/2019-04-04-how-to-write-document/02.png)
 
 ### 中文写作规范
 
@@ -75,3 +90,5 @@ MECE 法则是指我们在分析问题时，把整体层层分解为要素的过
 
 * [《科技文档写作实务 人民邮电出版》](https://book.douban.com/subject/25784432/)
 * [《Developing Quality Technical Information》](https://book.douban.com/subject/2851645/)
+* [推荐 | 金字塔原理，看这一篇就够了！](http://www.woshipm.com/pmd/306704.html)
+* [金字塔原理的解读与运用](https://www.sohu.com/a/209206336_444159)
