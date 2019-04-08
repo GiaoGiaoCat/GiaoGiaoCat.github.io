@@ -141,6 +141,6 @@ MECE 法则是指我们在分析问题时，把整体层层分解为要素的过
 
 * [《科技文档写作实务 人民邮电出版》](https://book.douban.com/subject/25784432/)
 * [《Developing Quality Technical Information》](https://book.douban.com/subject/2851645/)
-* [推荐 | 金字塔原理，看这一篇就够了！](http://www.woshipm.com/pmd/306704.html)
+* [金字塔原理，看这一篇就够了！](http://www.woshipm.com/pmd/306704.html)
 * [金字塔原理的解读与运用](https://www.sohu.com/a/209206336_444159)
 * [写有价值的技术文档](https://yq.aliyun.com/articles/54013)
