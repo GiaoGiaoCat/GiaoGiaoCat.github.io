@@ -121,6 +121,12 @@ Rust 编程语言的官方文档，Mozilla 基金会专门花钱聘请来的文�
 ![](http://wjp2013.github.io/assets/images/pictures/2019-04-04-how-to-write-document/07.png)
 ![](http://wjp2013.github.io/assets/images/pictures/2019-04-04-how-to-write-document/08.png)
 
+#### 使用 Git 和 Dropbox 来管理文档
+
+1. 根目录索引文件，TB Card 号码对应功能简介，开发者，更新日期
+2. 以 TB Card 号码创建子目录放置相关文档
+3. 文件格式 Markdown、MindNote、PDF、PlantUML
+
 ## 相关知识
 ### MECE 原则
 
