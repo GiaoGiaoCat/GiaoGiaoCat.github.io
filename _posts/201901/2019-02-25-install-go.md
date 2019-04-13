@@ -114,15 +114,56 @@ hello
 
 ### Debug
 
+Go 的 debug 工具首推 delve，先学习一下如何使用。
+
+#### 命令行下使用
+
+首先就是安装：
+
+1. `xcode-select --install`
+2. `go get -u github.com/go-delve/delve/cmd/dlv`
+
+用法也不算难：
+
+1. 假如你的项目在 `src/github.com/me/foo/cmd/foo` 目录下，并且你就在这个目录，可以直接执行 `dlv debug` 进入 debug 命令行模式。
+2. 如果在其它目录，可以 `dlv debug github.com/me/foo/cmd/foo` 用来调试该目录下 `cmd/foo.go` 文件。
+3. 然后用断点调试即可，比如想在 main 函数上价格断点就 `break main.main`
+
+具体的详情直接看[Getting Started](https://github.com/go-delve/delve/blob/master/Documentation/cli/getting_started.md)
+
+#### VSCode 配合 delve
+
 首先安装官方的 VSCode Go 扩展，然后配置好 `GOPATH`。
 
+1. 这一步不能忽略 `go get -u github.com/go-delve/delve/cmd/dlv`
+2. 在 VSCode command `shift + cmd + p` 中执行 Go: Install/Update Tools 可能需要重启 VSCode 才行。
+3. 修改 .vscode/launch.json 文件
+4. 打断点，在 debug 那里运行
 
-1. `brew install go-delve/delve/delve`
-2. 在 Go 的 workspace 下执行 `go get github.com/derekparker/delve`
-3. 在 VSCode command `shift + cmd + p` 中执行 Go: Install/Update Tools
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "remotePath": "",
+            "port": 2345,
+            "host": "127.0.0.1",
+            "program": "${fileDirname}",
+            "env": {},
+            "args": [],
+            "showLog": true
+        }
+    ]
+}
+```
 
-可能需要重启 VSCode 才行。
 
+* [Debugging Go with VS Code and Delve](https://flaviocopes.com/go-debugging-vscode-delve/)
+* [Debugging Go Code with Visual Studio Code](https://scotch.io/tutorials/debugging-go-code-with-visual-studio-code)
 * https://74th.github.io/vscode-debug-specs/golang/
 * https://flaviocopes.com/go-debugging-vscode-delve/
 * https://scotch.io/tutorials/debugging-go-code-with-visual-studio-code
