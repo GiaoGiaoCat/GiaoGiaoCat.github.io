@@ -168,6 +168,13 @@ Go 的 debug 工具首推 delve，先学习一下如何使用。
 * https://flaviocopes.com/go-debugging-vscode-delve/
 * https://scotch.io/tutorials/debugging-go-code-with-visual-studio-code
 
+#### Go 升级造成 VSCode 的 godefine 无效
+
+多数原因是 VSCode 在下载插件时候被墙了，翻墙之后手动在命令行下执行如下：
+
+1. gocode 提供代码补全 `go get -u github.com/nsf/gocode`
+2. godef 代码跳转 `go get -v code.google.com/p/rog-go/exp/cmd/godef` 再执行 `go install -v code.google.com/p/rog-go/exp/cmd/godef`
+
 ### 作废
 
 谢谢你看到这里，学习 Go 3 周之后，发现 1.11 开始更推荐使用 module 而不是 GOPATH，所以我会单独起一篇如何用 VSCode 开发 Go 的文章，本文关于编辑器部分的知识都过时了。
