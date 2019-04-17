@@ -71,6 +71,28 @@ GOOS=darwin GOARCH=amd64 go build -ldflags "-w -s" -o web
 * http://supervisord.org/
 * https://pm2.io/doc/en/runtime/overview/ -- 推荐，因为 UI 好看
 
+## 重构
+
+因为编辑器已经多数已经集成了 gofmt 这个命令可以暂时不用了解。
+
+## 查看文档
+
+使用编辑器 go to define 功能当然更快，但是有时候在命令行下查看文档也是必须的。
+
+```bash
+$ go doc strings            # View simplified documentation for the strings package
+$ go doc -all strings       # View full documentation for the strings package
+$ go doc strings.Replace    # View documentation for the strings.Replace function
+$ go doc sql.DB             # View documentation for the database/sql.DB type
+$ go doc sql.DB.Query       # View documentation for the database/sql.DB.Query method
+```
+
+还可以通过 -src 参数显示相关的源码。
+
+```bash
+$ go doc -src strings.Replace   # View the source code for the strings.Replace function
+```
+
 ## 测试
 
 单元测试，是指对软件中的最小可测试单元进行检查和验证。单元是认为规定的最小的被测功能模块。单元测试实在软件开发过程中要进行的最低级别的测试活动，应在个例的情况下进行测试。
@@ -96,6 +118,14 @@ func TestFailNow(t *testing.T) {
 func TestFail(t *testing.T) {
    t.Fail() // 标记失败但继续执行
 }
+```
+
+常用命令如下：
+
+```bash
+$ go test .          # Run all tests in the current directory
+$ go test ./...      # Run all tests in the current directory and sub-directories
+$ go test ./foo/bar  # Run all tests in the ./foo/bar directory
 ```
 
 ## 基准检验
@@ -202,3 +232,6 @@ go tool pprof --pdf cpu cpu.pprof > cpu.pdf
 
 上面的意思在当前目录输出 cpu.pprof 文件，在使用 go tool 工具链输出 pdf 格式文件，这个过程会用到 Graphviz 工具，需要提前安装。
 
+## 相关
+
+* [An Overview of Go's Tooling](https://www.alexedwards.net/blog/an-overview-of-go-tooling)
