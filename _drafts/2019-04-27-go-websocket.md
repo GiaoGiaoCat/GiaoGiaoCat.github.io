@@ -56,6 +56,7 @@ WebSocket 的协议在第一次 handshake 通过以后，连接便建立成功�
 
 ## 相关文章
 
+* [WebSocket Echo Test](https://www.websocket.org/echo.html) 一个用来测试 WebSocket 的站点
 * [WebSocket 是什么原理？为什么可以实现持久连接？](https://www.zhihu.com/question/20215561)
 * [WebSocket 教程](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
 * [WebSocket 详解教程](https://www.cnblogs.com/jingmoxukong/p/7755643.html)
