@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Go 的字符串相关"
+title:  "Go 中的字符串操作"
 date:   2019-05-02 08:00:00
 
 categories: go
@@ -22,7 +22,6 @@ author: "Victor"
 * 广义 Unicode 指一个标准，定义字符集和编码规则
 
 详见这篇总结 [位运算](/ruby/bitwise-operation-1/)
-
 
 ## 应用
 
