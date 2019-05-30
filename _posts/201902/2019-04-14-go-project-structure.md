@@ -170,3 +170,4 @@ Go 代码只存在于这三个文件夹。
 ## 相关讨论
 
 * [Best project structure when using go 1.11 mod](https://github.com/golang-standards/project-layout/issues/18)
+* [如何写出优雅的 Golang 代码](https://draveness.me/golang-101)
