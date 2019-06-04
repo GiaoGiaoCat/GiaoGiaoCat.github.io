@@ -77,6 +77,70 @@ stop
 
 ![](http://blog.yourtion.com/images/2015/12/palntuml-demo1.png)
 
+## 颜色配置
+
+为了让颜色与众不同，我们还可以自定义一些显示相关的配置。
+
+详细的外观参数在 [这个文档](http://plantuml.com/zh/skinparam)。想调教一份自己心仪的配色可不容易，我现在使用的是 [这套](https://amasuda.xyz/post/2018-06-01-plantuml-style/)，当然 [plantuml-style-c4](https://github.com/xuanye/plantuml-style-c4) 也非常好看。
+
+如果你有自己珍藏的配置，可以直接在源文件中嵌入该样式。
+
+```
+@startuml
+
+' !includeurl https://raw.githubusercontent.com/xuanye/plantuml-style-c4/master/core.puml
+!include style.puml
+
+actor Client
+
+Client -> Java : Request
+activate Java
+
+
+Java -> CircleService : Request Tip tax and Tip allow
+CircleService --> Java
+
+alt 圈子关闭打赏
+Java --> Client : Response error msg
+else
+Java -> TopicService : 我是否可打赏该对象
+TopicService --> Java
+
+alt 不可继续打赏
+Java --> Client : Response error msg
+else
+
+Java -> WalletService : 打赏者扣钱，创作者加钱
+WalletService --> Java
+
+opt 圈主需要抽成
+Java -> WalletService : 圈主加钱
+WalletService --> Java
+end
+
+Java -> TopicService : 创建打赏记录
+TopicService --> Java
+
+Java -> TransactionService : 创建打赏者和创作者的复式账单
+TransactionService --> Java
+
+opt 圈主需要抽成
+Java -> TransactionService : 创建圈主抽成的单式账单
+TransactionService --> Java
+end
+
+Java --> Client : Response body
+
+end
+end
+
+deactivate Java
+
+@enduml
+```
+
+![](https://raw.githubusercontent.com/wjp2013/wjp2013.github.io/master/assets/images/pictures/2016-04-05-plantuml-on-mac/01.png)
+
 ## 相关链接
 
 * [官方中文文档](http://translate.plantuml.com/zh)
