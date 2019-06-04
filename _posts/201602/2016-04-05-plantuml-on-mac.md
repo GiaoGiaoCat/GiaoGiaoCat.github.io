@@ -81,15 +81,16 @@ stop
 
 为了让颜色与众不同，我们还可以自定义一些显示相关的配置。
 
-详细的外观参数在 [这个文档](http://plantuml.com/zh/skinparam)。想调教一份自己心仪的配色可不容易，我现在使用的是 [这套](https://amasuda.xyz/post/2018-06-01-plantuml-style/)，当然 [plantuml-style-c4](https://github.com/xuanye/plantuml-style-c4) 也非常好看。
+详细的外观参数在 [这个文档](http://plantuml.com/zh/skinparam)。想调教一份自己心仪的配色可不容易，下面列一下我觉得不错的：
 
-如果你有自己珍藏的配置，可以直接在源文件中嵌入该样式。
+* https://amasuda.xyz/post/2018-06-01-plantuml-style/
+* [plantuml-style-c4](https://github.com/xuanye/plantuml-style-c4)
+* [plantuml-styles](https://github.com/inthepocket/plantuml-styles) 我推荐这套
+* [我魔改的](https://gist.github.com/wjp2013/339d54b66ff8a9cafdc9a9463028179b)
 
 ```
 @startuml
-
-' !includeurl https://raw.githubusercontent.com/xuanye/plantuml-style-c4/master/core.puml
-!include style.puml
+!include https://gist.githubusercontent.com/wjp2013/339d54b66ff8a9cafdc9a9463028179b/raw/9feb53e77b64bfb339eb23b72ec8bce84bcb87fd/style.plantuml
 
 actor Client
 
