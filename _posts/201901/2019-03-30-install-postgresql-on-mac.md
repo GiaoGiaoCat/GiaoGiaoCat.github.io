@@ -20,7 +20,6 @@ pg_ctl -D /usr/local/var/postgres start
 
 执行 `brew services start postgresql` 会自动在 ~/Library/LaunchAgents 下复制 homebrew.mxcl.postgresql.plist。
 
-
 ## Commands
 
 ```bash
@@ -43,3 +42,7 @@ dropdb mydjangoproject_development # example
 dropdb <database_name> && createdb <database_name>
 dropdb mydjangoproject_development && createdb mydjangoproject_development # example
 ```
+
+## 相关链接
+
+* [Mac 上安装配置和简单实用PostgreSQL](https://www.jianshu.com/p/9e91aa8782da)
