@@ -112,6 +112,10 @@ $GOPATH/bin/hello
 hello
 ```
 
+### Test
+
+跑测试需要在配置中添加 `"go.testFlags": ["-v"]`，这样测试会有输出值。详见 https://github.com/Microsoft/vscode-go/issues/1377。
+
 ### Debug
 
 Go 的 debug 工具首推 delve，先学习一下如何使用。
