@@ -3,7 +3,7 @@ layout: post
 title:  "使用 interface 进行缓存"
 date:   2019-11-01 17:10:00
 
-categories: golang
+categories: go
 tags: tip
 author: "Victor"
 ---
