@@ -185,9 +185,11 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./data:/data:rw
-      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - $PWD/data:/data:rw
+      - $PWD/conf/redis.conf:/usr/local/etc/redis/redis.conf
     command: redis-server /usr/local/etc/redis/redis.conf
+    # 认证密码一般配置在配置文件的 requirepass 字段。如果不使用配置文件，可以使用 command: redis-server --requirepass yourpass 配置认证密码；
+    # command: redis-server --requirepass sOmE_sEcUrE_pAsS
     # privileged: true
 ```
 
