@@ -76,21 +76,21 @@ vi CentOS-Base.repo
 ```
 
 ```
-[base]  
-name=Red Hat Enterprise Linux 7.0 -Base  
-baseurl=http://mirrors.163.com/centos/7/os/$basearch/  
-gpgcheck=1  
-gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7  
-[update]  
-name=Red Hat Enterprise Linux 7.0 -Updates  
-baseurl=http://mirrors.163.com/centos/7/updates/$basearch/  
-gpgcheck=1  
-gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7  
-[extras]  
-name=Red Hat Enterprise Linux 7.0 -Extras  
-baseurl=http://mirrors.163.com/centos/7/extras/$basearch/  
-gpgcheck=1  
-gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7  
+[base]
+name=Red Hat Enterprise Linux 7.0 -Base
+baseurl=http://mirrors.163.com/centos/7/os/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7
+[update]
+name=Red Hat Enterprise Linux 7.0 -Updates
+baseurl=http://mirrors.163.com/centos/7/updates/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7
+[extras]
+name=Red Hat Enterprise Linux 7.0 -Extras
+baseurl=http://mirrors.163.com/centos/7/extras/$basearch/
+gpgcheck=1
+gpgkey=http://mirrors.163.com/centos/RPM-GPG-KEY-CentOS-7
 ```
 
 保存就行。
@@ -230,7 +230,6 @@ service sshd restart
 
 `yum install cyrus-sasl-devel.x86_64`
 
-
 ### Nginx 无法访问 assets 文件夹下面的文件
 
 1. 把 assets 在 mina 中配置成 shared 文件
@@ -247,6 +246,23 @@ export GMAIL_USERNAME="myname@gmail.com"
 重新打开一个命令行端口之后，就可以通过 `ENV["GMAIL_USERNAME"]` 的方式访问该变量。
 
 其它方式可以参考 [Rails Environment Variables](http://railsapps.github.io/rails-environment-variables.html)。
+
+## 安装 Docker
+
+```bash
+yum install epel-release –y
+yum clean all
+yum list
+
+yum install docker-io –y
+systemctl start docker
+
+systemctl start docker     #运行Docker守护进程
+systemctl stop docker      #停止Docker守护进程
+systemctl restart docker   #重启Docker守护进程
+
+docker images
+```
 
 ## 相关阅读
 

@@ -4,7 +4,7 @@ title:  "Multi-Stage Docker Builds + Setting the timezone Alpine"
 date:   2020-06-18 17:10:00
 
 categories: go
-tags: debug
+tags: docker
 author: "Victor"
 ---
 

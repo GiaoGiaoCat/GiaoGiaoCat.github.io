@@ -51,6 +51,7 @@ git remote set-url origin --push --add https://example.com/USERNAME/REPO2.git
 ...
 [remote "origin"]
     url = https://USERNAME@github.com/USERNAME/REPO1.git
+    pushurl = https://USERNAME@github.com/USERNAME/REPO1.git
     pushurl = https://USERNAME@example.com/USERNAME/REPO2.git
 ...
 [branch "master"]
@@ -58,7 +59,7 @@ git remote set-url origin --push --add https://example.com/USERNAME/REPO2.git
 ...
 ```
 
-然后 `git push origin master` 就会同时提交到两个 repo，而 `git pull origin master` 会从两个 GitHub repo1 里取得更新。
+然后 `git push origin master` 就会同时提交到两个 repo，而 `git pull origin master` 会从 GitHub repo1 里取得更新。
 
 ## 原文
 
