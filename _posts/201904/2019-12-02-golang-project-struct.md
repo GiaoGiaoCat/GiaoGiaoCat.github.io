@@ -101,6 +101,7 @@ J2EE 分层设计是 Java 企业应用的最基本的设计思想。从最常规
 ### 阅读
 
 * [Golang 标准包布局](https://www.jianshu.com/p/022ba2dd9239)
+* [项目目录结构](https://makeoptim.com/golang/standards/project-layout)
 * [facade 层，service 层，domain 层，dao 层设计](https://www.iteye.com/blog/fei-6666-446247)
 * [Golang 设计模式相关源码](https://blog.csdn.net/jeanphorn/article/details/78077805)
 * [golang 设计模式](https://github.com/BPing/golang_design_pattern)
@@ -108,7 +109,7 @@ J2EE 分层设计是 Java 企业应用的最基本的设计思想。从最常规
 
 ### EBI 相关
 
-* [Clean Architecture using Golang](https://dev.to/codenation/clean-architecture-using-golang-5791)
+* [Clean Architecture using Golang](https://dev.to/eminetto/clean-architecture-using-golang-5791)
 * [Trying Clean Architecture on Golang](https://hackernoon.com/trying-clean-architecture-on-golang-2-44d615bf8fdf)
 * [EBI 架构(译)](https://www.jianshu.com/p/395814410cf5)
 * [什么是实体边界交互器架构](https://www.jdon.com/51390)
