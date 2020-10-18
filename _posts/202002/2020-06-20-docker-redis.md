@@ -12,7 +12,7 @@ author: "Victor"
 
 1. 查看可用的 Redis 版本，访问 [Redis 镜像库地址](https://hub.docker.com/_/redis?tab=tags)。也可以用 `docker search redis` 查看可用镜像
 2. 拉取官方的最新版本的镜像 `docker pull redis:latest`
-3. 查看本地镜像是否已安装了 redis `docker images`
+3. 查看本地镜像是否已安装了 redis `docker images ls`
 4. 运行容器 `docker run -itd --name redis-dev -p 6379:6379 redis`
     * -p 6379:6379：映射容器服务的 6379 端口到宿主机的 6379 端口。外部可以直接通过宿主机 ip:6379 访问到 Redis 的服务。
     * --name redis-dev：给容器命名为 redis-dev
