@@ -75,8 +75,25 @@ find | grep influx
 > drop measurement [test_measurement] // 删除表
 ```
 
+## chronograf
+
+为了方便查看 InfluxDB 的数据，可以装一个 chronograf。
+
+1. `docker pull chronograf`
+2. `docker run -d -p 8888:8888 --name chronograf-dev chronograf`
+
+```bash
+tmux
+ssh -NTCqnf -L 0.0.0.0:13555:xxx.influxdata.tsdb.aliyuncs.com:8086 root@xxx.xxx.xx.xx
+ctrl+b, d
+```
+
+打开 127.0.0.1:8888 开始配置并使用就行。
+
 ## 相关阅读
 
 * [Quick reference](https://hub.docker.com/_/influxdb)
 * [influxdb安装和学习](https://www.cnblogs.com/woshimrf/p/docker-influxdb.html)
 * [Docker下安装Influxdb-1.6.1和Grafana5.2.2](https://www.cnblogs.com/LUA123/p/9507029.html)
+* [chronograf](https://hub.docker.com/_/chronograf)
+* [Tmux 使用教程](https://www.ruanyifeng.com/blog/2019/10/tmux.html)
