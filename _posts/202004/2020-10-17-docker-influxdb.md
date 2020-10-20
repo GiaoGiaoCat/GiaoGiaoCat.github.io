@@ -88,7 +88,8 @@ ssh -NTCqnf -L 0.0.0.0:13555:xxx.influxdata.tsdb.aliyuncs.com:8086 root@xxx.xxx.
 ctrl+b, d
 ```
 
-打开 127.0.0.1:8888 开始配置并使用就行。
+打开 127.0.0.1:8888 开始配置并使用就行，这里用 `ifconfig | grep inet | grep -v inet6 | cut -d" " -f2 | tail -n1` 拿一下本地的 IP。
+在连接 InfluxDB 的时候用这个 IP:13555。
 
 ## 相关阅读
 
