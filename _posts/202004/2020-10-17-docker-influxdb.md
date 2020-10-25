@@ -71,8 +71,10 @@ find | grep influx
 > drop database [db_name] //  删除数据库
 > use my_test // 使用数据库
 > show measurements // 显示表列表
+> insert cpu_usage,host=server01,region=us-west value=0.64 // 插入时序数据记录
 > select * from test_measurement // 查看表
 > drop measurement [test_measurement] // 删除表
+> exit // 退出
 ```
 
 ## chronograf
