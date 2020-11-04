@@ -16,6 +16,14 @@ author: "Victor"
 
 临时的解决办法很简单，先执行 `ulimit -n 65535`，然后 `ulimit -n` 查看当前的最大文件打开数是否已优化。
 
+```bash
+# 通过 ulimit -Sn 设置最大打开文件描述符数的 soft limit，注意 soft limit 必须小于 hard limit
+ulimit -Sn 160000
+
+# 同时设置 soft limit 和 hard limit。对于非 root 用户只能设置比原来小的hard limit。
+ulimit -n 180000
+```
+
 ### 永久生效
 
 使用方案 1，登陆普通账号的时候，会报无权限错误，所以推荐使用方案 2。
@@ -34,7 +42,7 @@ source /etc/profile
 
 #### 方案 2
 
-修改 `/etc/security/limits.conf` 文件，在最后添加以下内容即可，这是 百度 的推荐：
+root 权限下，修改 `/etc/security/limits.conf` 文件，在最后添加以下内容即可，这是 百度 的推荐：
 
 ```bash
 * soft nofile 65535
@@ -42,6 +50,8 @@ source /etc/profile
 root soft nofile 65535
 root hard nofile 65535
 ```
+
+**设置 nofile 的 hard limit 还有一点要注意的就是 hard limit 不能大于 /proc/sys/fs/nr_open，假如 hard limit 大于 nr_open，注销后将无法正常登录。**
 
 ## `/etc/security/limits.conf` 配置文件说明
 
@@ -81,9 +91,49 @@ hard nofile # 可打开的文件描述符的最大数(超过会报错);
 3. 只有 root 用户才有权限修改 `/etc/security/limits.conf`
 4. 如果 limits.conf 没有做设定，则默认值是 1024
 
+## 一些有用的命令
+
+```bash
+# 所有用户创建的进程数
+ps h -Led -o user | sort | uniq -c | sort -n
+
+# 系统最大打开文件描述符数
+cat /proc/sys/fs/file-max
+
+# 设置
+vim /etc/sysctl.conf
+fs.file-max = 6553600
+
+# 进程最大打开文件描述符数
+# 默认查看的是 soft limit
+ulimit -n
+
+# 查看 hard limit
+ulimit -Hn
+
+# 查看当前系统使用的打开文件描述符数
+# 其中第一个数表示当前系统已分配使用的打开文件描述符数，第二个数为分配后已释放的（目前已不再使用），第三个数等于file-max。
+cat /proc/sys/fs/file-nr
+```
+
+### ulimit -a/n/H/S 都有什么含义
+
+* ulimit -a 显示当前所有的资源限制
+* ulimit -H 设置硬件资源限制
+* ulimit -S 设置软件资源限制
+* ulimit -n 设置进程最大打开文件描述符数
+
+### 注意
+
+* 所有进程打开的文件描述符数不能超过 /proc/sys/fs/file-max
+* 单个进程打开的文件描述符数不能超过 user limit中nofile 的 soft limit
+* nofile 的 soft limit 不能超过其 hard limit
+* nofile 的 hard limit 不能超过 /proc/sys/fs/nr_open
+
 ## 相关阅读
 
 * [Linux系统最大文件打开数优化，解决Too many open files报错](https://zhang.ge/4541.html)
 * [Baidu Cloud Ad Exchange - BCC云服务器和CDS云磁盘](https://cloud.baidu.com/doc/ADX/s/gjwvycfne)
 * [linux中/etc/security/limits.conf配置文件说明](https://cloud.tencent.com/developer/article/1403636)
 * [Linux中soft nproc 、soft nofile和hard nproc以及hard nofile配置](https://blog.csdn.net/zxljsbk/article/details/89153690)
+
