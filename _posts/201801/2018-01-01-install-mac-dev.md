@@ -100,6 +100,7 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 5. 如果有些词打不出来，可以更新一下词库 https://github.com/rime-aca/dictionaries
 6. `defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false` holding down a key won't repeat it
 7. `sudo spctl --master-disable` 启用安装任何来源的应用
+8. `brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package quicklookase qlvideo` 安装 Quick Look plugins
 
 ## 其它软件的安装
 
@@ -117,3 +118,4 @@ RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv instal
 * https://robots.thoughtbot.com/brewfile-a-gemfile-but-for-homebrew
 * https://github.com/sharat/vscode-brewfile
 * https://www.sublimetext.com/docs/3/vintage.html
+* [Quick Look plugins](https://github.com/sindresorhus/quick-look-plugins)
