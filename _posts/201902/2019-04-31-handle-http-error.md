@@ -4,7 +4,7 @@ title:  "Handling HTTP Request Errors"
 date:   2019-04-31 13:00:00
 
 categories: go
-tags: tip
+tags: debug
 author: "Victor"
 ---
 
