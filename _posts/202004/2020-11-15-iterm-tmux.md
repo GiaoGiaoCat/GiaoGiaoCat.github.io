@@ -23,6 +23,7 @@ screen 只支持窗口(windows)模式，tmux 支持多 panes 模式(与item2一�
 前缀键 `Ctrl+b`，然后再按命令键。比如 ? 显示帮助信息。
 
 ```bash
+# 会话操作
 tmux new -s <session-name> // 新建会话
 tmux ls // 查看当前所有的 tmux 会话
 tmux attach -t 0 // 使用会话编号接入会话
@@ -35,6 +36,7 @@ Ctrl+b d // 分离会话
 Ctrl+b s // 列出所有会话
 Ctrl+b $ // 重命名当前会话
 
+# 窗格操作
 Ctrl+b % // 划分左右两个窗格
 Ctrl+b " // 划分上下两个窗格"
 Ctrl+b <arrow key> // 光标切换到其他窗格
@@ -42,6 +44,14 @@ Ctrl+b x // 关闭当前窗格
 Ctrl+b ! // 将当前窗格拆分为一个独立窗口
 Ctrl+b z // 当前窗格全屏显示，再使用一次会变回原来大小
 Ctrl+b Ctrl+<arrow key> // 按箭头方向调整窗格大小
+
+# 窗口操作
+Ctrl+b c // 新建窗口
+Ctrl+b p // 切换至上一窗口
+Ctrl+b n // 切换至下一窗口
+Ctrl+b & // 关闭当前窗口
+Ctrl+b 0 // 切换至 0 号窗口
+Ctrl+b f // 根据窗口名搜索选择窗口，可模糊匹配
 ```
 
 ## 进阶玩法
