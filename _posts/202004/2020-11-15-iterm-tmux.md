@@ -47,8 +47,11 @@ Ctrl+b Ctrl+<arrow key> // 按箭头方向调整窗格大小
 
 # 窗口操作
 Ctrl+b c // 新建窗口
-Ctrl+b p // 切换至上一窗口
-Ctrl+b n // 切换至下一窗口
+Ctrl+b w // 列出所有窗口
+Ctrl+b p // 前一个窗口
+Ctrl+b n // 后一个窗口
+Ctrl+b f // 查找窗口
+Ctrl+b , // 重命名当前窗口
 Ctrl+b & // 关闭当前窗口
 Ctrl+b 0 // 切换至 0 号窗口
 Ctrl+b f // 根据窗口名搜索选择窗口，可模糊匹配
@@ -191,72 +194,37 @@ Plugin for opening highlighted selection directly from Tmux copy mode.
 ```bash
 The following commands are supported in copy mode:
 
-Command                                      vi              emacs
-append-selection
-append-selection-and-cancel                  A
-back-to-indentation                          ^               M-m
-begin-selection                              Space           C-Space
-bottom-line                                  L
-cancel                                       q               Escape
-clear-selection                              Escape          C-g
-copy-end-of-line [<prefix>]                  D               C-k
-copy-line [<prefix>]
-copy-pipe <command> [<prefix>]
-copy-pipe-no-clear <command> [<prefix>]
-copy-pipe-and-cancel <command> [<prefix>]
-copy-selection [<prefix>]
-copy-selection-no-clear [<prefix>]
-copy-selection-and-cancel [<prefix>]         Enter           M-w
-cursor-down                                  j               Down
-cursor-down-and-cancel
-cursor-left                                  h               Left
-cursor-right                                 l               Right
-cursor-up                                    k               Up
-end-of-line                                  $               C-e
-goto-line <line>                             :               g
-halfpage-down                                C-d             M-Down
-halfpage-down-and-cancel
-halfpage-up                                  C-u             M-Up
-history-bottom                               G               M->
-history-top                                  g               M-<
-jump-again                                   ;               ;
-jump-backward <to>                           F               F
-jump-forward <to>                            f               f
-jump-reverse                                 ,               ,
-jump-to-backward <to>                        T
-jump-to-forward <to>                         t
-middle-line                                  M               M-r
-next-matching-bracket                        %               M-C-f
-next-paragraph                               }               M-}
-next-space                                   W
-next-space-end                               E
-next-word                                    w
-next-word-end                                e               M-f
-other-end                                    o
-page-down                                    C-f             PageDown
-page-down-and-cancel
-page-up                                      C-b             PageUp
-previous-matching-bracket                                    M-C-b
-previous-paragraph                           {               M-{
-previous-space                               B
-previous-word                                b               M-b
-rectangle-toggle                             v               R
-scroll-down                                  C-e             C-Down
-scroll-down-and-cancel
-scroll-up                                    C-y             C-Up
-search-again                                 n               n
-search-backward <for>                        ?
-search-backward-incremental <for>                            C-r
-search-backward-text <for>
-search-forward <for>                         /
-search-forward-incremental <for>                             C-s
-search-forward-text <for>
-search-reverse                               N               N
-select-line                                  V
-select-word
-start-of-line                                0               C-a
-stop-selection
-top-line                                     H               M-R
+vi             emacs        功能
+^              M-m          反缩进
+Escape         C-g          清除选定内容
+Enter          M-w          复制选定内容
+j              Down         光标下移
+h              Left         光标左移
+l              Right        光标右移
+L                           光标移到尾行
+M              M-r          光标移到中间行
+H              M-R          光标移到首行
+k              Up           光标上移
+d              C-u          删除整行
+D              C-k          删除到行末
+$              C-e          移到行尾
+:              g            前往指定行
+C-d            M-Down       向下滚动半屏
+C-u            M-Up         向上滚动半屏
+C-f            Page down    下一页
+w              M-f          下一个词
+p              C-y          粘贴
+C-b            Page up      上一页
+b              M-b          上一个词
+q              Escape       退出
+C-Down or J    C-Down       向下翻
+C-Up or K      C-Up         向下翻
+n              n            继续搜索
+?              C-r          向前搜索
+/              C-s          向后搜索
+0              C-a          移到行首
+Space          C-Space      开始选中
+               C-t          字符调序
 ```
 
 ### tmux-sidebar
