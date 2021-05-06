@@ -4,7 +4,7 @@ title:  "如何通过命令行修改 macOS 系统下某一个文件类型的默�
 date:   2020-11-17 17:10:00
 
 categories: tool
-tags: terminal, mac
+tags: terminal mac
 author: "Victor"
 ---
 
