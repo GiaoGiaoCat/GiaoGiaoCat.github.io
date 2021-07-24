@@ -133,6 +133,7 @@ DDD 并没有给出标准的代码模型，按 DDD 分层架构的分层职责�
 * [DDD-经典四层架构应用](https://cloud.tencent.com/developer/article/1738058)
 * [DDD 分层架构的三种模式 2.0](https://gitbook.cn/books/5ead2416e90db13e2ff6f10b/index.html)
 * [DDD领域驱动设计实战-分层架构及代码目录结构](https://bbs.huaweicloud.com/blogs/273978)
+* [DDD系列解析：应用架构](https://tech.taobao.org/news/phf3um)
 * [DDD 分层架构最佳实践](https://xie.infoq.cn/article/f88324b09cd9db4214ac153cf)
 * [在 Golang 中尝试简洁架构](https://studygolang.com/articles/12909)
 * [什么是四层应用架构](https://www.jdon.com/artichect/four-tier-application-architecture.html) 应用架构和程序架构模式是两回事，不用读
