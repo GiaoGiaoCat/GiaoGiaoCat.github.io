@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "给 goland 配置成 fleet，插件、快捷键列表"
+title:  "给 goland 配置成 fleet，插件、快捷键列表，调整内容"
 date:   2022-09-04 08:10:00
 
 categories: go
@@ -16,6 +16,13 @@ author: "Victor"
 4. 重启开发工具即可；
 
 关闭新 UI，在步骤 3 点击 `恢复默认设置` 按钮。
+
+## JVM选项
+
+在大多数情况下，JVM选项的默认值应该是最佳的。这里是[文档](https://jetbrains.com.zh.xy2401.com/help/go/tuning-the-ide.html) 以下是最常修改的内容：
+
+* -Xmx 改成 `-Xmx2048m`
+* -Xms 改成 `-Xms1024m`
 
 ## 参考
 
