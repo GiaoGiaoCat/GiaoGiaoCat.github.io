@@ -51,3 +51,5 @@ brew list golangci-lint
 把目录改成 `/opt/homebrew/Cellar/golangci-lint/1.49.0/bin/golangci-lint`，如果嫌手动选目录麻烦，跳转到指定目录快捷键 command+shift+G。
 
 保存，重启，完美。
+
+如果遇到权限问题，需要执行 `chmod 755 /opt/homebrew/Cellar/golangci-lint/1.49.0/bin/golangci-lint`
