@@ -206,6 +206,42 @@ docker exec -it ${Redis 容器 ID} redis-cli -h 127.0.0.1 -p 6379
 > 所以必须给 Redis 设置密码才可以连接。
 > 如果只是测试用而不需要密码，则修改此属性的值为 no ，并且属性 requirepass xxx 不要打开即可。
 
+## 两台 Mac 开发机之间同步数据
+
+前提条件是两台机器都开启 iCloud 同步。
+
+首先，我们需要修改 redis.conf 文件以实现 Redis 数据的持久化和增加数据库数量。我们将 appendonly 设置为 yes 来开启 AOF 持久化，并将 databases 设置为 32 来增加数据库数量。
+
+下面文件是 /Users/victor/Library/Mobile Documents/com~apple~CloudDocs/Documents/Works/redis/conf⁠/redis.conf 内容
+
+```yaml
+# Minimal redis.conf
+port 6379
+daemonize no
+dir .
+save 900 1
+save 300 10
+save 60 10000
+appendonly yes
+databases 32
+cluster-config-file nodes.conf
+cluster-node-timeout 30000
+maxclients 1001
+```
+
+然后，我们需要确保 Docker 容器可以访问到这个修改后的配置文件。在 Docker 命令中，我们已经将主机上的 ~/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/Works/redis/conf 目录挂载到了 Docker 容器的 /usr/local/etc/redis 目录。因此，我们只需要将修改后的 redis.conf 文件保存到这个目录下。
+
+最后，我们需要在 Docker 命令中指定 Redis 的配置文件路径。我们可以通过在 redis-server 命令后添加配置文件的路径来实现这一点。
+
+```bash
+docker run -itd --restart=always \
+  -v ~/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/Works/redis/data:/data \
+  -v ~/Library/Mobile\ Documents/com~apple~CloudDocs/Documents/Works/redis/conf:/usr/local/etc/redis \
+  --name redis-dev -p 6379:6379 redis redis-server /usr/local/etc/redis/redis.conf
+```
+
+在这个命令中，redis-server /usr/local/etc/redis/redis.conf 表示使用 /usr/local/etc/redis/redis.conf 作为 Redis 的配置文件。
+
 ## 相关阅读
 
 * [Docker 安装 Redis](https://www.runoob.com/docker/docker-install-redis.html) 基础安装
