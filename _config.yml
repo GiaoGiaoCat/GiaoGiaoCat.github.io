@@ -1,14 +1,17 @@
 # Site settings
 title: "脱线道士维克多"
+description: "Ruby, Rails and Web Development Blog"
 email: wjp2013@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://wjp2013.github.io/" # the base hostname & protocol for your site
 github_username: wjp2013
+author: Victor
 
-timezone: Beijing
+timezone: Asia/Shanghai
 plugins:
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-seo-tag
 
 # Build settings
 highlighter: rouge
@@ -22,3 +25,11 @@ redcarpet:
 paginate: 25
 
 github: [metadata]
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
